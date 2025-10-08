@@ -1,0 +1,15 @@
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\bin\Debug\net8.0\TransferCenterBusinessInterface.deps.json
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\bin\Debug\net8.0\TransferCenterBusinessInterface.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\bin\Debug\net8.0\TransferCenterBusinessInterface.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\bin\Debug\net8.0\TransferCenterModel.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\bin\Debug\net8.0\TransferCenterModel.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.csproj.AssemblyReference.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.GeneratedMSBuildEditorConfig.editorconfig
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.AssemblyInfoInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.AssemblyInfo.cs
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.csproj.CoreCompileInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\Transfer.67D53611.Up2Date
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\refint\TransferCenterBusinessInterface.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\TransferCenterBusinessInterface.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterBusinessInterface\obj\Debug\net8.0\ref\TransferCenterBusinessInterface.dll

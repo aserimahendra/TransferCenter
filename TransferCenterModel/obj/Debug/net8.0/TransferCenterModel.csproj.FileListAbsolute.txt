@@ -1,0 +1,11 @@
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\bin\Debug\net8.0\TransferCenterModel.deps.json
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\bin\Debug\net8.0\TransferCenterModel.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\bin\Debug\net8.0\TransferCenterModel.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.AssemblyInfoInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.AssemblyInfo.cs
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.csproj.CoreCompileInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\refint\TransferCenterModel.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\TransferCenterModel.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterModel\obj\Debug\net8.0\ref\TransferCenterModel.dll

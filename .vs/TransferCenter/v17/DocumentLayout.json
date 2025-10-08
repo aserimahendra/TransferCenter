@@ -1,0 +1,366 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\models\\buildinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\models\\buildinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\Tables\\tblUser.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransferCenterDB\\Tables\\tblUser.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCD083D9-22C2-4243-99DF-7ECBA5096C60}|TransferCenterBusiness\\TransferCenterBusiness.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterbusiness\\userbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCD083D9-22C2-4243-99DF-7ECBA5096C60}|TransferCenterBusiness\\TransferCenterBusiness.csproj|solutionrelative:transfercenterbusiness\\userbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F6D32847-63C1-433B-80A6-FC7CE03027CA}|TransferCenterModel\\TransferCenterModel.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentermodel\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F6D32847-63C1-433B-80A6-FC7CE03027CA}|TransferCenterModel\\TransferCenterModel.csproj|solutionrelative:transfercentermodel\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61AD5653-8A19-4CCD-9921-AEE11639456B}|TransferCenterBusinessInterface\\TransferCenterBusinessInterface.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterbusinessinterface\\iuserbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61AD5653-8A19-4CCD-9921-AEE11639456B}|TransferCenterBusinessInterface\\TransferCenterBusinessInterface.csproj|solutionrelative:transfercenterbusinessinterface\\iuserbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\TransferCenterDB.sqlproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransferCenterDB\\TransferCenterDB.sqlproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\transfercentercore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\transfercentercore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\data\\basedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\data\\basedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\unitofwork\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\unitofwork\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentercore\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F7CA1B3-46CC-4C23-8510-AB02AB9C3D07}|TransferCenterCore\\TransferCenterCore.csproj|solutionrelative:transfercentercore\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD154970-DBC0-4CA9-AE80-60D38925405C}|TransferCenterHelper\\TransferCenterHelper.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterhelper\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD154970-DBC0-4CA9-AE80-60D38925405C}|TransferCenterHelper\\TransferCenterHelper.csproj|solutionrelative:transfercenterhelper\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F6D32847-63C1-433B-80A6-FC7CE03027CA}|TransferCenterModel\\TransferCenterModel.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercentermodel\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F6D32847-63C1-433B-80A6-FC7CE03027CA}|TransferCenterModel\\TransferCenterModel.csproj|solutionrelative:transfercentermodel\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\Tables\\tblUser.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransferCenterDB\\Tables\\tblUser.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|c:\\laxmi\\testprojects\\transfercenter\\transfercenter\\transfercenterweb\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6AC15BA-7B52-44C3-9CC1-3CD33060BE26}|TransferCenterWeb\\TransferCenterWeb.csproj|solutionrelative:transfercenterweb\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BuildInfo.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Models\\BuildInfo.cs",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Models\\BuildInfo.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Models\\BuildInfo.cs",
+              "RelativeToolTip": "TransferCenterWeb\\Models\\BuildInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T18:15:45.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "TransferCenterWeb\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAASwC0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-07T18:13:28.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\appsettings.json",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\appsettings.json",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\appsettings.json",
+              "RelativeToolTip": "TransferCenterWeb\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-07T18:12:36.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Program.cs",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Program.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Program.cs",
+              "RelativeToolTip": "TransferCenterWeb\\Program.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAApwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T17:59:01.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "TransferCenterWeb\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-07T17:57:12.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "TransferCenterWeb\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T17:57:04.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "TransferCenterWeb\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterWeb\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "TransferCenterWeb\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T17:56:58.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "tblUser.sql ",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\Tables\\tblUser.sql",
+              "RelativeDocumentMoniker": "TransferCenterDB\\Tables\\tblUser.sql",
+              "ToolTip": "tblUser.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-10-07T17:47:18.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TransferCenterDB.sqlproj",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\TransferCenterDB.sqlproj",
+              "RelativeDocumentMoniker": "TransferCenterDB\\TransferCenterDB.sqlproj",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterDB\\TransferCenterDB.sqlproj",
+              "RelativeToolTip": "TransferCenterDB\\TransferCenterDB.sqlproj",
+              "ViewState": "AgIAABoAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000827|",
+              "WhenOpened": "2025-10-06T17:53:50.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TransferCenterCore",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\TransferCenterCore.csproj",
+              "RelativeDocumentMoniker": "TransferCenterCore\\TransferCenterCore.csproj",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\TransferCenterCore.csproj",
+              "RelativeToolTip": "TransferCenterCore\\TransferCenterCore.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-06T17:28:36.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "tblUser.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\tblUser.cs",
+              "RelativeDocumentMoniker": "TransferCenterModel\\tblUser.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\tblUser.cs",
+              "RelativeToolTip": "TransferCenterModel\\tblUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T17:28:02.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserBusiness.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusiness\\UserBusiness.cs",
+              "RelativeDocumentMoniker": "TransferCenterBusiness\\UserBusiness.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusiness\\UserBusiness.cs",
+              "RelativeToolTip": "TransferCenterBusiness\\UserBusiness.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAASwEEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:35:55.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IUserBusiness.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusinessInterface\\IUserBusiness.cs",
+              "RelativeDocumentMoniker": "TransferCenterBusinessInterface\\IUserBusiness.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusinessInterface\\IUserBusiness.cs",
+              "RelativeToolTip": "TransferCenterBusinessInterface\\IUserBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:34:50.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "TransferCenterCore\\Repository\\UserRepository.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "TransferCenterCore\\Repository\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T17:29:20.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "TransferCenterCore\\UnitOfWork\\UnitOfWork.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeToolTip": "TransferCenterCore\\UnitOfWork\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T17:31:26.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\UnitOfWork\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "TransferCenterCore\\UnitOfWork\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\UnitOfWork\\IUnitOfWork.cs",
+              "RelativeToolTip": "TransferCenterCore\\UnitOfWork\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T17:30:22.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BaseDbContext.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\Data\\BaseDbContext.cs",
+              "RelativeDocumentMoniker": "TransferCenterCore\\Data\\BaseDbContext.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\Data\\BaseDbContext.cs",
+              "RelativeToolTip": "TransferCenterCore\\Data\\BaseDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-03T17:57:44.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterHelper\\Class1.cs",
+              "RelativeDocumentMoniker": "TransferCenterHelper\\Class1.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterHelper\\Class1.cs",
+              "RelativeToolTip": "TransferCenterHelper\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:33:11.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\Class1.cs",
+              "RelativeDocumentMoniker": "TransferCenterModel\\Class1.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\Class1.cs",
+              "RelativeToolTip": "TransferCenterModel\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:31:27.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "TransferCenterCore\\GenericRepository.cs",
+              "ToolTip": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterCore\\GenericRepository.cs",
+              "RelativeToolTip": "TransferCenterCore\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:30:43.373Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

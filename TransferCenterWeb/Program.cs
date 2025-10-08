@@ -1,0 +1,71 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using TransferCenterBusiness;
+using TransferCenterBusinessInterface;
+using TransferCenterCore.UnitOfWork;
+using TransferCenterCore.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using TransferCenterWeb.Models; // Required for session
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+// Add session services
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Add DbContext
+builder.Services.AddDbContext<BaseDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductivityToolConnection")));
+
+// Register UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserBusiness, UserBusiness>();
+
+var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
+var copyright = builder.Configuration["Copyright"] ?? "© 2025 Your Company";
+builder.Services.AddSingleton(new BuildInfo { BuildNumber = buildNumber, Copyright = copyright });
+
+
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseSession(); // Enable session middleware
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.MapGet("/", context => {
+    if (context.Session.GetString("UserId") == null)
+    {
+        context.Response.Redirect("/Account/Login");
+    }
+    return Task.CompletedTask;
+});
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Account}/{action=Login}/{id?}");
+
+app.Run();

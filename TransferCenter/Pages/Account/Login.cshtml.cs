@@ -1,0 +1,58 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using TransferCenter.Models;
+using TransferCenterBusinessInterface;
+
+namespace TransferCenter.Pages.Account
+{
+    public class LoginModel : PageModel
+    {
+        private readonly IUserBusiness _userBusiness;
+
+        [BindProperty]
+        public LoginViewModel LoginInput { get; set; } = default!;
+
+        public LoginModel(IUserBusiness userBusiness)
+        {
+            _userBusiness = userBusiness;
+        }
+
+        public IActionResult OnGet()
+        {
+            // If user is already authenticated, redirect to home page
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            try
+            {
+                var user = await _userBusiness.Login(LoginInput.LoginId, LoginInput.Password);
+                
+                if (user != null)
+                {
+                    // TODO: Implement proper authentication using cookie authentication
+                    // For now, redirect to home page on successful login
+                    return RedirectToPage("/Index");
+                }
+            }
+            catch
+            {
+                // Log the error if needed
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            return Page();
+        }
+    }
+}

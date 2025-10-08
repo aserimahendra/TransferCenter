@@ -1,0 +1,15 @@
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\bin\Debug\net8.0\TransferCenterCore.deps.json
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\bin\Debug\net8.0\TransferCenterCore.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\bin\Debug\net8.0\TransferCenterCore.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\bin\Debug\net8.0\TransferCenterModel.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\bin\Debug\net8.0\TransferCenterModel.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.csproj.AssemblyReference.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.AssemblyInfoInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.AssemblyInfo.cs
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.csproj.CoreCompileInputs.cache
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\Transfer.70D8B318.Up2Date
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\refint\TransferCenterCore.dll
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\TransferCenterCore.pdb
+C:\Laxmi\TestProjects\TransferCenter\TransferCenter\TransferCenterCore\obj\Debug\net8.0\ref\TransferCenterCore.dll
