@@ -92,3 +92,5 @@ _ReSharper*/
 
 # SonarQube
 .sonar/
+*.dll
+/TransferCenter/bin/Debug/net8.0/de/Microsoft.Data.SqlClient.resources.dll
