@@ -4,7 +4,7 @@ using TransferCenterDbStore.Data;
 
 namespace TransferCenterDbStore
 {
-    public class GenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly BaseDbContext _dbContext;
         private readonly DbSet<T> _entitiySet;

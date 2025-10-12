@@ -14,22 +14,22 @@ namespace TransferCenterCore.Service
             _unitOfWork = unitOfWork;
             _configuration = configuration;
         }
-        public async Task<tblUser> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
             return await _unitOfWork.UserRepository.GetAsync(x => x.LoginId == username && x.Password == password);
         }
 
-        public tblUser LoginNew(string username, string password)
+        public User LoginNew(string username, string password)
         {
             return _unitOfWork.UserRepository.Get(x => x.LoginId == username && x.Password == password);
         }
 
-        public IEnumerable<tblUser> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return _unitOfWork.UserRepository.GetAll();
         }
 
-        public long SaveUser(tblUser user)
+        public long SaveUser(User user)
         {
             long result = 0;
 
@@ -71,12 +71,12 @@ namespace TransferCenterCore.Service
             return result;
         }
 
-        public tblUser GetUserById(int Id)
+        public User GetUserById(int Id)
         {
             return _unitOfWork.UserRepository.Get(x => x.UserId == Id);
         }
 
-        public void UpdateUser(tblUser user)
+        public void UpdateUser(User user)
         {
             int result = 0;
 

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterDbStore.Entity
 {
-    public class tblUser
+    public class User
     {
         [Key]
         public long UserId { get; set; }
@@ -15,8 +15,5 @@ namespace TransferCenterDbStore.Entity
         public string LoginId { get; set; } = string.Empty;
         public DateTime CreatedOn { get; set; }
         public bool IsActive { get; set; } = true;
-
-
-      
     }
 }

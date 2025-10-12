@@ -12,7 +12,9 @@ namespace TransferCenterDbStore.Data
     {
         public BaseDbContext(DbContextOptions<BaseDbContext> options) : base(options) { }
 
-
-        public DbSet<tblUser> tblUser { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<AdditionalInfo> AdditionalInfo { get; set; }
+        public DbSet<PatientDetails> PatientDetails { get; set; }
+        public DbSet<PatientTransferInfo> PatientTransferInfo { get; set; }
     }
 }
