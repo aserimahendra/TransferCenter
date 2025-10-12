@@ -9,7 +9,7 @@ namespace TransferCenterBusinessInterface
 
         public IEnumerable<tblUser> GetAll();
 
-        public int SaveUser(tblUser user);
+        public long SaveUser(tblUser user);
 
         public int CheckDuplicateEmail(string email);
 

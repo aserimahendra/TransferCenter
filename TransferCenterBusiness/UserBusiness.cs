@@ -31,9 +31,9 @@ namespace TransferCenterBusiness
             return _unitOfWork.UserRepository.GetAll();
         }
 
-        public int SaveUser(tblUser user)
+        public long SaveUser(tblUser user)
         {
-            int result = 0;
+            long result = 0;
 
             try
             {

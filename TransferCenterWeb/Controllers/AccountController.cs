@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TransferCenterWeb.Models;
-using TransferCenterModel;
 using TransferCenterBusinessInterface;
+using TransferCenterWeb.Models;
 
 namespace TransferCenterWeb.Controllers
 {
@@ -29,9 +28,12 @@ namespace TransferCenterWeb.Controllers
             if (user != null)
             {
                 // TODO: Implement authentication logic (cookie, claims, etc.)
+                HttpContext.Session.SetInt32(Constant.Session.IsAuthenticated, 1);
+                HttpContext.Session.SetString(Constant.Session.UserId, user.LoginId);
+                HttpContext.Session.SetString(Constant.Session.Email, user.EmailId);
                 return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError(string.Empty, Constant.Log.Error.InvalidLoginAttempt);
             return View(model);
         }
     }

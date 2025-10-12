@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TransferCenterBusiness;
 using TransferCenterBusinessInterface;
-using TransferCenterCore.UnitOfWork;
 using TransferCenterCore.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using TransferCenterCore.UnitOfWork;
+using TransferCenterWeb;
 using TransferCenterWeb.Models; // Required for session
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +52,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseSession(); // Enable session middleware
-
+app.UseMiddleware<ContextMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
