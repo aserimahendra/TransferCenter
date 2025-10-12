@@ -1,0 +1,48 @@
+﻿@model TransferCenterWeb.Models.PatientTransferViewModel
+
+@{
+  //  ViewData["Title"] = "Patient Transfer";
+}
+
+<h2 class="mb-4">New Patient Transfer</h2>
+
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Basic Transfer Info
+        </div>
+        <div class="card-body">
+            @Html.Partial("CreateTransferDetails", Model.TransferInfo)
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            Patient Details
+        </div>
+        <div class="card-body">
+            @Html.Partial("CreatePatientDetails", Model.Detail)
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            Additional Info
+        </div>
+        <div class="card-body">
+            @* @Html.Partial("CreateAdditionalInfo", Model.AdditionalInfos) *@
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

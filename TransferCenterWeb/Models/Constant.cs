@@ -15,6 +15,6 @@
             {
                 public static string InvalidLoginAttempt = "Invalid login attempt.";
             }
-        }
+        }        
     }
 }

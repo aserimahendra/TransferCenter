@@ -6,7 +6,7 @@ public class PatientTransferViewModel
     public PatientTransferInfo TransferInfo { get; set; } = new();
 
     // Section 2: Detailed Patient Info (e.g. diagnosis, insurance, isolation)
-    public PatientDetail Detail { get; set; } = new();
+    public PatientDetails Detail { get; set; } = new();
 
     // Section 3: Additional Metadata or Key-Value Info
     public List<AdditionalInfo> AdditionalInfos { get; set; } = new();

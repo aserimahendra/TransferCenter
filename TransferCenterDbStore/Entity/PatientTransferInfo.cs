@@ -9,14 +9,15 @@ public class PatientTransferInfo
     public string PhoneNumber { get; set; }
 
     public string FaxNumber { get; set; }
+    public string RequestingFacility { get; set; }
 
     public DateTime TransferDate { get; set; }
 
+    public string ReferringMd { get; set; }
     public string ReferringMdPhone { get; set; }
+    public string ReferringSpecialistPhone { get; set; }
 
     public string ReferringSpecialist { get; set; }
-
-    public string SpecialistPhone { get; set; }
 
     public DateTime AdmitDate { get; set; }
 
