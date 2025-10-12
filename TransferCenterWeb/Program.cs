@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using TransferCenterBusiness;
-using TransferCenterBusinessInterface;
-using TransferCenterCore.UnitOfWork;
-using TransferCenterCore.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using TransferCenterCore.Interface;
+using TransferCenterCore.Service;
+using TransferCenterDbStore.Data;
+using TransferCenterDbStore.UnitOfWork;
+using TransferCenterWeb;
 using TransferCenterWeb.Models; // Required for session
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +26,7 @@ builder.Services.AddDbContext<BaseDbContext>(options =>
 
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUserBusiness, UserBusiness>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
 var copyright = builder.Configuration["Copyright"] ?? "© 2025 Your Company";
@@ -51,7 +48,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseSession(); // Enable session middleware
-
+app.UseMiddleware<ContextMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
