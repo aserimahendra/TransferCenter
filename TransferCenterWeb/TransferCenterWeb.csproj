@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TransferCenterCore\TransferCenterCore.csproj" />
     <ProjectReference Include="..\TransferCenterDbStore\TransferCenterDbStore.csproj" />
   </ItemGroup>
 
