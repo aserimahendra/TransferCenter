@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using TransferCenterBusinessInterface;
+using TransferCenterCore.Interface;
 using TransferCenterWeb.Models;
 
 namespace TransferCenterWeb.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserBusiness _userBusiness;
-        public AccountController(IUserBusiness userBusiness)
+        private readonly IUserService _userService;
+        public AccountController(IUserService userService)
         {
-            _userBusiness = userBusiness;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace TransferCenterWeb.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = await _userBusiness.Login(model.LoginId, model.Password);
+            var user = await _userService.Login(model.LoginId, model.Password);
             if (user != null)
             {
                 // TODO: Implement authentication logic (cookie, claims, etc.)
