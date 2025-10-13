@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TransferCenterDbStore.Entity;
 
 
 public class PatientDetails
 {
-    public int Id { get; set; }
+    [Key]
+    public long Id { get; set; }
 
     public string Name { get; set; } = null!;
 

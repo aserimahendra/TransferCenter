@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TransferCenterDbStore.Entity;
 
 public class AdditionalInfo
 {
+    [Key]
     public long Id { get; set; }
-    // Binary (YES/NO) — represented by bool
     public bool ServicesAvailable { get; set; }
     public bool SitterRequired { get; set; }
     public bool VTIBDrips { get; set; }
@@ -11,7 +13,6 @@ public class AdditionalInfo
     public bool PFCTTransfer { get; set; }
     public bool CovidWithin3Days { get; set; }
     
-    // Tri-state document statuses
     public DocumentStatus FaceSheet { get; set; }
     public DocumentStatus HAndP { get; set; }
     public DocumentStatus CovidTestResults { get; set; }
@@ -24,7 +25,6 @@ public class AdditionalInfo
     public DocumentStatus TreatmentsAndProceduresInED { get; set; }
     public DocumentStatus InsuranceAuthorization { get; set; }
 
-    // Free text fields
     public string OtherNotes { get; set; }
     public string CodeStatus { get; set; }
 

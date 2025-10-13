@@ -27,6 +27,7 @@ builder.Services.AddDbContext<BaseDbContext>(options =>
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
 
 var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
 var copyright = builder.Configuration["Copyright"] ?? "© 2025 Your Company";

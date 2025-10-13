@@ -4,7 +4,7 @@
 
 /****** Object:  Table [dbo].[tblUser]    Script Date: 02-10-2025 11.33.06 PM ******/
 
-CREATE TABLE [dbo].[tblUser](
+CREATE TABLE [dbo].[User](
 	[UserId] [bigint] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](200) NOT NULL,
 	[LastName] [varchar](200) NOT NULL,

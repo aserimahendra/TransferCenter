@@ -1,37 +1,35 @@
 ﻿@model TransferCenterWeb.Models.PatientTransferViewModel
 
-@{
-  //  ViewData["Title"] = "Patient Transfer";
-}
-
-<h2 class="mb-4">New Patient Transfer</h2>
+<h2 class="mb-4">KPC Global Transfer Request</h2>
 
 <form asp-action="Create" method="post" class="needs-validation" novalidate>
 
     <div class="card mb-4">
         <div class="card-header bg-primary text-white">
-            Basic Transfer Info
+            Transferring Facility Information
         </div>
         <div class="card-body">
-            @Html.Partial("CreateTransferDetails", Model.TransferInfo)
+            @* @Html.Partial("CreateTrPatientansferDetails", Model.PatientTransferInfo) *@
+            @Html.EditorFor(m => m.PatientTransferInfo)
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-header bg-secondary text-white">
-            Patient Details
+            Patient Information
         </div>
         <div class="card-body">
-            @Html.Partial("CreatePatientDetails", Model.Detail)
+            @* @Html.Partial("CreatePatientDetails", Model.PatientDetails) *@
+            @Html.EditorFor(mbox=> mbox.PatientDetails)
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-header bg-dark text-white">
-            Additional Info
+            Additional information
         </div>
         <div class="card-body">
-            @* @Html.Partial("CreateAdditionalInfo", Model.AdditionalInfos) *@
+            @Html.EditorFor(mbox => mbox.AdditionalInfo)
         </div>
     </div>
 

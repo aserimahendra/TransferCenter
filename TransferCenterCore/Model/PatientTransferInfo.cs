@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace TransferCenterDbStore.Entity;
+namespace TransferCenterCore.Models;
 
 public class PatientTransferInfo
 {
-    [Key]
     public long Id { get; set; }
 
     public string CaseMgrSwRn { get; set; }
@@ -12,12 +9,15 @@ public class PatientTransferInfo
     public string PhoneNumber { get; set; }
 
     public string FaxNumber { get; set; }
+
     public string RequestingFacility { get; set; }
 
     public DateTime TransferDate { get; set; }
 
     public string ReferringMd { get; set; }
+
     public string ReferringMdPhone { get; set; }
+
     public string ReferringSpecialistPhone { get; set; }
 
     public string ReferringSpecialist { get; set; }

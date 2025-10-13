@@ -4,7 +4,7 @@ namespace TransferCenterWeb.Models;
 
 public class PatientTransferInfo
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [DisplayName("Case Mgr/SW/RN")]
     public string CaseMgrSwRn { get; set; }
@@ -19,7 +19,7 @@ public class PatientTransferInfo
     public string RequestingFacility { get; set; }
 
     [DisplayName("Date Of Transfer")]
-    public DateTime TransferDate { get; set; }
+    public DateTime TransferDate { get; set; }= DateTime.Now;
 
     [DisplayName("Referring MD")]
     public string ReferringMd { get; set; }
@@ -34,7 +34,7 @@ public class PatientTransferInfo
     public string ReferringSpecialist { get; set; }
 
     [DisplayName("Admit Date")]
-    public DateTime AdmitDate { get; set; }
+    public DateTime AdmitDate { get; set; }=DateTime.Now;
 
     public string Unit { get; set; }
 

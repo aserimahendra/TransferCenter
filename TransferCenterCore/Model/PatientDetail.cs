@@ -1,4 +1,4 @@
-namespace TransferCenterWeb.Models;
+namespace TransferCenterCore.Models;
 
 public class PatientDetails
 {

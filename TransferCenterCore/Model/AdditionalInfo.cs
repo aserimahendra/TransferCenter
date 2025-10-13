@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using TransferCenterDbStore.Entity;
 
-namespace TransferCenterWeb.Models;
+namespace TransferCenterCore.Models;
 
 public class AdditionalInfo
 {
