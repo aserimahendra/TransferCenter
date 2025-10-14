@@ -3,13 +3,14 @@
     public static class PatientTransferInfoTranslator
     {
         // Web → Core
-        public static TransferCenterCore.Models.PatientTransferInfo ToCoreModel(this Models.PatientTransferInfo source)
+        public static TransferCenterCore.Models.PatientTransferInfo ToCoreModel(this Models.PatientTransferInfo source, Guid guid)
         {
             if (source == null) return null!;
 
             return new TransferCenterCore.Models.PatientTransferInfo
             {
                 Id = source.Id,
+                UId = guid,
                 CaseMgrSwRn = source.CaseMgrSwRn,
                 PhoneNumber = source.PhoneNumber,
                 FaxNumber = source.FaxNumber,
@@ -33,6 +34,7 @@
             return new Models.PatientTransferInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 CaseMgrSwRn = source.CaseMgrSwRn,
                 PhoneNumber = source.PhoneNumber,
                 FaxNumber = source.FaxNumber,

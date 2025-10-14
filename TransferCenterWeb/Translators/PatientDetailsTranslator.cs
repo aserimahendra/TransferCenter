@@ -2,13 +2,14 @@
 {
     public static class PatientDetailsTranslator
     {
-        public static TransferCenterCore.Models.PatientDetails ToCoreModel(this Models.PatientDetails patientDetails)
+        public static TransferCenterCore.Models.PatientDetails ToCoreModel(this Models.PatientDetails patientDetails, Guid guid)
         {
             if (patientDetails == null) return null!;
 
             return new TransferCenterCore.Models.PatientDetails
             {
                 Id = patientDetails.Id,
+                UId = patientDetails.UId,
                 Name = patientDetails.Name,
                 DOB = patientDetails.DOB,
                 Gender = patientDetails.Gender,
@@ -32,6 +33,7 @@
             return new TransferCenterWeb.Models.PatientDetails
             {
                 Id = coreModel.Id,
+                UId= coreModel.UId,
                 Name = coreModel.Name,
                 DOB = coreModel.DOB,
                 Gender = coreModel.Gender,

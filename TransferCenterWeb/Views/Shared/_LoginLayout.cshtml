@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TransferCenterWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TransferCenterWeb.styles.css" asp-append-version="true" />
+    
+    <!-- Custom Styles -->
+    @* <style>
+        body {
+            background: linear-gradient(135deg, #fdfd96, #d0e8ff, #ffffff);
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* min-height: 100vh; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-card {
+            /* background: rgba(255, 255, 255, 0.75); */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+    </style>
+ *@
+    <style>
+        body {
+            
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .glass-card {
+            /* background: rgba(255, 255, 255, 0.75); */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            /* border: 1px solid rgba(255, 255, 255, 0.3); */
+            /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); */
+        }
+
+        .btn-login {
+            background-color: #F59C1A;
+            color: #1D3CA6;
+            font-weight: 600;
+        }
+
+            .btn-login:hover {
+                background-color: #e68a14;
+                color: white;
+            }
+
+        .text-primary {
+            color: #1D3CA6 !important;
+        }
+    </style>
+
+</head>
+<body class="bg-kpc-gradient">
+    <div class="glass-card">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

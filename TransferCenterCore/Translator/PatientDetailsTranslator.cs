@@ -8,6 +8,7 @@
 
             return new TransferCenterDbStore.Entity.PatientDetails
             {
+                UId = patientDetails.UId,
                 Id = patientDetails.Id,
                 Name = patientDetails.Name,
                 DOB = patientDetails.DOB,
@@ -32,6 +33,7 @@
             return new Models.PatientDetails
             {
                 Id = coreModel.Id,
+                UId = coreModel.UId,
                 Name = coreModel.Name,
                 DOB = coreModel.DOB,
                 Gender = coreModel.Gender,

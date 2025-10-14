@@ -1,0 +1,32 @@
+﻿@model TransferCenterWeb.Models.PatientTransferViewModel
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        Transferring Facility Information
+    </div>
+    <div class="card-body">
+        @await Html.PartialAsync("PatientTransferDetails", Model.PatientTransferInfo)
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header bg-secondary text-white">
+        Patient Information
+    </div>
+    <div class="card-body">
+        @await Html.PartialAsync("PatientDetails", Model.PatientDetails)
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">
+        Additional information
+    </div>
+    <div class="card-body">
+        @await Html.PartialAsync("AdditionalInfoDetails", Model.AdditionalInfo)
+    </div>
+</div>
+<div>
+    @* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) | *@
+    <a asp-action="Index">Back to Report</a>
+</div>

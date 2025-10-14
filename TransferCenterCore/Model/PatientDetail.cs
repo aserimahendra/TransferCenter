@@ -4,11 +4,12 @@ public class PatientDetails
 {
     public long Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public Guid UId { get; set; }
+    public string Name { get; set; } 
 
     public DateTime DOB { get; set; } = DateTime.Now;
 
-    public string Gender { get; set; } = null!;
+    public string Gender { get; set; }
 
     public bool IsIsolation { get; set; }
 

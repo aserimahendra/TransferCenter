@@ -7,6 +7,7 @@ public class PatientDetails
 {
     [Key]
     public long Id { get; set; }
+    public Guid UId { get; set; }
 
     public string Name { get; set; } = null!;
 

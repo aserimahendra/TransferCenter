@@ -1,16 +1,19 @@
 ﻿
+using System;
+
 namespace TransferCenter.Translators
 {
     public static class AdditionalInfoTranslator
     {
         // Web to Core
-        public static TransferCenterCore.Models.AdditionalInfo ToCoreModel(this TransferCenterWeb.Models.AdditionalInfo source)
+        public static TransferCenterCore.Models.AdditionalInfo ToCoreModel(this TransferCenterWeb.Models.AdditionalInfo source, Guid guid)
         {
             if (source == null) return null!;
 
             return new TransferCenterCore.Models.AdditionalInfo
             {
                 Id = source.Id,
+                UId= guid,
                 ServicesAvailable = source.ServicesAvailable,
                 SitterRequired = source.SitterRequired,
                 VTIBDrips = source.VTIBDrips,
@@ -43,6 +46,7 @@ namespace TransferCenter.Translators
             return new TransferCenterWeb.Models.AdditionalInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 ServicesAvailable = source.ServicesAvailable,
                 SitterRequired = source.SitterRequired,
                 VTIBDrips = source.VTIBDrips,

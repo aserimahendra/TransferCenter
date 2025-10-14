@@ -1,0 +1,107 @@
+﻿@model IEnumerable<TransferCenterWeb.Models.PatientTransferInfo>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.CaseMgrSwRn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FaxNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestingFacility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransferDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferringMd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferringMdPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferringSpecialistPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferringSpecialist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPhone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UId)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseMgrSwRn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FaxNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestingFacility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransferDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferringMd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferringMdPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferringSpecialistPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferringSpecialist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdmitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPhone)
+            </td>
+            <td>
+                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
+                    <a href="@Url.Action("Details", new { id = item.UId })" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-info-circle"></i> Details
+                    </a>
+                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

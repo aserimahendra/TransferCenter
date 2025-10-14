@@ -1,35 +1,48 @@
 @model TransferCenterWeb.Models.LoginViewModel
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="container py-5">
+<div class="">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <div class="card shadow-lg border-0 rounded-lg">
-                <div class="card-header bg-primary text-white text-center">
+        <div>
+            <div class="card shadow-lg border-0 rounded-lg bg-transparent ">
+                @* <div class="card-header bg-primary text-white text-center">
                     <h3 class="mb-0">Sign In</h3>
-                </div>
+                </div> *@
                 <div class="card-body">
-                    <form asp-action="Login" method="post" autocomplete="off">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="LoginId" class="form-control" placeholder="Login ID" />
-                            <label asp-for="LoginId">Login ID</label>
-                            <span asp-validation-for="LoginId" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
-                            <label asp-for="Password">Password</label>
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input asp-for="RememberMe" class="form-check-input" />
-                            <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 py-2">Login</button>
-                    </form>
+                    <div class="card shadow-sm rounded-4 p-4" style="margin: auto;">
+                        <form asp-action="Login" method="post" autocomplete="off" novalidate>
+                            @* <img src="~/favicon.png" alt="KPC" class="img-fluid" style="max-height: 100px; margin-left:20%"> *@
+                            <div class="text-center mb-4">
+                                <img src="~/favicon.png" alt="KPC Group Logo" class="img-fluid" style="max-height: 80px;" />
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="LoginId" class="form-control rounded-3" placeholder="Login ID" />
+                                <label asp-for="LoginId">Login ID</label>
+                                <span asp-validation-for="LoginId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Password" type="password" class="form-control rounded-3" placeholder="Password" />
+                                <label asp-for="Password">Password</label>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-check mb-4">
+                                <input asp-for="RememberMe" class="form-check-input" id="rememberMeCheck" />
+                                <label asp-for="RememberMe" class="form-check-label" for="rememberMeCheck">Remember Me</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 shadow-sm">
+                                Login
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>

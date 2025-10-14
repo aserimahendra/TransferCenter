@@ -13,9 +13,10 @@ namespace TransferCenterWeb.Controllers
                 _globalTransferService = globalTransferService;
         }
         // GET: GlobalTransferController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var infoDList = await _globalTransferService.GetList();
+            return View(infoDList.Select(x=>x.ToWebModel()).ToList());
         }
 
 
@@ -32,6 +33,7 @@ namespace TransferCenterWeb.Controllers
             {
                 if (!ModelState.IsValid)
                     return View(patientTransferViewModel);
+                patientTransferViewModel.Id= Guid.NewGuid();
                 await _globalTransferService.Save(patientTransferViewModel.ToCoreModel());
                 return View(patientTransferViewModel);
             }
@@ -39,6 +41,12 @@ namespace TransferCenterWeb.Controllers
             {
                 throw ex;
             }
+        }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var details = await _globalTransferService.Get(id);
+            return View(details.ToWebModel());
         }
 
     }

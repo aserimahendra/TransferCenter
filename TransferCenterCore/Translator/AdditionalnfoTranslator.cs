@@ -11,13 +11,13 @@ namespace TransferCenterCore.Translators
             return new TransferCenterDbStore.Entity.AdditionalInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 ServicesAvailable = source.ServicesAvailable,
                 SitterRequired = source.SitterRequired,
                 VTIBDrips = source.VTIBDrips,
                 Dialysis = source.Dialysis,
                 PFCTTransfer = source.PFCTTransfer,
                 CovidWithin3Days = source.CovidWithin3Days,
-
                 FaceSheet = (TransferCenterDbStore.Entity.DocumentStatus)source.FaceSheet,
                 HAndP = (TransferCenterDbStore.Entity.DocumentStatus)source.HAndP,
                 CovidTestResults = (TransferCenterDbStore.Entity.DocumentStatus)source.CovidTestResults,
@@ -29,20 +29,20 @@ namespace TransferCenterCore.Translators
                 MedicationList = (TransferCenterDbStore.Entity.DocumentStatus)source.MedicationList,
                 TreatmentsAndProceduresInED = (TransferCenterDbStore.Entity.DocumentStatus)source.TreatmentsAndProceduresInED,
                 InsuranceAuthorization = (TransferCenterDbStore.Entity.DocumentStatus)source.InsuranceAuthorization,
-
                 OtherNotes = source.OtherNotes,
                 CodeStatus = source.CodeStatus
             };
         }
 
         // Core to Web
-        public static Models.AdditionalInfo ToCoreModel(TransferCenterDbStore.Entity.AdditionalInfo source)
+        public static Models.AdditionalInfo ToCoreModel(this TransferCenterDbStore.Entity.AdditionalInfo source)
         {
             if (source == null) return null!;
 
             return new Models.AdditionalInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 ServicesAvailable = source.ServicesAvailable,
                 SitterRequired = source.SitterRequired,
                 VTIBDrips = source.VTIBDrips,

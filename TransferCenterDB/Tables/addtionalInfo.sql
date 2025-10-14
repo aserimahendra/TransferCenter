@@ -1,6 +1,6 @@
 CREATE TABLE dbo.AdditionalInfo (
     Id BIGINT PRIMARY KEY IDENTITY(1,1),
-
+   UId UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
     ServicesAvailable BIT NOT NULL,
     SitterRequired BIT NOT NULL,
     VTIBDrips BIT NOT NULL,

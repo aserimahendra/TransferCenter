@@ -9,6 +9,7 @@
             return new TransferCenterDbStore.Entity.PatientTransferInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 CaseMgrSwRn = source.CaseMgrSwRn,
                 PhoneNumber = source.PhoneNumber,
                 FaxNumber = source.FaxNumber,
@@ -31,6 +32,7 @@
             return new Models.PatientTransferInfo
             {
                 Id = source.Id,
+                UId = source.UId,
                 CaseMgrSwRn = source.CaseMgrSwRn,
                 PhoneNumber = source.PhoneNumber,
                 FaxNumber = source.FaxNumber,

@@ -3,7 +3,7 @@ namespace TransferCenterWeb.Models;
 public class PatientDetails
 {
     public long Id { get; set; }
-
+    public Guid UId { get; set; }
     public string Name { get; set; } = null!;
 
     public DateTime DOB { get; set; } = DateTime.Now;

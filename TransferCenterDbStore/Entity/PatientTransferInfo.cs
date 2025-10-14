@@ -6,6 +6,7 @@ public class PatientTransferInfo
 {
     [Key]
     public long Id { get; set; }
+    public Guid UId { get; set; }
 
     public string CaseMgrSwRn { get; set; }
 

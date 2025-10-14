@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 
 namespace TransferCenterWeb.Models;
@@ -5,6 +6,7 @@ namespace TransferCenterWeb.Models;
 public class PatientTransferInfo
 {
     public long Id { get; set; }
+    public Guid UId { get; set; }
 
     [DisplayName("Case Mgr/SW/RN")]
     public string CaseMgrSwRn { get; set; }

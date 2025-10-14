@@ -5,6 +5,7 @@ namespace TransferCenterWeb.Models;
 
 public class AdditionalInfo
 {
+    public Guid UId { get; set; }
     public long Id { get; set; }
     public bool ServicesAvailable { get; set; }
     public bool SitterRequired { get; set; }

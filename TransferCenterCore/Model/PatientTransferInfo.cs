@@ -4,6 +4,7 @@ public class PatientTransferInfo
 {
     public long Id { get; set; }
 
+    public Guid UId { get; set; }
     public string CaseMgrSwRn { get; set; }
 
     public string PhoneNumber { get; set; }

@@ -6,13 +6,13 @@ public class AdditionalInfo
 {
     [Key]
     public long Id { get; set; }
+    public Guid UId { get; set; }
     public bool ServicesAvailable { get; set; }
     public bool SitterRequired { get; set; }
     public bool VTIBDrips { get; set; }
     public bool Dialysis { get; set; }
     public bool PFCTTransfer { get; set; }
     public bool CovidWithin3Days { get; set; }
-    
     public DocumentStatus FaceSheet { get; set; }
     public DocumentStatus HAndP { get; set; }
     public DocumentStatus CovidTestResults { get; set; }

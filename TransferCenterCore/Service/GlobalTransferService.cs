@@ -54,5 +54,42 @@ namespace TransferCenterCore.Service
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<PatientTransferViewModel>> GetList()
+        {
+            var transferInfo = await _unitOfWork.PatientTransferInfoRepository.GetAllAsync();
+            return transferInfo.Select(x => new PatientTransferViewModel() { Id= x.UId,TransferInfo = x.ToCoreModel() }).ToList();
+        }
+
+        public async Task<PatientTransferViewModel> Get(Guid uid)
+        {
+            var transferInfo = await GetTransferInfoAsync(uid);
+            var patientDetails = await  GetPatientDetailsAsync(uid);
+            var additionalInfo = await GetAdditionalInfoAsync(uid);
+
+            return new PatientTransferViewModel()
+            {
+                AdditionalInfo = additionalInfo.ToCoreModel(),
+                PatientInfo = patientDetails.ToCoreModel(),
+                TransferInfo = transferInfo.ToCoreModel(),
+                Id = uid,
+            };
+        }
+
+        private async Task<TransferCenterDbStore.Entity.PatientTransferInfo> GetTransferInfoAsync(Guid uid)
+        {
+            return await _unitOfWork.PatientTransferInfoRepository.GetAsync(x => x.UId == uid);
+        }
+
+        private async Task<TransferCenterDbStore.Entity.PatientDetails> GetPatientDetailsAsync(Guid uid)
+        {
+            return await _unitOfWork.PatientDetailsRepository.GetAsync(x => x.UId == uid);
+        }
+
+        private async Task<TransferCenterDbStore.Entity.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
+        {
+            return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+        }
+
     }
 }
