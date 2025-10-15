@@ -17,8 +17,8 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.navbar {
+    z-index: 1050;
 }
 
 .bg-kpc-gradient {
@@ -75,5 +75,40 @@ body {
     color: white;
     text-align: center;
     padding: 10px 0;
-    z-index: 1030; /* stays above other content */
+    z-index: 1; /* stays above other content */
+}
+
+/* Scrollable container with 90% viewport height and gradient */
+.scrollable-container {
+    height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+    /* Thin scrollbar styling for WebKit */
+    .scrollable-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scrollable-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 3px;
+    }
+
+        .scrollable-container::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+/* Thin scrollbar for Firefox */
+.scrollable-container {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.text-kpc {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }

@@ -31,10 +31,16 @@ namespace TransferCenterWeb.Controllers
                 HttpContext.Session.SetInt32(Constant.Session.IsAuthenticated, 1);
                 HttpContext.Session.SetString(Constant.Session.UserId, user.LoginId);
                 HttpContext.Session.SetString(Constant.Session.Email, user.EmailId);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "GlobalTransfer");
             }
             ModelState.AddModelError(string.Empty, Constant.Log.Error.InvalidLoginAttempt);
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            return View("login");
         }
     }
 }

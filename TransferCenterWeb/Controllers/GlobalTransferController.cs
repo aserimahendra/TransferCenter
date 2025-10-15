@@ -34,8 +34,9 @@ namespace TransferCenterWeb.Controllers
                 if (!ModelState.IsValid)
                     return View(patientTransferViewModel);
                 patientTransferViewModel.Id= Guid.NewGuid();
+                
                 await _globalTransferService.Save(patientTransferViewModel.ToCoreModel());
-                return View(patientTransferViewModel);
+                return View("index");
             }
             catch (Exception ex)
             {

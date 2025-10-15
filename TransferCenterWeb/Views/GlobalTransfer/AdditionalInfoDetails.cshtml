@@ -1,121 +1,85 @@
 ﻿@model TransferCenterWeb.Models.AdditionalInfo
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ServicesAvailable)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ServicesAvailable)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SitterRequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SitterRequired)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VTIBDrips)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VTIBDrips)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dialysis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dialysis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PFCTTransfer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PFCTTransfer)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CovidWithin3Days)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CovidWithin3Days)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FaceSheet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FaceSheet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HAndP)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HAndP)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CovidTestResults)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CovidTestResults)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TransferOrder)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TransferOrder)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProgressNotes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProgressNotes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConsultationNotes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConsultationNotes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MostRecentLabResults)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MostRecentLabResults)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RadiologyResults)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RadiologyResults)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicationList)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicationList)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TreatmentsAndProceduresInED)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TreatmentsAndProceduresInED)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceAuthorization)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceAuthorization)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherNotes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OtherNotes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodeStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodeStatus)
-        </dd>
-    </dl>
-</div>
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ServicesAvailable)</td>
+            <td class="col-sm-8">@(Model.ServicesAvailable ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.SitterRequired)</td>
+            <td class="col-sm-8">@(Model.SitterRequired ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.VTIBDrips)</td>
+            <td class="col-sm-8">@(Model.VTIBDrips ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Dialysis)</td>
+            <td class="col-sm-8">@(Model.Dialysis ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.PFCTTransfer)</td>
+            <td class="col-sm-8">@(Model.PFCTTransfer ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CovidWithin3Days)</td>
+            <td class="col-sm-8">@(Model.CovidWithin3Days ? "Yes" : "No")</td>
+        </tr>
+
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.FaceSheet)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.FaceSheet)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.HAndP)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.HAndP)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CovidTestResults)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.CovidTestResults)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TransferOrder)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.TransferOrder)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ProgressNotes)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ProgressNotes)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ConsultationNotes)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ConsultationNotes)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MostRecentLabResults)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.MostRecentLabResults)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.RadiologyResults)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.RadiologyResults)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MedicationList)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.MedicationList)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TreatmentsAndProceduresInED)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.TreatmentsAndProceduresInED)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.InsuranceAuthorization)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.InsuranceAuthorization)</td>
+        </tr>
+
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.OtherNotes)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.OtherNotes)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CodeStatus)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.CodeStatus)</td>
+        </tr>
+    </tbody>
+</table>
 

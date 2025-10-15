@@ -1,78 +1,54 @@
 ﻿@model TransferCenterWeb.Models.PatientTransferInfo
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CaseMgrSwRn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CaseMgrSwRn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FaxNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FaxNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RequestingFacility)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RequestingFacility)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TransferDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TransferDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReferringMd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReferringMd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReferringMdPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReferringMdPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReferringSpecialistPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReferringSpecialistPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReferringSpecialist)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReferringSpecialist)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdmitDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdmitDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Unit)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UnitPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UnitPhone)
-        </dd>
-    </dl>
-</div>
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CaseMgrSwRn)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.CaseMgrSwRn)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.PhoneNumber)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.PhoneNumber)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.FaxNumber)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.FaxNumber)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.RequestingFacility)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.RequestingFacility)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TransferDate)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.TransferDate)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReferringMd)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReferringMd)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReferringMdPhone)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReferringMdPhone)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReferringSpecialistPhone)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReferringSpecialistPhone)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReferringSpecialist)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReferringSpecialist)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.AdmitDate)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.AdmitDate)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Unit)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Unit)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.UnitPhone)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.UnitPhone)</td>
+        </tr>
+    </tbody>
+</table>

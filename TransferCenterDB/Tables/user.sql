@@ -21,9 +21,6 @@ CREATE TABLE [dbo].[User](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[tblUser] ADD  CONSTRAINT [DF_tblUser_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
-GO
-
 
 
 
