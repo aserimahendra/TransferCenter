@@ -2115,46 +2115,38 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Renu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/rohitmishra/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenter\\TransferCenter.csproj",
+      "projectUniqueName": "/Volumes/Study/Git/TransferCenter/TransferCenter/TransferCenter.csproj",
       "projectName": "TransferCenter",
-      "projectPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenter\\TransferCenter.csproj",
-      "packagesPath": "C:\\Users\\Renu\\.nuget\\packages\\",
-      "outputPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenter\\obj\\",
+      "projectPath": "/Volumes/Study/Git/TransferCenter/TransferCenter/TransferCenter.csproj",
+      "packagesPath": "/Users/rohitmishra/.nuget/packages/",
+      "outputPath": "/Volumes/Study/Git/TransferCenter/TransferCenter/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Renu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/rohitmishra/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusinessInterface\\TransferCenterBusinessInterface.csproj": {
-              "projectPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusinessInterface\\TransferCenterBusinessInterface.csproj"
+            "/Volumes/Study/Git/TransferCenter/TransferCenterBusiness/TransferCenterBusiness.csproj": {
+              "projectPath": "/Volumes/Study/Git/TransferCenter/TransferCenterBusiness/TransferCenterBusiness.csproj"
             },
-            "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusiness\\TransferCenterBusiness.csproj": {
-              "projectPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterBusiness\\TransferCenterBusiness.csproj"
+            "/Volumes/Study/Git/TransferCenter/TransferCenterBusinessInterface/TransferCenterBusinessInterface.csproj": {
+              "projectPath": "/Volumes/Study/Git/TransferCenter/TransferCenterBusinessInterface/TransferCenterBusinessInterface.csproj"
             },
-            "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\TransferCenterModel.csproj": {
-              "projectPath": "C:\\Laxmi\\TestProjects\\TransferCenter\\TransferCenter\\TransferCenterModel\\TransferCenterModel.csproj"
+            "/Volumes/Study/Git/TransferCenter/TransferCenterModel/TransferCenterModel.csproj": {
+              "projectPath": "/Volumes/Study/Git/TransferCenter/TransferCenterModel/TransferCenterModel.csproj"
             }
           }
         }
@@ -2169,7 +2161,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -2191,6 +2183,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2199,8 +2205,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+    }
+  ]
 }
