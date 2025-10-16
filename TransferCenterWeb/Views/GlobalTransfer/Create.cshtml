@@ -1,0 +1,44 @@
+﻿@model TransferCenterWeb.Models.PatientTransferViewModel
+
+<h2 class="mb-4 text-warning text-center text-kpc">KPC Global Transfer Request</h2>
+
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Transferring Facility Information
+        </div>
+        <div class="card-body">
+            @Html.EditorFor(m => m.PatientTransferInfo)
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            Patient Information
+        </div>
+        <div class="card-body">
+            @Html.EditorFor(mbox => mbox.PatientDetails)
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            Additional information
+        </div>
+        <div class="card-body">
+            @Html.EditorFor(mbox => mbox.AdditionalInfo)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

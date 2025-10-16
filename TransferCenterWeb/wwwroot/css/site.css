@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -17,6 +17,98 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.navbar {
+    z-index: 1050;
+}
+
+.bg-kpc-gradient {
+    background: linear-gradient(135deg, #F59C1A, #FFFFFF, #1D3CA6);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-kpc-gradient-glass {
+    background: linear-gradient(135deg, #F59C1Aaa, #FFFFFFaa, #1D3CA6aa); /* add alpha */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bg-kpc-gradient-glass-reversed {
+    background: linear-gradient(135deg, #1D3CA6aa, #FFFFFFaa, #F59C1Aaa); /* Blue → White → Yellow */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bg-kpc-gradient-glass-reversed-fade {
+    background: linear-gradient( 135deg, rgba(29, 60, 166, 0.85) 0%, /* Stronger blue start */
+    rgba(255, 255, 255, 0.5) 50%, /* More transparent white in middle */
+    rgba(245, 156, 26, 0.25) 100% /* Very faded yellow end */
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* lighter border */
+}
+
+.btn-kpc-warning {
+    background-color: #F59C1A; /* Your yellow color */
+    color: #fff; /* White text for contrast */
+    border: none;
+}
+
+    .btn-kpc-warning:hover,
+    .btn-kpc-warning:focus,
+    .btn-kpc-warning:active {
+        background-color: #d88716; /* Slightly darker yellow on hover */
+        color: #fff;
+        outline: none;
+        box-shadow: none;
+    }
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1D3CA6; /* Blue or your preferred color */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1; /* stays above other content */
+}
+
+/* Scrollable container with 90% viewport height and gradient */
+.scrollable-container {
+    height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+    /* Thin scrollbar styling for WebKit */
+    .scrollable-container::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scrollable-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 3px;
+    }
+
+        .scrollable-container::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+/* Thin scrollbar for Firefox */
+.scrollable-container {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.text-kpc {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
