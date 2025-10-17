@@ -9,7 +9,7 @@
             return new TransferCenterCore.Models.PatientDetails
             {
                 Id = patientDetails.Id,
-                UId = patientDetails.UId,
+                UId = guid,
                 Name = patientDetails.Name,
                 DOB = patientDetails.DOB,
                 Gender = patientDetails.Gender,

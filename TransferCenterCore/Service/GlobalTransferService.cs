@@ -20,13 +20,14 @@ namespace TransferCenterCore.Service
             throw new NotImplementedException();
         }
 
-        public Task Save(PatientTransferViewModel patientTransferViewModel)
+        public async Task Save(PatientTransferViewModel patientTransferViewModel)
         {
             try
             {
                 // wait for all tasks to complete if needed
-                Task.WhenAll(SavePatientInfo(patientTransferViewModel.PatientInfo), SavePatientTransferInfo(patientTransferViewModel.TransferInfo), SaveAdditionalInfoInfo(patientTransferViewModel.AdditionalInfo));
-                return Task.CompletedTask;
+                await SavePatientInfo(patientTransferViewModel.PatientInfo);
+                await SavePatientTransferInfo(patientTransferViewModel.TransferInfo);
+                await SaveAdditionalInfoInfo(patientTransferViewModel.AdditionalInfo);
             }
             catch (Exception)
             {
