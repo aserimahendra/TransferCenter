@@ -1,0 +1,109 @@
+﻿@model TransferCenterWeb.Models.PatientDetails
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- Row 1: Name, DOB, Gender -->
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="DOB" class="form-label"></label>
+            <input asp-for="DOB" class="form-control" type="date" />
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Gender" class="form-label"></label>
+            <input asp-for="Gender" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Row 2: Isolation, IsolationType, Height, Weight -->
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="form-check mt-4">
+                <input class="form-check-input" asp-for="IsIsolation" />
+                <label class="form-check-label" asp-for="IsIsolation"></label>
+                <span asp-validation-for="IsIsolation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="IsolationType" class="form-label"></label>
+            <input asp-for="IsolationType" class="form-control" />
+            <span asp-validation-for="IsolationType" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Height" class="form-label"></label>
+            <input asp-for="Height" class="form-control" />
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Weight" class="form-label"></label>
+            <input asp-for="Weight" class="form-control" />
+            <span asp-validation-for="Weight" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Remaining Fields: One per full-width row -->
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label asp-for="Diagnosis" class="form-label"></label>
+            <input asp-for="Diagnosis" class="form-control" />
+            <span asp-validation-for="Diagnosis" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label asp-for="LevelOfCareNeeded" class="form-label"></label>
+            <input asp-for="LevelOfCareNeeded" class="form-control" />
+            <span asp-validation-for="LevelOfCareNeeded" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label asp-for="AcceptingPhysician" class="form-label"></label>
+            <input asp-for="AcceptingPhysician" class="form-control" />
+            <span asp-validation-for="AcceptingPhysician" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row mb-3 align-items-start">
+        <!-- Left Side: Label + Checkboxes -->
+        <div class="col-md-2">
+            <label class="form-label">Reason for Transfer</label>
+
+            <div class="form-check">
+                <input class="form-check-input" asp-for="Lateral" />
+                <label class="form-check-label" asp-for="Lateral"></label>
+                <span asp-validation-for="Lateral" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" asp-for="HLOC" />
+                <label class="form-check-label" asp-for="HLOC"></label>
+                <span asp-validation-for="HLOC" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Right Side: Textarea -->
+        <div class="col-md-10 mt-2">
+            <label asp-for="ReasonForTransfer" class="form-label visually-hidden"></label> <!-- Optional if label already shown -->
+            <textarea asp-for="ReasonForTransfer" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="ReasonForTransfer" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <label asp-for="PatientInsurance" class="form-label"></label>
+            <input asp-for="PatientInsurance" class="form-control" />
+            <span asp-validation-for="PatientInsurance" class="text-danger"></span>
+        </div>
+    </div>

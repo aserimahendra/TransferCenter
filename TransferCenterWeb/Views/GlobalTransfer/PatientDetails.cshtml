@@ -1,0 +1,62 @@
+﻿@model TransferCenterWeb.Models.PatientDetails
+
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.DOB)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.DOB)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Gender)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Gender)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.IsIsolation)</td>
+            <td class="col-sm-8">@(Model.IsIsolation ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.IsolationType)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.IsolationType)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Height)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Height)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Weight)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Weight)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Diagnosis)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Diagnosis)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.LevelOfCareNeeded)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.LevelOfCareNeeded)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.AcceptingPhysician)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.AcceptingPhysician)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReasonForTransfer)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReasonForTransfer)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Lateral)</td>
+            <td class="col-sm-8">@(Model.Lateral ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.HLOC)</td>
+            <td class="col-sm-8">@(Model.HLOC ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.PatientInsurance)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.PatientInsurance)</td>
+        </tr>
+    </tbody>
+</table>

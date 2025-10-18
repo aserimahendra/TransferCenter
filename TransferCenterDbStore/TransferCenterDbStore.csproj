@@ -8,12 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TransferCenterDbStore\TransferCenterDbStore.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
   </ItemGroup>
 
 </Project>

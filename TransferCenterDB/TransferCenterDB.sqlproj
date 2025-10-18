@@ -59,6 +59,11 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tables\tblUser.sql" />
+    <None Include="Tables\user.sql" />
+    <None Include="Tables\patientTransferInfo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\addtionalInfo.sql" />
+    <Build Include="Tables\patientDetails.sql" />
   </ItemGroup>
 </Project>
