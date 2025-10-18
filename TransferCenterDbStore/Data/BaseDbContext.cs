@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransferCenterDbStore.Entity;
+using TransferCenterDbStore.Entities;
 
 namespace TransferCenterDbStore.Data
 {
@@ -16,5 +16,6 @@ namespace TransferCenterDbStore.Data
         public DbSet<AdditionalInfo> AdditionalInfo { get; set; }
         public DbSet<PatientDetails> PatientDetails { get; set; }
         public DbSet<PatientTransferInfo> PatientTransferInfo { get; set; }
+        public DbSet<AuditLog> AuditLog { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TransferCenterCore.Interface;
-using TransferCenterCore.Service;
+using TransferCenterCore.Interfaces;
+using TransferCenterCore.Services;
 using TransferCenterDbStore.Data;
 using TransferCenterDbStore.UnitOfWork;
 using TransferCenterWeb;
@@ -27,10 +27,11 @@ builder.Services.AddDbContext<BaseDbContext>(options =>
 // Register UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
 
 var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
-var copyright = builder.Configuration["Copyright"] ?? "© 2025 Your Company";
+var copyright = builder.Configuration["Copyright"] ?? "ï¿½ 2025 Your Company";
 builder.Services.AddSingleton(new BuildInfo { BuildNumber = buildNumber, Copyright = copyright });
 
 
@@ -51,7 +52,7 @@ app.UseRouting();
 app.UseSession(); // Enable session middleware
 app.UseMiddleware<ContextMiddleware>();
 app.UseAuthorization();
-
+app.UseAuthorization();
 app.MapControllers();
 
 app.MapGet("/", context => {
@@ -66,4 +67,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
+app.UseMiddleware<AuditLogMiddleware>();
 app.Run();

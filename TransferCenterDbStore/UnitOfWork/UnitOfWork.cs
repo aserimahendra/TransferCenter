@@ -1,6 +1,6 @@
 ﻿using TransferCenterDbStore.Data;
-using TransferCenterDbStore.Interface;
-using TransferCenterDbStore.Repository;
+using TransferCenterDbStore.Interfaces;
+using TransferCenterDbStore.Repositories;
 
 namespace TransferCenterDbStore.UnitOfWork
 {
@@ -30,6 +30,7 @@ namespace TransferCenterDbStore.UnitOfWork
         IAdditionalInfoRepository _additionalInfoRepository;  
         IPatientDetailsRepository _patientDetailsRepository;
         IPatientTransferInfoRepository _patientTransferInfoRepository;
+        IAuditLogRepository _auditLogRepository;
 
         public IUserRepository UserRepository
         {
@@ -47,6 +48,11 @@ namespace TransferCenterDbStore.UnitOfWork
         public IPatientTransferInfoRepository PatientTransferInfoRepository
         {
             get { return _patientTransferInfoRepository ?? new PatientTransferInfoRepository(_dbContext); }
+        }
+
+        public IAuditLogRepository AuditLogRepository
+        {
+            get { return _auditLogRepository ?? new AuditLogRepository(_dbContext); }
         }
        
         #endregion

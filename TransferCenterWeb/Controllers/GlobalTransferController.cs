@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using TransferCenterCore.Interface;
+using TransferCenterCore.Interfaces;
 using TransferCenterWeb.Models;
 using TransferCenterWeb.Translators;
 
@@ -29,19 +29,11 @@ namespace TransferCenterWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PatientTransferViewModel patientTransferViewModel)
         {
-            try
-            {
                 if (!ModelState.IsValid)
                     return View(patientTransferViewModel);
                 patientTransferViewModel.Id= Guid.NewGuid();
-                
                 await _globalTransferService.Save(patientTransferViewModel.ToCoreModel());
                 return View("index");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         public async Task<IActionResult> Details(Guid id)

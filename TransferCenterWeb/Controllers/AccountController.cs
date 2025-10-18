@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using TransferCenterCore.Interface;
+using TransferCenterCore.Interfaces;
 using TransferCenterWeb.Models;
 
 namespace TransferCenterWeb.Controllers

@@ -13,7 +13,10 @@ CREATE TABLE [dbo].[User](
 	[DomainID] [varchar](200) NULL,
 	[LoginId] [varchar](200) NOT NULL,
 	[Password] [varchar](200) NULL,
-	[CreatedOn] [datetime] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL DEFAULT (GETDATE()),
+	[CreatedBy] [varchar](200) NOT NULL,
+
+    
  CONSTRAINT [PK_tblUser] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
