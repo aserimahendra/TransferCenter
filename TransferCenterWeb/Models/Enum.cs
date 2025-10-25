@@ -1,6 +1,23 @@
+using System.ComponentModel;
+
 namespace TransferCenterWeb.Models;
 
-public enum Enum
+public enum WeightIn
 {
-    
+    Lbs,
+    Kgs
+}
+
+public enum DocumentStatus
+{
+    Sent,
+    Yes,
+    [Description("N/A")]
+    NA
+}
+
+public enum TransferType
+{
+    GlobalPatientTransfer = 1,
+    PatientTransfer = 2
 }

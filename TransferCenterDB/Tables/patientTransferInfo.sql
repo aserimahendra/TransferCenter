@@ -10,6 +10,7 @@ GO
 CREATE TABLE dbo.PatientTransferInfo (
     Id BIGINT PRIMARY KEY IDENTITY(1,1),
     UId UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
+    TransferType SMALLINT NOT NULL,
     CaseMgrSwRn NVARCHAR(255) NOT NULL,
 
     PhoneNumber NVARCHAR(50) NOT NULL,
@@ -32,11 +33,21 @@ CREATE TABLE dbo.PatientTransferInfo (
 
     Unit NVARCHAR(100) NOT NULL,
 
-    UnitPhone NVARCHAR(50) NOT NULL
+    UnitPhone NVARCHAR(50) NOT NULL,
+
+    IsHloc BIT NOT NULL,
+
+    MR INT NULL,
+
+    SecondPhoneNumber NVARCHAR(50) NULL,
+
+    SecondFaxNumber NVARCHAR(50) NULL,
+
+    PrimaryCallerName NVARCHAR(255) NULL,
+
+    SecondaryCallerName NVARCHAR(255) NULL
 );
 GO
 -- Use TransferCenter database
-USE TransferCenter;
-GO
 
 

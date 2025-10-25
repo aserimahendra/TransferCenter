@@ -7,10 +7,10 @@ using TransferCenterWeb.Translators;
 namespace TransferCenterWeb.Controllers;
 
 [Authorize]
-public class GlobalTransferController : Controller
+public class GlobalPatientTransferController : Controller
 {
     IGlobalTransferService _globalTransferService;
-    public GlobalTransferController(IGlobalTransferService globalTransferService)
+    public GlobalPatientTransferController(IGlobalTransferService globalTransferService)
     {
         _globalTransferService = globalTransferService;
     }

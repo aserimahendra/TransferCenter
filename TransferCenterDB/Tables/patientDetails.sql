@@ -3,17 +3,17 @@ CREATE TABLE dbo.PatientDetails (
     UId UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
     Name NVARCHAR(255) NOT NULL,
 
-    DOB DATE NOT NULL,
+    DOB DATETIME NOT NULL,
 
-    Gender NVARCHAR(50) NOT NULL,
+    Gender SMALLINT NOT NULL,
 
     IsIsolation BIT NOT NULL,
 
     IsolationType NVARCHAR(255) NULL,
 
-    Height NVARCHAR(50) NULL,
+    Height FLOAT NOT NULL,
 
-    Weight NVARCHAR(50) NULL,
+    Weight FLOAT NOT NULL,
 
     Diagnosis NVARCHAR(MAX) NULL,
 
@@ -27,6 +27,18 @@ CREATE TABLE dbo.PatientDetails (
 
     HLOC BIT NOT NULL,
 
-    PatientInsurance NVARCHAR(255) NOT NULL
+    PatientInsurance NVARCHAR(255) NULL,
+
+    CodeStatus NVARCHAR(MAX) NULL,
+
+    Sitter BIT NOT NULL,
+
+    JehovahWitness BIT NOT NULL,
+
+    Capitated BIT NOT NULL,
+
+    GCS NVARCHAR(255) NULL,
+
+    WeightIn SMALLINT NOT NULL
 );
 GO

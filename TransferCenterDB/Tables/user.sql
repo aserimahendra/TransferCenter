@@ -14,6 +14,7 @@ CREATE TABLE [dbo].[User](
 	[LoginId] [varchar](200) NOT NULL,
 	[Password] [varchar](200) NULL,
 	[CreatedOn] [datetime] NOT NULL DEFAULT (GETDATE()),
+	[Role] [smallint] NOT NULL DEFAULT ((0)),
 	[CreatedBy] [varchar](200) NOT NULL,
 
     
