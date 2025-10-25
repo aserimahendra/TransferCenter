@@ -1,6 +1,6 @@
-namespace TransferCenterWeb.Models;
+namespace TransferCenterWeb.Models.GlobalTransfer;
 
-public class PatientTransferViewModel
+public class GlobalPatientTransferViewModel
 {
     public Guid Id { get; set; }
 
