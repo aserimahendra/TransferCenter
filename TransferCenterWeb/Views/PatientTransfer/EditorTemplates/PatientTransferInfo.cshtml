@@ -1,0 +1,127 @@
+@model TransferCenterWeb.Models.PatientTransfer.PatientTransferInfo
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.UId)
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<!-- Case Manager / Call Time -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <label asp-for="CaseMgrSwRn" class="form-label"></label>
+        <input asp-for="CaseMgrSwRn" class="form-control" />
+        <span asp-validation-for="CaseMgrSwRn" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="TransferDate" class="form-label"></label>
+        <input asp-for="TransferDate" class="form-control" type="date" />
+        <span asp-validation-for="TransferDate" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="MR" class="form-label"></label>
+        <input asp-for="MR" class="form-control" type="number" />
+        <span asp-validation-for="MR" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- Primary Caller -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label asp-for="PrimaryCallerName" class="form-label"></label>
+        <input asp-for="PrimaryCallerName" class="form-control" />
+        <span asp-validation-for="PrimaryCallerName" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="PhoneNumber" class="form-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" type="tel" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="FaxNumber" class="form-label"></label>
+        <input asp-for="FaxNumber" class="form-control" type="tel" />
+        <span asp-validation-for="FaxNumber" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- Secondary Caller -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label asp-for="SecondaryCallerName" class="form-label"></label>
+        <input asp-for="SecondaryCallerName" class="form-control" />
+        <span asp-validation-for="SecondaryCallerName" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="SecondPhoneNumber" class="form-label"></label>
+        <input asp-for="SecondPhoneNumber" class="form-control" type="tel" />
+        <span asp-validation-for="SecondPhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="SecondFaxNumber" class="form-label"></label>
+        <input asp-for="SecondFaxNumber" class="form-control" type="tel" />
+        <span asp-validation-for="SecondFaxNumber" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- Facility & HLOC -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <label asp-for="RequestingFacility" class="form-label"></label>
+        <input asp-for="RequestingFacility" class="form-control" />
+        <span asp-validation-for="RequestingFacility" class="text-danger"></span>
+    </div>
+    <div class="col-md-3">
+        <div class="form-check mt-4">
+            <input class="form-check-input" asp-for="IsHloc" />
+            <label class="form-check-label" asp-for="IsHloc"></label>
+        </div>
+        <span asp-validation-for="IsHloc" class="text-danger"></span>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<!-- Referring MD -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label asp-for="ReferringMd" class="form-label"></label>
+        <input asp-for="ReferringMd" class="form-control" />
+        <span asp-validation-for="ReferringMd" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="ReferringMdPhone" class="form-label"></label>
+        <input asp-for="ReferringMdPhone" class="form-control" type="tel" />
+        <span asp-validation-for="ReferringMdPhone" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="ReferringSpecialist" class="form-label"></label>
+        <input asp-for="ReferringSpecialist" class="form-control" />
+        <span asp-validation-for="ReferringSpecialist" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- Specialist Contact -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label asp-for="ReferringSpecialistPhone" class="form-label"></label>
+        <input asp-for="ReferringSpecialistPhone" class="form-control" type="tel" />
+        <span asp-validation-for="ReferringSpecialistPhone" class="text-danger"></span>
+    </div>
+</div>
+
+<!-- Admit Details -->
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label asp-for="AdmitDate" class="form-label"></label>
+        <input asp-for="AdmitDate" class="form-control" type="date" />
+        <span asp-validation-for="AdmitDate" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Unit" class="form-label"></label>
+        <input asp-for="Unit" class="form-control" />
+        <span asp-validation-for="Unit" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="UnitPhone" class="form-label"></label>
+        <input asp-for="UnitPhone" class="form-control" type="tel" />
+        <span asp-validation-for="UnitPhone" class="text-danger"></span>
+    </div>
+</div>

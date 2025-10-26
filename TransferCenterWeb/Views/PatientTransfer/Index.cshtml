@@ -1,9 +1,9 @@
-﻿@model IEnumerable<TransferCenterWeb.Models.GlobalPatientTransfer.GlobalPatientTransferRequest>
+﻿@model IEnumerable<TransferCenterWeb.Models.PatientTransferRequest>
 
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <!-- Left: Page Title -->
-    <h2 class="mb-0 text-center text-kpc">Global Patient Transfer Report</h2>
+    <h2 class="mb-0 text-center text-kpc">Patient Transfer Report</h2>
 
     <!-- Right: Button group (Add, Export Excel, Export PDF) -->
     <div class="btn-group" role="group" aria-label="Actions">
@@ -23,7 +23,7 @@
 <section class="container-fluid">
 
     @{
-        var details = Model.ToList().Select(x => x.PatientTransferInfo).ToList();
+        var details = Model.Select(x => x.PatientTransferInfo).ToList();
         @await Html.PartialAsync("PatientTransferList", details)
     }
 

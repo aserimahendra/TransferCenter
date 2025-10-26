@@ -40,4 +40,10 @@
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\EditorTemplates\GlobalTransferAdditionalInfo.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\EditorTemplates\GlobalTransferPatientDetails.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\EditorTemplates\GlobalTransferPatientTransferInfo.cshtml" />
+  </ItemGroup>
+
 </Project>

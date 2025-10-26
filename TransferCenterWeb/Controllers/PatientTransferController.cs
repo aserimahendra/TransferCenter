@@ -20,17 +20,19 @@ public class PatientTransferController : Controller
     // GET: PatientTransferController
     public async Task<IActionResult> Index()
     {
-        var infoDList = await _patientTransferService.GetList();
-        return View(infoDList.Select(x => x.ToWebModel()).ToList());
+        var transferRequests = await _patientTransferService.GetList();
+        var viewModel = transferRequests?.Select(x => x.ToWebModel()).ToList() ?? new List<PatientTransferRequest>(); 
+        return View(viewModel);
     }
 
     public IActionResult Create()
     {
-        PatientTransferRequest patientTransferRequest = new PatientTransferRequest();
+        var patientTransferRequest = new PatientTransferRequest();
         return View(patientTransferRequest);
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PatientTransferRequest patientTransferRequest)
     {
         if (!ModelState.IsValid)
@@ -38,12 +40,15 @@ public class PatientTransferController : Controller
 
         patientTransferRequest.Id = Guid.NewGuid();
         await _patientTransferService.Save(patientTransferRequest.ToCoreModel());
-        return View();
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> Details(Guid id)
     {
         var details = await _patientTransferService.Get(id);
+        if (details == null)
+            return NotFound();
+
         return View(details.ToWebModel());
     }
 }

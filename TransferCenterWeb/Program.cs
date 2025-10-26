@@ -53,6 +53,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
+builder.Services.AddScoped<IPatientTransferService, PatientTransferService>();
 builder.Services.AddScoped<IComorbiditiesAndRiskScoreRepository, ComorbiditiesAndRiskScoreRepository>();
 builder.Services.AddScoped<IDbContextFactory, DbContextFactory>();
 

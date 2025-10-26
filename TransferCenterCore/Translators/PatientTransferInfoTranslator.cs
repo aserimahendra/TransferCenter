@@ -21,7 +21,8 @@ public static class PatientTransferInfoTranslator
             ReferringSpecialist = source.ReferringSpecialist,
             AdmitDate = source.AdmitDate,
             Unit = source.Unit,
-            UnitPhone = source.UnitPhone
+            UnitPhone = source.UnitPhone,
+            TransferType = source.TransferType,
         };
     }
 
@@ -44,7 +45,8 @@ public static class PatientTransferInfoTranslator
             ReferringSpecialist = source.ReferringSpecialist,
             AdmitDate = source.AdmitDate,
             Unit = source.Unit,
-            UnitPhone = source.UnitPhone
+            UnitPhone = source.UnitPhone,
+            TransferType = source.TransferType,
         };
     }
 }

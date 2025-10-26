@@ -1,0 +1,84 @@
+@model TransferCenterWeb.Models.PatientTransfer.PatientDetails
+@using TransferCenterWeb.Models
+
+@{
+    var weightUnit = Model.WeightIn switch
+    {
+        (short)WeightIn.Lbs => "Lbs",
+        (short)WeightIn.Kgs => "Kgs",
+        _ => Model.WeightIn.ToString()
+    };
+}
+
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.FirstName)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.FirstName)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.LastName)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.LastName)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.DOB)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.DOB)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Gender)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Gender)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Height)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Height)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Weight)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Weight)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.WeightIn)</td>
+            <td class="col-sm-8">@weightUnit</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Diagnosis)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.Diagnosis)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ReasonForTransfer)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.ReasonForTransfer)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.LevelOfCareNeeded)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.LevelOfCareNeeded)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Sitter)</td>
+            <td class="col-sm-8">@(Model.Sitter ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.JehovahWitness)</td>
+            <td class="col-sm-8">@(Model.JehovahWitness ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Capitated)</td>
+            <td class="col-sm-8">@(Model.Capitated ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.IsIsolation)</td>
+            <td class="col-sm-8">@(Model.IsIsolation ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.IsolationType)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.IsolationType)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CodeStatus)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.CodeStatus)</td>
+        </tr>
+        <tr>
+            <td class="col-sm-4">@Html.DisplayNameFor(model => model.GCS)</td>
+            <td class="col-sm-8">@Html.DisplayFor(model => model.GCS)</td>
+        </tr>
+    </tbody>
+</table>
