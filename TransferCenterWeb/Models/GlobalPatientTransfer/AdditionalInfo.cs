@@ -85,5 +85,6 @@ public class AdditionalInfo
     [Required]
     [DisplayName("Code Status")]
     public string CodeStatus { get; set; }
-    
+
+    public bool IsActive { get; set; } = true;
 }

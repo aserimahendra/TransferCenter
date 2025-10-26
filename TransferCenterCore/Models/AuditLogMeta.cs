@@ -1,0 +1,10 @@
+namespace TransferCenterCore.Models;
+
+public abstract class AuditLogMeta
+{
+    public string CreatedBy { get; set; }
+
+    public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+    public DateTime? LastUpdatedOn { get; set; }
+}

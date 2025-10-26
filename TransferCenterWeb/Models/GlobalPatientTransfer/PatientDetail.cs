@@ -62,4 +62,6 @@ public class PatientDetails
     [Required]
     [DisplayName("Patient Insurance")]
     public string PatientInsurance { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }

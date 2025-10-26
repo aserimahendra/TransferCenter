@@ -1,0 +1,107 @@
+@model TransferCenterWeb.Models.Shared.PaginationModel
+@using Microsoft.AspNetCore.Routing
+@using System.Text.Encodings.Web
+
+@if (Model != null && !string.IsNullOrWhiteSpace(Model.Action))
+{
+    var totalPagesRaw = Model.TotalPages;
+    var shouldRender = totalPagesRaw > 1 || Model.RenderIfSinglePage;
+
+    if (shouldRender)
+    {
+        var totalPages = System.Math.Max(1, totalPagesRaw);
+        var currentPage = Model.CurrentPage <= 0 ? 1 : Model.CurrentPage;
+        currentPage = System.Math.Min(currentPage, totalPages);
+
+        var baseRouteValues = new RouteValueDictionary();
+        if (!string.IsNullOrEmpty(Model.Area))
+        {
+            baseRouteValues["area"] = Model.Area;
+        }
+        if (!string.IsNullOrEmpty(Model.Controller))
+        {
+            baseRouteValues["controller"] = Model.Controller;
+        }
+
+        if (Model.RouteValues != null)
+        {
+            foreach (var kvp in Model.RouteValues)
+            {
+                if (string.IsNullOrEmpty(kvp.Key))
+                {
+                    continue;
+                }
+
+                if (string.Equals(kvp.Key, Model.PageQueryKey, System.StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(kvp.Key, Model.PageSizeQueryKey, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                baseRouteValues[kvp.Key] = kvp.Value;
+            }
+        }
+
+        baseRouteValues[Model.PageSizeQueryKey] = Model.PageSize;
+
+        string BuildUrl(int pageNumber)
+        {
+            var routeValues = new RouteValueDictionary(baseRouteValues)
+            {
+                [Model.PageQueryKey] = pageNumber
+            };
+
+            var url = Url.Action(Model.Action, Model.Controller, routeValues);
+            return url ?? string.Empty;
+        }
+
+        var htmlEncoder = HtmlEncoder.Default;
+
+        var maxLinks = Model.MaxPageLinks > 0 ? Model.MaxPageLinks : 5;
+        var halfWindow = maxLinks / 2;
+        var start = System.Math.Max(1, currentPage - halfWindow);
+        var end = System.Math.Min(totalPages, start + maxLinks - 1);
+        if (end - start + 1 < maxLinks)
+        {
+            start = System.Math.Max(1, end - maxLinks + 1);
+        }
+
+        <nav aria-label="Pagination">
+            <ul class="pagination mb-0">
+                <li class="page-item @(currentPage == 1 ? "disabled" : string.Empty)">
+                    @{
+                        var firstUrl = htmlEncoder.Encode(BuildUrl(1));
+                    }
+                    <a class="page-link" href="@Html.Raw(firstUrl)">First</a>
+                </li>
+                <li class="page-item @(currentPage == 1 ? "disabled" : string.Empty)">
+                    @{
+                        var previousUrl = htmlEncoder.Encode(BuildUrl(System.Math.Max(1, currentPage - 1)));
+                    }
+                    <a class="page-link" href="@Html.Raw(previousUrl)">Previous</a>
+                </li>
+                @for (var pageNumber = start; pageNumber <= end; pageNumber++)
+                {
+                    <li class="page-item @(pageNumber == currentPage ? "active" : string.Empty)">
+                        @{
+                            var pageUrl = htmlEncoder.Encode(BuildUrl(pageNumber));
+                        }
+                        <a class="page-link" href="@Html.Raw(pageUrl)">@pageNumber</a>
+                    </li>
+                }
+                <li class="page-item @(currentPage == totalPages ? "disabled" : string.Empty)">
+                    @{
+                        var nextUrl = htmlEncoder.Encode(BuildUrl(System.Math.Min(totalPages, currentPage + 1)));
+                    }
+                    <a class="page-link" href="@Html.Raw(nextUrl)">Next</a>
+                </li>
+                <li class="page-item @(currentPage == totalPages ? "disabled" : string.Empty)">
+                    @{
+                        var lastUrl = htmlEncoder.Encode(BuildUrl(totalPages));
+                    }
+                    <a class="page-link" href="@Html.Raw(lastUrl)">Last</a>
+                </li>
+            </ul>
+        </nav>
+    }
+}

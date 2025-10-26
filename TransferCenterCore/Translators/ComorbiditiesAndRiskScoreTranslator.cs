@@ -42,7 +42,8 @@ public static class ComorbiditiesAndRiskScoreTranslator
             Comorbidities = source.Comorbidities,
             RiskScore = source.RiskScore,
             CreatedDate = source.CreatedDate,
-            UpdatedDate = source.UpdatedDate
+            UpdatedDate = source.UpdatedDate,
+            IsActive = source.IsActive
         };
     }
 
@@ -83,7 +84,8 @@ public static class ComorbiditiesAndRiskScoreTranslator
             Comorbidities = source.Comorbidities,
             RiskScore = source.RiskScore,
             CreatedDate = source.CreatedDate,
-            UpdatedDate = source.UpdatedDate
+            UpdatedDate = source.UpdatedDate,
+            IsActive = source.IsActive
         };
     }
 }

@@ -1,4 +1,7 @@
 @model TransferCenterWeb.Areas.Admin.Models.UserViewModel
+@using System.Linq
+@using System.Text.Encodings.Web
+@using TransferCenterWeb.Models.Shared
 
 @{
     ViewBag.Title = "Users";
@@ -7,65 +10,58 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Users</h2>
-    <div class="btn-group" role="group" aria-label="Actions">
-        <a asp-area="Admin" asp-controller="User" asp-action="Create" class="btn btn-primary" title="Create New">
-            <i class="bi bi-plus-lg"></i>
-        </a>
-        <a asp-area="Admin" asp-controller="User" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel">
-            <i class="bi bi-file-earmark-spreadsheet"></i>
-        </a>
-        <a asp-area="Admin" asp-controller="User" asp-action="ExportPdf" class="btn btn-danger" title="Export to PDF">
-            <i class="bi bi-file-earmark-pdf"></i>
-        </a>
-    </div>
+    
 </div>
 
 @{
+    var htmlEncoder = HtmlEncoder.Default;
+    var rawSearch = ViewContext.HttpContext.Request.Query["search"].ToString();
+    var encodedSearch = htmlEncoder.Encode(rawSearch ?? string.Empty);
     var currentPage = int.TryParse(ViewContext.HttpContext.Request.Query["page"], out var p) ? p : 1;
     var pageSize = int.TryParse(ViewContext.HttpContext.Request.Query["pageSize"], out var ps) ? ps : 10;
+    if (pageSize <= 0)
+    {
+        pageSize = 10;
+    }
     var total = Model?.TotalCount ?? 0;
-    var totalPages = (int)Math.Ceiling(total / (double)pageSize);
+    var totalPages = (int)System.Math.Ceiling(total / (double)pageSize);
+    if (currentPage < 1)
+    {
+        currentPage = 1;
+    }
+    if (totalPages > 0 && currentPage > totalPages)
+    {
+        currentPage = totalPages;
+    }
 }
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
+<div class="d-flex justify-content-between align-items-center mt-3">
     <div>
-        Showing page @currentPage of @totalPages — @total items
+        Showing page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items
     </div>
-    <nav>
-        @functions{
-            string BuildQuery(int page, int pageSizeParam)
+    <div>
+        @{
+            var queryDictionary = ViewContext.HttpContext.Request.Query
+                .ToDictionary(k => k.Key, v => v.Value.ToString(), System.StringComparer.OrdinalIgnoreCase);
+            queryDictionary["pageSize"] = pageSize.ToString();
+            var paginationModel = new PaginationModel
             {
-                var q = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(ViewContext.HttpContext.Request.QueryString.Value ?? "");
-                var dict = q.ToDictionary(k => k.Key, v => v.Value.ToString());
-                dict["page"] = page.ToString();
-                dict["pageSize"] = pageSizeParam.ToString();
-                return "?" + string.Join("&", dict.Select(kv => kv.Key + "=" + System.Net.WebUtility.UrlEncode(kv.Value)));
-            }
+                Action = nameof(TransferCenterWeb.Areas.Admin.Controllers.UserController.Index),
+                Controller = "User",
+                Area = "Admin",
+                CurrentPage = currentPage,
+                PageSize = pageSize,
+                TotalItems = total,
+                RouteValues = queryDictionary
+            };
         }
-
-        <ul class="pagination mb-0">
-            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                <a class="page-link" href="@BuildQuery(1, pageSize)">First</a>
-            </li>
-
-            @{ var start = Math.Max(1, currentPage - 2); var end = Math.Min(totalPages, currentPage + 2); }
-            @for (var i = start; i <= end; i++)
-            {
-                <li class="page-item @(i == currentPage ? "active" : "")">
-                    <a class="page-link" href="@BuildQuery(i, pageSize)">@i</a>
-                </li>
-            }
-
-            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                <a class="page-link" href="@BuildQuery(totalPages, pageSize)">Last</a>
-            </li>
-        </ul>
-    </nav>
+        @await Html.PartialAsync("_Pagination", paginationModel)
+    </div>
 </div>
 
 <form method="get" class="row g-2 mb-3">
     <div class="col-auto">
-    <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="@ViewContext.HttpContext.Request.Query["search"]" />
+    <input type="text" name="search" class="form-control" placeholder="Search by name or email" value="@Html.Raw(encodedSearch)" />
     </div>
     <div class="col-auto">
         <select name="pageSize" class="form-select">
@@ -90,7 +86,19 @@
                 <th scope="col">LoginId</th>
                 <th scope="col">DomainID</th>
                 <th scope="col">CreatedOn</th>
-                <th scope="col" class="text-center">Actions</th>
+                <th scope="col" class="text-center">
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a asp-area="Admin" asp-controller="User" asp-action="Create" class="btn btn-primary" title="Create New">
+                            <i class="bi bi-plus-lg"></i>
+                        </a>
+                        <a asp-area="Admin" asp-controller="User" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel">
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                        </a>
+                        <a asp-area="Admin" asp-controller="User" asp-action="ExportPdf" class="btn btn-danger" title="Export to PDF">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </a>
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -112,6 +120,7 @@
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <form asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this user?');">
                                     <i class="bi bi-trash"></i>
                                 </button>

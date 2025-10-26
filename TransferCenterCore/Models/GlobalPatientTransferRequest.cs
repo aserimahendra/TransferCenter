@@ -1,6 +1,6 @@
 namespace TransferCenterCore.Models;
 
-public class GlobalPatientTransferRequest
+public class GlobalPatientTransferRequest : AuditLogMeta
 {
     public Guid Id { get; set; }
 
@@ -12,4 +12,6 @@ public class GlobalPatientTransferRequest
 
     // Section 3: Additional Metadata or Key-Value Info
     public AdditionalInfo AdditionalInfo { get; set; } = new();
+
+    public bool IsActive { get; set; } = true;
 }

@@ -2,11 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterDbStore.Entities;
 
-public class PatientDetails
+public class PatientDetails : AuditLogMeta
 {
     [Key]
     public long Id { get; set; }
     public Guid UId { get; set; }
+    
+    public short TransferType { get; set; }
 
     public string Name { get; set; } 
 
@@ -40,4 +42,6 @@ public class PatientDetails
     public bool Capitated { get; set; }
     public string? GCS { get; set; }
     public short WeightIn { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }

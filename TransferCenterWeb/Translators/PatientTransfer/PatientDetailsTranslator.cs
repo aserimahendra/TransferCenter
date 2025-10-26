@@ -30,7 +30,9 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 IsIsolation = source.IsIsolation,
                 IsolationType = source.IsolationType,
                 CodeStatus = source.CodeStatus,
-                GCS = source.GCS
+                GCS = source.GCS,
+                IsActive = source.IsActive,
+                TransferType = (short)Models.TransferType.PatientTransfer
             };
         }
 
@@ -60,7 +62,8 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 IsIsolation = source.IsIsolation,
                 IsolationType = source.IsolationType,
                 CodeStatus = source.CodeStatus ?? string.Empty,
-                GCS = source.GCS ?? string.Empty
+                GCS = source.GCS ?? string.Empty,
+                IsActive = source.IsActive
             };
         }
     }

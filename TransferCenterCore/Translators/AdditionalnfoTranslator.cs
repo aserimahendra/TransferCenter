@@ -32,7 +32,8 @@ public static class AdditionalInfoTranslator
             TreatmentsAndProceduresInED = source.TreatmentsAndProceduresInED,
             InsuranceAuthorization = source.InsuranceAuthorization,
             OtherNotes = source.OtherNotes,
-            CodeStatus = source.CodeStatus
+            CodeStatus = source.CodeStatus,
+            IsActive = source.IsActive
         };
     }
 
@@ -63,7 +64,8 @@ public static class AdditionalInfoTranslator
             TreatmentsAndProceduresInED = source.TreatmentsAndProceduresInED,
             InsuranceAuthorization = source.InsuranceAuthorization,
             OtherNotes = source.OtherNotes,
-            CodeStatus = source.CodeStatus
+            CodeStatus = source.CodeStatus,
+            IsActive = source.IsActive
         };
     }
 }

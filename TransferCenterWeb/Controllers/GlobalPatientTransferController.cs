@@ -29,6 +29,7 @@ public class GlobalPatientTransferController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(GlobalPatientTransferRequest globalPatientTransferRequest)
     {
         if (!ModelState.IsValid)
@@ -42,6 +43,24 @@ public class GlobalPatientTransferController : Controller
     {
         var details = await _globalTransferService.Get(id);
         return View(details.ToWebModel());
+    }
+
+    public async Task<IActionResult> Update(Guid id)
+    {
+        var details = await _globalTransferService.Get(id);
+        if (details == null) return NotFound();
+        var globalPatientTransferRequest = details.ToWebModel();
+        return View(globalPatientTransferRequest);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(GlobalPatientTransferRequest globalPatientTransferRequest)
+    {
+        if (!ModelState.IsValid)
+         return View(globalPatientTransferRequest);
+        await _globalTransferService.Update(globalPatientTransferRequest.ToCoreModel());
+        return View();
     }
 
 }

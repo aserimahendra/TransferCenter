@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterDbStore.Entities;
 
-public class PatientTransferInfo
+public class PatientTransferInfo : AuditLogMeta
 {
     [Key]
     public long Id { get; set; }
@@ -40,5 +40,7 @@ public class PatientTransferInfo
     public string? PrimaryCallerName { get; set; }
     
     public string? SecondaryCallerName { get; set; }
+
+    public bool IsActive { get; set; } = true;
 
 }

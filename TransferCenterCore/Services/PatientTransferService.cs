@@ -54,9 +54,18 @@ public class PatientTransferService : IPatientTransferService
         await _unitOfWork.CommitAsync();
     }
 
-    public bool Update(PatientTransferRequest patientTransferRequest)
+    public async Task Update(PatientTransferRequest patientTransferRequest)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await UpdatePatientInfo(patientTransferRequest.PatientDetails);
+            await UpdatePatientTransferInfo(patientTransferRequest.PatientTransferInfo);
+            await UpdateAdditionalInfo(patientTransferRequest.AdditionalInfo);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public async Task<List<PatientTransferRequest>> GetList()
@@ -97,5 +106,23 @@ public class PatientTransferService : IPatientTransferService
     private async Task<TransferCenterDbStore.Entities.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
     {
         return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+    }
+
+    private async Task UpdatePatientInfo(PatientDetails patientDetails)
+    {
+        _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
+        await _unitOfWork.CommitAsync();
+    }
+
+    private async Task UpdatePatientTransferInfo(PatientTransferInfo patientTransferInfo)
+    {
+        _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
+        await _unitOfWork.CommitAsync();
+    }
+
+    private async Task UpdateAdditionalInfo(AdditionalInfo additionalInfo)
+    {
+        _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
+        await _unitOfWork.CommitAsync();
     }
 }

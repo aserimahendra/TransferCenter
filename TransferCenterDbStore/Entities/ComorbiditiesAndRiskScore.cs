@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterDbStore.Entities;
 
-public class ComorbiditiesAndRiskScore
+public class ComorbiditiesAndRiskScore : AuditLogMeta
 {
     [Key]
     public long Id { get; set; }
@@ -36,4 +36,6 @@ public class ComorbiditiesAndRiskScore
     public double RiskScore { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }

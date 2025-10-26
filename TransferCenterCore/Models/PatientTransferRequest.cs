@@ -3,7 +3,7 @@ namespace TransferCenterCore.Models;
 /// <summary>
 /// Root object representing the complete ICU In-Patient Transfer Request Form.
 /// </summary>
-public class PatientTransferRequest
+public class PatientTransferRequest : AuditLogMeta
 {
     public Guid Id { get; set; }
 
@@ -16,4 +16,6 @@ public class PatientTransferRequest
     // Section 3: Additional Metadata or Key-Value Info
     public AdditionalInfo AdditionalInfo { get; set; } = new();
     public ComorbiditiesAndRiskScore ComorbiditiesAndRiskScore { get; set; } = new();
+
+    public bool IsActive { get; set; } = true;
 }

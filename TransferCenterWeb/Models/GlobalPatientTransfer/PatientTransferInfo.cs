@@ -65,4 +65,6 @@ public class PatientTransferInfo
     [DisplayName("Unit Phone #")]
     [Phone]
     public string UnitPhone { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }

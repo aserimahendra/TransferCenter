@@ -111,6 +111,8 @@ public class AdditionalInfo
     [Required]
     [DisplayName("Medication List")]
     public DocumentStatus MedicationList { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }
 public enum DocumentStatus
 {

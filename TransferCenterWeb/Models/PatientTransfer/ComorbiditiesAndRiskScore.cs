@@ -84,4 +84,6 @@ namespace TransferCenterWeb.Models.PatientTransfer;
 
         [Display(Name = "Total Points")]
         public int? TotalPoints { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }

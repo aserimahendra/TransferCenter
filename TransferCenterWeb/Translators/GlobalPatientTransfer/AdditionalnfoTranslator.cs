@@ -1,4 +1,5 @@
 ﻿using System;
+using TransferCenterWeb.Models;
 
 namespace TransferCenter.Translators;
 
@@ -30,9 +31,10 @@ public static class AdditionalInfoTranslator
             MedicationList = (short)source.MedicationList,
             TreatmentsAndProceduresInED = (short)source.TreatmentsAndProceduresInED,
             InsuranceAuthorization = (short)source.InsuranceAuthorization,
-
             OtherNotes = source.OtherNotes,
-            CodeStatus = source.CodeStatus
+            CodeStatus = source.CodeStatus,
+            IsActive = source.IsActive,
+            TransferType = (short)TransferType.GlobalPatientTransfer
         };
     }
 
@@ -63,7 +65,8 @@ public static class AdditionalInfoTranslator
             TreatmentsAndProceduresInED = (TransferCenterWeb.Models.DocumentStatus)source.TreatmentsAndProceduresInED,
             InsuranceAuthorization = (TransferCenterWeb.Models.DocumentStatus)source.InsuranceAuthorization,
             OtherNotes = source.OtherNotes,
-            CodeStatus = source.CodeStatus
+            CodeStatus = source.CodeStatus,
+            IsActive = source.IsActive
         };
     }
 }

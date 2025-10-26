@@ -23,6 +23,7 @@ public static class PatientTransferInfoTranslator
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
             TransferType = source.TransferType,
+            IsActive = source.IsActive
         };
     }
 
@@ -47,6 +48,7 @@ public static class PatientTransferInfoTranslator
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
             TransferType = source.TransferType,
+            IsActive = source.IsActive
         };
     }
 }

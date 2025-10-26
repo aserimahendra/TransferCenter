@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<TransferCenterWeb.Models.GlobalPatientTransfer.PatientTransferInfo>
+@using System.Text.Encodings.Web
+@{
+    var htmlEncoder = HtmlEncoder.Default;
+}
 
 
 <table class="table table-bordered table-striped">
@@ -46,7 +50,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.UnitPhone)
             </th>
-            <th></th>
+            <th>
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <a asp-controller="GlobalPatientTransfer" asp-action="Create" class="btn btn-primary" title="Create New">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>
+                    <a asp-controller="GlobalPatientTransfer" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel">
+                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                    </a>
+                    <a asp-controller="GlobalPatientTransfer" asp-action="ExportPdf" class="btn btn-danger" title="Export to PDF">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </a>
+                </div>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -95,13 +111,43 @@
                 @Html.DisplayFor(modelItem => item.UnitPhone)
             </td>
             <td>
-                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
-                    <a href="@Url.Action("Details", new { id = item.UId })" class="btn btn-outline-primary btn-sm">
-                        <i class="bi bi-info-circle"></i>
-                    </a>
-                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                @{ 
+                    var editUrl = Url.Action("Update", new { id = item.UId });
+                    var detailsUrl = Url.Action("Details", new { id = item.UId });
+                    var deleteUrl = Url.Action("Delete", new { id = item.UId });
+                    var encodedEditUrl = htmlEncoder.Encode(editUrl ?? string.Empty);
+                    var encodedDetailsUrl = htmlEncoder.Encode(detailsUrl ?? string.Empty);
+                    var encodedDeleteUrl = htmlEncoder.Encode(deleteUrl ?? string.Empty);
+                }
+                <a class="btn btn-outline-secondary btn-sm me-1" href="@Html.Raw(encodedEditUrl)" target="_blank" rel="noopener noreferrer">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a href="@Html.Raw(encodedDetailsUrl)" class="btn btn-outline-primary btn-sm me-1">
+                    <i class="bi bi-info-circle"></i>
+                </a>
+                <form method="post" action="@Html.Raw(encodedDeleteUrl)" class="d-inline js-confirm-delete">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteForms = document.querySelectorAll('.js-confirm-delete');
+        deleteForms.forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var confirmation = window.confirm('Are you sure you want to delete this patient transfer?');
+                if (confirmation) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>

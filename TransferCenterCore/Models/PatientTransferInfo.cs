@@ -1,11 +1,10 @@
 namespace TransferCenterCore.Models;
 
-public class PatientTransferInfo
+public class PatientTransferInfo : AuditLogMeta
 {
     public long Id { get; set; }
 
     public Guid UId { get; set; }
-
     public short TransferType { get; set; }
     public string CaseMgrSwRn { get; set; }
 
@@ -42,5 +41,7 @@ public class PatientTransferInfo
     public string? PrimaryCallerName { get; set; }
     
     public string? SecondaryCallerName { get; set; }
+
+    public bool IsActive { get; set; } = true;
 
 }

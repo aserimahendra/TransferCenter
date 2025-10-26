@@ -29,7 +29,8 @@ public static class PatientTransferInfoTranslator
             ReferringSpecialistPhone = source.ReferringSpecialistPhone,
             AdmitDate = source.AdmitDate,
             Unit = source.Unit,
-            UnitPhone = source.UnitPhone
+            UnitPhone = source.UnitPhone,
+            IsActive = source.IsActive
         };
     }
 
@@ -59,7 +60,8 @@ public static class PatientTransferInfoTranslator
             AdmitDate = source.AdmitDate,
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
-            TransferType = (short)Models.TransferType.PatientTransfer
+            TransferType = (short)Models.TransferType.PatientTransfer,
+            IsActive = source.IsActive
         };
     }
 }

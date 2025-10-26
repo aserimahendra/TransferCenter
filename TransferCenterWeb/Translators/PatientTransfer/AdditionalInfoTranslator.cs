@@ -45,7 +45,9 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 CovidWithin3Days = source.CovidWithin3Days,
                 MostRecentLabResults = (short)source.MostRecentLabResults,
                 RadiologyResults = (short)source.RadiologyResults,
-                MedicationList = (short)source.MedicationList
+                MedicationList = (short)source.MedicationList,
+                IsActive = source.IsActive,
+                TransferType = (short)Models.TransferType.PatientTransfer
             };
         }
 
@@ -88,7 +90,8 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 CovidWithin3Days = source.CovidWithin3Days,
                 MostRecentLabResults = (DocumentStatus)source.MostRecentLabResults,
                 RadiologyResults = (DocumentStatus)source.RadiologyResults,
-                MedicationList = (DocumentStatus)source.MedicationList
+                MedicationList = (DocumentStatus)source.MedicationList,
+                IsActive = source.IsActive
             };
         }
     }

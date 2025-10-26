@@ -68,4 +68,6 @@ public class PatientDetails
     
     public string GCS { get; set; }
 
+    public bool IsActive { get; set; } = true;
+
 }

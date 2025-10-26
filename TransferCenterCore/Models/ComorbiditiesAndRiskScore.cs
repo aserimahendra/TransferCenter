@@ -1,7 +1,6 @@
-
 namespace TransferCenterCore.Models;
 
-public class ComorbiditiesAndRiskScore
+public class ComorbiditiesAndRiskScore : AuditLogMeta
 {
     public long Id { get; set; }
     public long Guid{ get; set; }
@@ -35,4 +34,6 @@ public class ComorbiditiesAndRiskScore
     public double RiskScore { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
+    public bool IsActive { get; set; } = true;
 }

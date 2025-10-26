@@ -51,9 +51,18 @@ public class GlobalTransferService : IGlobalTransferService
         _unitOfWork.AdditionalInfoRepository.Add(additionalInfo.ToEntity());
         await _unitOfWork.CommitAsync();
     }
-    public bool Update(GlobalPatientTransferRequest patientTransferViewModel)
+    public async Task Update(GlobalPatientTransferRequest patientTransferViewModel)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await UpdatePatientInfo(patientTransferViewModel.PatientInfo);
+            await UpdatePatientTransferInfo(patientTransferViewModel.TransferInfo);
+            await UpdateAdditionalInfo(patientTransferViewModel.AdditionalInfo);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public async Task<List<GlobalPatientTransferRequest>> GetList()
@@ -90,6 +99,24 @@ public class GlobalTransferService : IGlobalTransferService
     private async Task<TransferCenterDbStore.Entities.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
     {
         return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+    }
+
+    private async Task UpdatePatientInfo(Models.PatientDetails patientDetails)
+    {
+        _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
+        await _unitOfWork.CommitAsync();
+    }
+
+    private async Task UpdatePatientTransferInfo(Models.PatientTransferInfo patientTransferInfo)
+    {
+        _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
+        await _unitOfWork.CommitAsync();
+    }
+
+    private async Task UpdateAdditionalInfo(Models.AdditionalInfo additionalInfo)
+    {
+        _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
+        await _unitOfWork.CommitAsync();
     }
 
 }

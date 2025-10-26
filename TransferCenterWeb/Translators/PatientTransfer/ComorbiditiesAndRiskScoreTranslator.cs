@@ -35,7 +35,8 @@ public static class ComorbiditiesAndRiskScoreTranslator
             CovidPositive = source.CovidPositive,
             RecentSurgeryAtUCI = source.RecentSurgeryAtUCI,
             RecentSurgeryOutsideUCI = source.RecentSurgeryOutsideUCI,
-            TotalPoints = GetValueOrDefault(source.TotalPoints)
+            TotalPoints = GetValueOrDefault(source.TotalPoints),
+            IsActive = source.IsActive
         };
     }
 
@@ -71,7 +72,8 @@ public static class ComorbiditiesAndRiskScoreTranslator
             CovidPositive = source.CovidPositive,
             RecentSurgeryAtUCI = source.RecentSurgeryAtUCI,
             RecentSurgeryOutsideUCI = source.RecentSurgeryOutsideUCI,
-            TotalPoints = source.TotalPoints
+            TotalPoints = source.TotalPoints,
+            IsActive = source.IsActive,
         };
     }
 

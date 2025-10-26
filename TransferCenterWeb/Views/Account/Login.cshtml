@@ -13,6 +13,7 @@
                 <div class="card-body">
                     <div class="card shadow-sm rounded-4 p-4" style="margin: auto;">
                         <form asp-action="Login" method="post" autocomplete="off" novalidate>
+                            @Html.AntiForgeryToken()
                             @* <img src="~/favicon.png" alt="KPC" class="img-fluid" style="max-height: 100px; margin-left:20%"> *@
                             <div class="text-center mb-4">
                                 <img src="~/favicon.png" alt="KPC Group Logo" class="img-fluid" style="max-height: 80px;" />

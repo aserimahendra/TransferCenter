@@ -92,4 +92,6 @@ public class PatientTransferInfo
     [Phone]
     public string UnitPhone { get; set; }
     
+    public bool IsActive { get; set; } = true;
+    
 }

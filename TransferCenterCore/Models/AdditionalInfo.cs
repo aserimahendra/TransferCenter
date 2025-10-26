@@ -1,11 +1,10 @@
-using System.ComponentModel;
-
 namespace TransferCenterCore.Models;
 
-public class AdditionalInfo
+public class AdditionalInfo : AuditLogMeta
 {
     public Guid UId { get; set; }
     public long Id { get; set; }
+    public short TransferType { get; set; }
     public bool ServicesAvailable { get; set; }
     public bool SitterRequired { get; set; }
     public bool VTIBDrips { get; set; }
@@ -84,5 +83,7 @@ public class AdditionalInfo
     public short DiagnosticsStatus { get; set; }
 
     public short MedicationListStatus { get; set; }
+
+    public bool IsActive { get; set; } = true;
 
 }
