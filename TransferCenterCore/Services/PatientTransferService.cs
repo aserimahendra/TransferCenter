@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using TransferCenterCore.Context;
 using TransferCenterCore.Interfaces;
 using TransferCenterCore.Models;
 using TransferCenterCore.Translators;
@@ -17,9 +18,12 @@ public class PatientTransferService : IPatientTransferService
         _configuration = configuration;
     }
 
-    public bool Delete(PatientTransferRequest patientTransferRequest)
+    public async Task Delete(PatientTransferRequest patientTransferRequest)
     {
-        throw new NotImplementedException();
+        patientTransferRequest.AdditionalInfo.IsActive = false;
+        patientTransferRequest.PatientDetails.IsActive = false;
+        patientTransferRequest.PatientTransferInfo.IsActive = false;
+        await Update(patientTransferRequest);
     }
 
     public async Task Save(PatientTransferRequest patientTransferRequest)
@@ -29,6 +33,8 @@ public class PatientTransferService : IPatientTransferService
             await SavePatientInfo(patientTransferRequest.PatientDetails);
             await SavePatientTransferInfo(patientTransferRequest.PatientTransferInfo);
             await SaveAdditionalInfo(patientTransferRequest.AdditionalInfo);
+            await _unitOfWork.CommitAsync();
+
         }
         catch (Exception)
         {
@@ -38,20 +44,23 @@ public class PatientTransferService : IPatientTransferService
 
     private async Task SavePatientInfo(PatientDetails patientDetails)
     {
+        patientDetails.CreatedBy = CallContextScope.Current?.EmailId ?? string.Empty;
+        patientDetails.CreatedOn = DateTime.UtcNow;
         _unitOfWork.PatientDetailsRepository.Add(patientDetails.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 
     private async Task SavePatientTransferInfo(PatientTransferInfo patientTransferInfo)
     {
+        patientTransferInfo.CreatedBy = CallContextScope.Current?.EmailId ?? string.Empty;
+        patientTransferInfo.CreatedOn = DateTime.UtcNow;
         _unitOfWork.PatientTransferInfoRepository.Add(patientTransferInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 
     private async Task SaveAdditionalInfo(AdditionalInfo additionalInfo)
     {
+        additionalInfo.CreatedBy = CallContextScope.Current?.EmailId ?? string.Empty;
+        additionalInfo.CreatedOn = DateTime.UtcNow;
         _unitOfWork.AdditionalInfoRepository.Add(additionalInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 
     public async Task Update(PatientTransferRequest patientTransferRequest)
@@ -61,6 +70,7 @@ public class PatientTransferService : IPatientTransferService
             await UpdatePatientInfo(patientTransferRequest.PatientDetails);
             await UpdatePatientTransferInfo(patientTransferRequest.PatientTransferInfo);
             await UpdateAdditionalInfo(patientTransferRequest.AdditionalInfo);
+            await _unitOfWork.CommitAsync();
         }
         catch (Exception)
         {
@@ -68,14 +78,35 @@ public class PatientTransferService : IPatientTransferService
         }
     }
 
-    public async Task<List<PatientTransferRequest>> GetList()
+    private const int DefaultPageSize = 10;
+    private const short InPatientTransferType = 2;
+
+    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize)
     {
-        var transferInfo = await _unitOfWork.PatientTransferInfoRepository.GetAllAsync();
-        return transferInfo.Select(x => new PatientTransferRequest
-        {
-            Id = x.UId,
-            PatientTransferInfo = x.ToCoreModel()
-        }).ToList();
+        page = page < 1 ? 1 : page;
+        pageSize = pageSize <= 0 ? DefaultPageSize : pageSize;
+
+        var baseQuery = _unitOfWork.PatientTransferInfoRepository
+            .Query(x => x.IsActive && x.TransferType == InPatientTransferType);
+
+        var totalCount = await _unitOfWork.PatientTransferInfoRepository
+            .CountAsync(x => x.IsActive && x.TransferType == InPatientTransferType);
+
+        var pagedTransfers = baseQuery
+            .OrderByDescending(x => x.CreatedOn)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var items = pagedTransfers
+            .Select(x => new PatientTransferRequest
+            {
+                Id = x.UId,
+                PatientTransferInfo = x.ToCoreModel(),
+            })
+            .ToList();
+
+        return (items, totalCount);
     }
 
     public async Task<PatientTransferRequest> Get(Guid uid)
@@ -105,24 +136,31 @@ public class PatientTransferService : IPatientTransferService
 
     private async Task<TransferCenterDbStore.Entities.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
     {
-        return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+        try
+        {
+          return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
     }
 
     private async Task UpdatePatientInfo(PatientDetails patientDetails)
     {
+        patientDetails.LastUpdatedOn = DateTime.UtcNow;
         _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 
     private async Task UpdatePatientTransferInfo(PatientTransferInfo patientTransferInfo)
     {
+        patientTransferInfo.LastUpdatedOn = DateTime.UtcNow;
         _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 
     private async Task UpdateAdditionalInfo(AdditionalInfo additionalInfo)
     {
+        additionalInfo.LastUpdatedOn = DateTime.UtcNow;
         _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
 }

@@ -1,130 +1,130 @@
 @model TransferCenterWeb.Models.PatientTransfer.AdditionalInfo
 
 <table class="table table-striped table-bordered">
-    <tbody>
+    <tbody>ˍ
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Dialysis)</td>
-            <td class="col-sm-8">@(Model.Dialysis ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.Dialysis)</td>
+            <td class="col-sm-3">@(Model.Dialysis ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.VTIBDrips)</td>
-            <td class="col-sm-8">@(Model.VTIBDrips ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.VTIBDrips)</td>
+            <td class="col-sm-3">@(Model.VTIBDrips ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ServicesAvailable)</td>
-            <td class="col-sm-8">@(Model.ServicesAvailable ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.ServicesAvailable)</td>
+            <td class="col-sm-3">@(Model.ServicesAvailable ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.LifeImageUploadRequested)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.LifeImageUploadRequested)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.LifeImageUploadRequested)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.LifeImageUploadRequested)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.PFCTTransfer)</td>
-            <td class="col-sm-8">@(Model.PFCTTransfer ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.PFCTTransfer)</td>
+            <td class="col-sm-3">@(Model.PFCTTransfer ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.SendingFacilityUnableToUseLifeImage)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.SendingFacilityUnableToUseLifeImage)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.SendingFacilityUnableToUseLifeImage)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.SendingFacilityUnableToUseLifeImage)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ColdOrFluSymptoms)</td>
-            <td class="col-sm-8">@(Model.ColdOrFluSymptoms ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.ColdOrFluSymptoms)</td>
+            <td class="col-sm-3">@(Model.ColdOrFluSymptoms ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.NewRashUnknownCause)</td>
-            <td class="col-sm-8">@(Model.NewRashUnknownCause ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.NewRashUnknownCause)</td>
+            <td class="col-sm-3">@(Model.NewRashUnknownCause ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ContactWithCovidPositive)</td>
-            <td class="col-sm-8">@(Model.ContactWithCovidPositive ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.ContactWithCovidPositive)</td>
+            <td class="col-sm-3">@(Model.ContactWithCovidPositive ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.DiagnosedCovidOrPositiveLab)</td>
-            <td class="col-sm-8">@(Model.DiagnosedCovidOrPositiveLab ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DiagnosedCovidOrPositiveLab)</td>
+            <td class="col-sm-3">@(Model.DiagnosedCovidOrPositiveLab ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CovidDiagnosisDates)</td>
-            <td class="col-sm-8">@(Model.CovidDiagnosisDates.HasValue ? Model.CovidDiagnosisDates.Value.ToString("d") : "-")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CovidDiagnosisDates)</td>
+            <td class="col-sm-3">@(Model.CovidDiagnosisDates.HasValue ? Model.CovidDiagnosisDates.Value.ToString("d") : "-")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.SickHouseholdMembers)</td>
-            <td class="col-sm-8">@(Model.SickHouseholdMembers ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.SickHouseholdMembers)</td>
+            <td class="col-sm-3">@(Model.SickHouseholdMembers ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.ExposedToMeasles)</td>
-            <td class="col-sm-8">@(Model.ExposedToMeasles ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.ExposedToMeasles)</td>
+            <td class="col-sm-3">@(Model.ExposedToMeasles ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TraveledOutsideUS)</td>
-            <td class="col-sm-8">@(Model.TraveledOutsideUS ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.TraveledOutsideUS)</td>
+            <td class="col-sm-3">@(Model.TraveledOutsideUS ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TraveledArabianPeninsula)</td>
-            <td class="col-sm-8">@(Model.TraveledArabianPeninsula ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.TraveledArabianPeninsula)</td>
+            <td class="col-sm-3">@(Model.TraveledArabianPeninsula ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.TraveledAfrica)</td>
-            <td class="col-sm-8">@(Model.TraveledAfrica ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.TraveledAfrica)</td>
+            <td class="col-sm-3">@(Model.TraveledAfrica ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.HasRespiratoryIllnessAfterTravel)</td>
-            <td class="col-sm-8">@(Model.HasRespiratoryIllnessAfterTravel ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.HasRespiratoryIllnessAfterTravel)</td>
+            <td class="col-sm-3">@(Model.HasRespiratoryIllnessAfterTravel ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.AdmittedToKindredHospital)</td>
-            <td class="col-sm-8">@(Model.AdmittedToKindredHospital ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.AdmittedToKindredHospital)</td>
+            <td class="col-sm-3">@(Model.AdmittedToKindredHospital ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MultiDrugResistantInfection)</td>
-            <td class="col-sm-8">@(Model.MultiDrugResistantInfection ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MultiDrugResistantInfection)</td>
+            <td class="col-sm-3">@(Model.MultiDrugResistantInfection ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.Microorganisms)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.Microorganisms)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.Microorganisms)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.Microorganisms)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CommunicableDisease)</td>
-            <td class="col-sm-8">@(Model.CommunicableDisease ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CommunicableDisease)</td>
+            <td class="col-sm-3">@(Model.CommunicableDisease ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.DiseaseConditions)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.DiseaseConditions)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DiseaseConditions)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.DiseaseConditions)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.LabResultsStatus)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.LabResultsStatus)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.LabResultsStatus)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.LabResultsStatus)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.DiagnosticsStatus)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.DiagnosticsStatus)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DiagnosticsStatus)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.DiagnosticsStatus)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MedicationListStatus)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.MedicationListStatus)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MedicationListStatus)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.MedicationListStatus)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.FaceSheet)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.FaceSheet)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.FaceSheet)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.FaceSheet)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.HAndP)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.HAndP)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.HAndP)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.HAndP)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.CovidWithin3Days)</td>
-            <td class="col-sm-8">@(Model.CovidWithin3Days ? "Yes" : "No")</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CovidWithin3Days)</td>
+            <td class="col-sm-3">@(Model.CovidWithin3Days ? "Yes" : "No")</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MostRecentLabResults)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.MostRecentLabResults)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MostRecentLabResults)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.MostRecentLabResults)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.RadiologyResults)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.RadiologyResults)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.RadiologyResults)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.RadiologyResults)</td>
         </tr>
         <tr>
-            <td class="col-sm-4">@Html.DisplayNameFor(model => model.MedicationList)</td>
-            <td class="col-sm-8">@Html.DisplayFor(model => model.MedicationList)</td>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MedicationList)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.MedicationList)</td>
         </tr>
     </tbody>
 </table>

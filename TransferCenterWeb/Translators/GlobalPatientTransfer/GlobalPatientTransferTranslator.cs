@@ -1,4 +1,5 @@
 ﻿using TransferCenter.Translators;
+using TransferCenterCore.Context;
 
 namespace TransferCenterWeb.Translators;
 
@@ -14,6 +15,7 @@ public static class GlobalPatientTransferTranslator
             TransferInfo = PatientTransferInfoTranslator.ToCoreModel(source.PatientTransferInfo, source.Id),
             PatientInfo = PatientDetailsTranslator.ToCoreModel(source.PatientDetails, source.Id),
             AdditionalInfo = AdditionalInfoTranslator.ToCoreModel(source.AdditionalInfo, source.Id)
+            
         };
     }
 

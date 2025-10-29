@@ -13,6 +13,7 @@ public static class ComorbiditiesAndRiskScoreTranslator
         return new TransferCenterCore.Models.ComorbiditiesAndRiskScore
         {
             Id = source.Id,
+            Uid = source.UId,
             None = source.None,
             StrokeTIA = source.StrokeTIA,
             CHF = source.CHF,
@@ -55,6 +56,7 @@ public static class ComorbiditiesAndRiskScoreTranslator
         return new TransferCenterDbStore.Entities.ComorbiditiesAndRiskScore
         {
             Id = source.Id,
+            UId = source.Uid,
             None = source.None,
             StrokeTIA = source.StrokeTIA,
             CHF = source.CHF,

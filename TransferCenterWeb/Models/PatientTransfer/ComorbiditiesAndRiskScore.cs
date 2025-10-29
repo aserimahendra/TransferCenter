@@ -7,6 +7,10 @@ namespace TransferCenterWeb.Models.PatientTransfer;
     /// </summary>
     public class ComorbiditiesAndRiskScore
     {
+        public Guid UId { get; set; }
+
+        public long Id { get; set; }
+
         [Display(Name = "None (0 points)")]
         public bool None { get; set; }
 

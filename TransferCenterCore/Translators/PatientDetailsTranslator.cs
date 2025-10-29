@@ -11,6 +11,7 @@ public static class PatientDetailsTranslator
             UId = patientDetails.UId,
             Id = patientDetails.Id,
             Name = patientDetails.Name,
+            TransferType = patientDetails.TransferType,
             DOB = patientDetails.DOB,
             Gender = patientDetails.Gender,
             IsIsolation = patientDetails.IsIsolation,
@@ -24,7 +25,16 @@ public static class PatientDetailsTranslator
             Lateral = patientDetails.Lateral,
             HLOC = patientDetails.HLOC,
             PatientInsurance = patientDetails.PatientInsurance,
-            IsActive = patientDetails.IsActive
+            CodeStatus = patientDetails.CodeStatus,
+            Sitter = patientDetails.Sitter,
+            JehovahWitness = patientDetails.JehovahWitness,
+            Capitated = patientDetails.Capitated,
+            GCS = patientDetails.GCS,
+            WeightIn = patientDetails.WeightIn,
+            IsActive = patientDetails.IsActive,
+            CreatedOn = patientDetails.CreatedOn,
+            CreatedBy = patientDetails.CreatedBy,
+            LastUpdatedOn = patientDetails.LastUpdatedOn,
         };
     }
     public static Models.PatientDetails ToCoreModel(this TransferCenterDbStore.Entities.PatientDetails coreModel)
@@ -36,6 +46,7 @@ public static class PatientDetailsTranslator
             Id = coreModel.Id,
             UId = coreModel.UId,
             Name = coreModel.Name,
+            TransferType = coreModel.TransferType,
             DOB = coreModel.DOB,
             Gender = coreModel.Gender,
             IsIsolation = coreModel.IsIsolation,
@@ -49,7 +60,17 @@ public static class PatientDetailsTranslator
             Lateral = coreModel.Lateral,
             HLOC = coreModel.HLOC,
             PatientInsurance = coreModel.PatientInsurance,
-            IsActive = coreModel.IsActive
+            CodeStatus = coreModel.CodeStatus,
+            Sitter = coreModel.Sitter,
+            JehovahWitness = coreModel.JehovahWitness,
+            Capitated = coreModel.Capitated,
+            GCS = coreModel.GCS,
+            WeightIn = coreModel.WeightIn,
+            IsActive = coreModel.IsActive,
+            CreatedOn = coreModel.CreatedOn,
+            CreatedBy = coreModel.CreatedBy,
+            LastUpdatedOn = coreModel.LastUpdatedOn,
+            
         };
     }
 }

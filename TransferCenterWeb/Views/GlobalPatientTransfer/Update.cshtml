@@ -1,0 +1,40 @@
+@model TransferCenterWeb.Models.GlobalPatientTransfer.GlobalPatientTransferRequest
+
+@{
+    Layout = "_ModalLayout";
+    ViewData["Title"] = "Update KPC Global Patient Transfer Request";
+
+}
+
+<form asp-action="Update" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="card shadow-sm mb-5 border-0 rounded-4 overflow-hidden">
+        <div class="card-body bg-light p-4">
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
+                @Html.EditorFor(m => m.PatientTransferInfo, "EditorTemplates/PatientTransferInfo")
+            </section>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
+                @Html.EditorFor(m => m.PatientDetails, "EditorTemplates/PatientDetails")
+            </section>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 shadow-sm">
+                @Html.EditorFor(mbox => mbox.AdditionalInfo, "EditorTemplates/AdditionalInfo")
+            </section>
+        </div>
+
+    </div>
+
+    <div class="position-sticky bottom-0 start-0 end-0  border-top border-3 border-primary shadow-sm py-3 px-3 bg-white" style="z-index: 10;">
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary px-4 js-modal-cancel" data-modal-dismiss="cancel">Cancel</button>
+            <button type="submit" class="btn btn-success px-4">Update</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

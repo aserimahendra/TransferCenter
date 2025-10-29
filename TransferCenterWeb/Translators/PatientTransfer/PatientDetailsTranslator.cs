@@ -32,7 +32,9 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 CodeStatus = source.CodeStatus,
                 GCS = source.GCS,
                 IsActive = source.IsActive,
-                TransferType = (short)Models.TransferType.PatientTransfer
+                TransferType = (short)Models.TransferType.PatientTransfer,
+                WeightIn = source.WeightIn,
+                
             };
         }
 
@@ -63,7 +65,8 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 IsolationType = source.IsolationType,
                 CodeStatus = source.CodeStatus ?? string.Empty,
                 GCS = source.GCS ?? string.Empty,
-                IsActive = source.IsActive
+                IsActive = source.IsActive,
+                WeightIn = source.WeightIn
             };
         }
     }

@@ -23,7 +23,16 @@ public static class PatientTransferInfoTranslator
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
             TransferType = source.TransferType,
-            IsActive = source.IsActive
+            IsHloc = source.IsHloc,
+            MR = source.MR,
+            SecondPhoneNumber = source.SecondPhoneNumber,
+            SecondFaxNumber = source.SecondFaxNumber,
+            PrimaryCallerName = source.PrimaryCallerName,
+            SecondaryCallerName = source.SecondaryCallerName,
+            IsActive = source.IsActive,
+            CreatedOn = source.CreatedOn,
+            CreatedBy = source.CreatedBy,
+            LastUpdatedOn = source.LastUpdatedOn,
         };
     }
 
@@ -48,7 +57,16 @@ public static class PatientTransferInfoTranslator
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
             TransferType = source.TransferType,
-            IsActive = source.IsActive
+            IsHloc = source.IsHloc,
+            MR = source.MR,
+            SecondPhoneNumber = source.SecondPhoneNumber,
+            SecondFaxNumber = source.SecondFaxNumber,
+            PrimaryCallerName = source.PrimaryCallerName,
+            SecondaryCallerName = source.SecondaryCallerName,
+            IsActive = source.IsActive,
+            CreatedOn = source.CreatedOn,
+            CreatedBy = source.CreatedBy,
+            LastUpdatedOn = source.LastUpdatedOn,
         };
     }
 }

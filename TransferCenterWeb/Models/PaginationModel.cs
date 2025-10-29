@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-namespace TransferCenterWeb.Models.Shared;
+namespace TransferCenterWeb.Models;
 
 public class PaginationModel
 {

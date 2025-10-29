@@ -15,9 +15,12 @@ public class GlobalTransferService : IGlobalTransferService
         _unitOfWork = unitOfWork;
         _configuration = configuration;
     }
-    public bool Delete(GlobalPatientTransferRequest patientTransferViewModel)
+    public async Task Delete(GlobalPatientTransferRequest patientTransferViewModel)
     {
-        throw new NotImplementedException();
+        patientTransferViewModel.AdditionalInfo.IsActive = false;
+        patientTransferViewModel.PatientInfo.IsActive = false;
+        patientTransferViewModel.TransferInfo.IsActive = false;
+        await Update(patientTransferViewModel);
     }
 
     public async Task Save(GlobalPatientTransferRequest patientTransferViewModel)
@@ -28,6 +31,7 @@ public class GlobalTransferService : IGlobalTransferService
             await SavePatientInfo(patientTransferViewModel.PatientInfo);
             await SavePatientTransferInfo(patientTransferViewModel.TransferInfo);
             await SaveAdditionalInfoInfo(patientTransferViewModel.AdditionalInfo);
+            await _unitOfWork.CommitAsync();
         }
         catch (Exception)
         {
@@ -38,26 +42,55 @@ public class GlobalTransferService : IGlobalTransferService
 
     private async Task SavePatientInfo(Models.PatientDetails patientDetails)
     {
+        patientDetails.CreatedBy = string.IsNullOrWhiteSpace(patientDetails.CreatedBy)
+            ? "system"
+            : patientDetails.CreatedBy;
+        patientDetails.CreatedOn = DateTime.UtcNow;
         _unitOfWork.PatientDetailsRepository.Add(patientDetails.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
     private async Task SavePatientTransferInfo(Models.PatientTransferInfo patientTransferInfo)
     {
+        patientTransferInfo.CreatedBy = string.IsNullOrWhiteSpace(patientTransferInfo.CreatedBy)
+            ? "system"
+            : patientTransferInfo.CreatedBy;
+        patientTransferInfo.CreatedOn = DateTime.UtcNow;
         _unitOfWork.PatientTransferInfoRepository.Add(patientTransferInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
     private async Task SaveAdditionalInfoInfo(Models.AdditionalInfo additionalInfo)
     {
+        additionalInfo.CreatedBy = string.IsNullOrWhiteSpace(additionalInfo.CreatedBy)
+            ? "system"
+            : additionalInfo.CreatedBy;
+        additionalInfo.CreatedOn = DateTime.UtcNow;
         _unitOfWork.AdditionalInfoRepository.Add(additionalInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
     }
+    
+    private async Task UpdatePatientInfo(Models.PatientDetails patientDetails)
+    {
+        patientDetails.LastUpdatedOn = DateTime.UtcNow;
+        _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
+    }
+    private async Task UpdatePatientTransferInfo(Models.PatientTransferInfo patientTransferInfo)
+    {
+        patientTransferInfo.LastUpdatedOn = DateTime.UtcNow;
+        _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
+    }
+    private async Task UpdateAdditionalInfoInfo(Models.AdditionalInfo additionalInfo)
+    {
+        additionalInfo.LastUpdatedOn = DateTime.UtcNow;
+        _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
+    }
+    
     public async Task Update(GlobalPatientTransferRequest patientTransferViewModel)
     {
         try
         {
+            // wait for all tasks to complete if needed
             await UpdatePatientInfo(patientTransferViewModel.PatientInfo);
             await UpdatePatientTransferInfo(patientTransferViewModel.TransferInfo);
-            await UpdateAdditionalInfo(patientTransferViewModel.AdditionalInfo);
+            await UpdateAdditionalInfoInfo(patientTransferViewModel.AdditionalInfo);
+            await _unitOfWork.CommitAsync();
+
         }
         catch (Exception)
         {
@@ -65,10 +98,38 @@ public class GlobalTransferService : IGlobalTransferService
         }
     }
 
-    public async Task<List<GlobalPatientTransferRequest>> GetList()
+    private const int DefaultPageSize = 10;
+    private const short GlobalTransferType = 1;
+
+    public async Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize)
     {
-        var transferInfo = await _unitOfWork.PatientTransferInfoRepository.GetAllAsync();
-        return transferInfo.Select(x => new GlobalPatientTransferRequest() { Id= x.UId,TransferInfo = x.ToCoreModel() }).ToList();
+        page = page < 1 ? 1 : page;
+        pageSize = pageSize <= 0 ? DefaultPageSize : pageSize;
+
+        var baseQuery = _unitOfWork.PatientTransferInfoRepository
+            .Query(x => x.IsActive && x.TransferType == GlobalTransferType);
+
+        var totalCount = await _unitOfWork.PatientTransferInfoRepository
+            .CountAsync(x => x.IsActive && x.TransferType == GlobalTransferType);
+
+        var pagedTransfers = baseQuery
+            .OrderByDescending(x => x.CreatedOn)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var items = pagedTransfers
+            .Select(x => new GlobalPatientTransferRequest
+            {
+                Id = x.UId,
+                TransferInfo = x.ToCoreModel(),
+                CreatedOn = x.CreatedOn,
+                CreatedBy = x.CreatedBy,
+                LastUpdatedOn = x.LastUpdatedOn
+            })
+            .ToList();
+
+        return (items, totalCount);
     }
 
     public async Task<GlobalPatientTransferRequest> Get(Guid uid)
@@ -100,23 +161,4 @@ public class GlobalTransferService : IGlobalTransferService
     {
         return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
     }
-
-    private async Task UpdatePatientInfo(Models.PatientDetails patientDetails)
-    {
-        _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
-        await _unitOfWork.CommitAsync();
-    }
-
-    private async Task UpdatePatientTransferInfo(Models.PatientTransferInfo patientTransferInfo)
-    {
-        _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
-    }
-
-    private async Task UpdateAdditionalInfo(Models.AdditionalInfo additionalInfo)
-    {
-        _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
-        await _unitOfWork.CommitAsync();
-    }
-
 }

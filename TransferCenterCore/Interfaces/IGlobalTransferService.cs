@@ -6,7 +6,7 @@ public interface IGlobalTransferService
 {
     public Task Save(GlobalPatientTransferRequest patientTransferViewModel);
     public Task<GlobalPatientTransferRequest> Get(Guid uid);
-    public Task<List<GlobalPatientTransferRequest>> GetList();
+    public Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize);
     public Task Update(GlobalPatientTransferRequest patientTransferViewModel);
-    public bool Delete(GlobalPatientTransferRequest patientTransferViewModel);
+    public Task Delete(GlobalPatientTransferRequest patientTransferViewModel);
 }

@@ -17,4 +17,12 @@ public class BaseDbContext : DbContext
     public DbSet<PatientTransferInfo> PatientTransferInfo { get; set; }
     public DbSet<AuditLog> AuditLog { get; set; }
     public DbSet<ComorbiditiesAndRiskScore> ComorbiditiesAndRiskScores { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<User>()
+            .ToTable("User", tb => tb.ExcludeFromMigrations());
+    }
 }

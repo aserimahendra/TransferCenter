@@ -1,153 +1,172 @@
-﻿@model IEnumerable<TransferCenterWeb.Models.GlobalPatientTransfer.PatientTransferInfo>
+﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.GlobalPatientTransferListViewModel
 @using System.Text.Encodings.Web
+@using TransferCenterWeb.Models
+@using TransferCenterWeb.Models.GlobalPatientTransfer
+
 @{
+    var httpContext = ViewContext.HttpContext;
     var htmlEncoder = HtmlEncoder.Default;
+
+    var currentPage = int.TryParse(httpContext.Request.Query["page"], out var parsedPage) ? parsedPage : 1;
+    if (currentPage < 1)
+    {
+        currentPage = 1;
+    }
+
+    var pageSize = int.TryParse(httpContext.Request.Query["pageSize"], out var parsedPageSize) ? parsedPageSize : 10;
+    if (pageSize <= 0)
+    {
+        pageSize = 10;
+    }
+
+    var total = Model?.TotalCount ?? 0;
+    var totalPages = (int)Math.Ceiling(total / (double)pageSize);
+    if (totalPages > 0 && currentPage > totalPages)
+    {
+        currentPage = totalPages;
+    }
+
+    var queryDictionary = httpContext.Request.Query
+        .ToDictionary(k => k.Key, v => v.Value.ToString(), StringComparer.OrdinalIgnoreCase);
+    queryDictionary["pageSize"] = pageSize.ToString();
+
+    var paginationModel = new PaginationModel
+    {
+        Action = nameof(TransferCenterWeb.Controllers.GlobalPatientTransferController.TransferList),
+        Controller = "GlobalPatientTransfer",
+        CurrentPage = currentPage,
+        PageSize = pageSize,
+        TotalItems = total,
+        RouteValues = queryDictionary,
+        RenderIfSinglePage = false
+    };
+
+    var transfers = Model?.Items?
+        .Select(x => x.PatientTransferInfo)
+        .Where(x => x != null)
+        .ToList() ?? new List<PatientTransferInfo>();
 }
+
+@* <div class="d-flex justify-content-between align-items-center mt-3">
+    <div>
+        Showing page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items
+    </div>
+    <div>
+        @await Html.PartialAsync("_Pagination", paginationModel)
+    </div>
+</div>
+
+<form method="get" data-list-filter class="row g-2 mb-3">
+    <div class="col-auto">
+        <select name="pageSize" class="form-select">
+            <option value="10" selected="@(pageSize == 10 ? "selected" : null)">10</option>
+            <option value="25" selected="@(pageSize == 25 ? "selected" : null)">25</option>
+            <option value="50" selected="@(pageSize == 50 ? "selected" : null)">50</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-secondary">Apply</button>
+    </div>
+</form> *@
+
+<div class="d-flex justify-content-end align-items-center mb-3 gap-2">
+    <button type="button" class="btn btn-primary" data-modal-url="@Url.Action("Create", "GlobalPatientTransfer")" data-modal-title="KPC Global Patient Transfer Request"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request" aria-label="Add new transfer">
+        <i class="bi bi-plus-circle"></i>
+    </button>
+    <a asp-controller="GlobalPatientTransfer" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel"
+       data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Export to Excel">
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+    </a>
+</div>
 
 
 <table class="table table-bordered table-striped">
     <thead class="table-primary">
         <tr>
-           @*  <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UId)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.CaseMgrSwRn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FaxNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequestingFacility)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TransferDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferringMd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferringMdPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferringSpecialistPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferringSpecialist)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AdmitDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPhone)
-            </th>
-            <th>
-                <div class="btn-group" role="group" aria-label="Actions">
-                    <a asp-controller="GlobalPatientTransfer" asp-action="Create" class="btn btn-primary" title="Create New">
-                        <i class="bi bi-plus-lg"></i>
-                    </a>
-                    <a asp-controller="GlobalPatientTransfer" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel">
-                        <i class="bi bi-file-earmark-spreadsheet"></i>
-                    </a>
-                    <a asp-controller="GlobalPatientTransfer" asp-action="ExportPdf" class="btn btn-danger" title="Export to PDF">
-                        <i class="bi bi-file-earmark-pdf"></i>
-                    </a>
-                </div>
-            </th>
+            <th>Case Manager/SW/RN</th>
+            <th>Phone Number</th>
+            <th>Requesting Facility</th>
+            <th>Transfer Date</th>
+            <th>Referring MD</th>
+            <th>Referring MD Phone</th>
+            <th>Admit Date</th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@if (transfers.Any())
+{
+    foreach (var item in transfers)
+    {
         <tr>
-           @*  <td>
-                @Html.DisplayFor(modelItem => item.Id)
+            <td>
+                @Html.DisplayFor(_ => item.CaseMgrSwRn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UId)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.CaseMgrSwRn)
+                @Html.DisplayFor(_ => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(_ => item.RequestingFacility)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FaxNumber)
+                @Html.DisplayFor(_ => item.TransferDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RequestingFacility)
+                @Html.DisplayFor(_ => item.ReferringMd)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransferDate)
+                @Html.DisplayFor(_ => item.ReferringMdPhone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReferringMd)
+                @Html.DisplayFor(_ => item.AdmitDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReferringMdPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReferringSpecialistPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReferringSpecialist)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdmitDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPhone)
-            </td>
-            <td>
-                @{ 
-                    var editUrl = Url.Action("Update", new { id = item.UId });
-                    var detailsUrl = Url.Action("Details", new { id = item.UId });
-                    var deleteUrl = Url.Action("Delete", new { id = item.UId });
-                    var encodedEditUrl = htmlEncoder.Encode(editUrl ?? string.Empty);
-                    var encodedDetailsUrl = htmlEncoder.Encode(detailsUrl ?? string.Empty);
-                    var encodedDeleteUrl = htmlEncoder.Encode(deleteUrl ?? string.Empty);
+                @{
+                    var editUrl = Url.Action("Update", "GlobalPatientTransfer", new { id = item.UId });
+                    var detailsUrl = Url.Action("Details", "GlobalPatientTransfer", new { id = item.UId });
+                    var modalUpdateTitle = $"Update Global Patient transfer : {item.CaseMgrSwRn}";
+                    var modalDetailsTitle = $"Global transfer Details:  {item.CaseMgrSwRn}";
+                    var deleteUrl = Url.Action("Delete", "GlobalPatientTransfer", new { id = item.UId });
+                    var pdfUrl = Url.Action("DetailsInPdf", "GlobalPatientTransfer", new { id = item.UId });
+                    var modalDeleteTitle = $"Delete Global Patient transfer: {item.CaseMgrSwRn}";
+
                 }
-                <a class="btn btn-outline-secondary btn-sm me-1" href="@Html.Raw(encodedEditUrl)" target="_blank" rel="noopener noreferrer">
-                    <i class="bi bi-pencil-square"></i> Edit
-                </a>
-                <a href="@Html.Raw(encodedDetailsUrl)" class="btn btn-outline-primary btn-sm me-1">
+                <button type="button" class="btn btn-outline-secondary btn-sm me-1" data-modal-url="@editUrl" data-modal-title="@modalUpdateTitle"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this transfer" aria-label="Edit transfer">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm me-1" data-modal-url="@detailsUrl" data-modal-title="@modalDetailsTitle"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="View transfer details" aria-label="View transfer details">
                     <i class="bi bi-info-circle"></i>
-                </a>
-                <form method="post" action="@Html.Raw(encodedDeleteUrl)" class="d-inline js-confirm-delete">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                </button>
+                <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
+                            data-modal-title="@modalDeleteTitle"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this transfer"
+                            aria-label="Delete transfer">
                         <i class="bi bi-trash"></i>
                     </button>
-                </form>
+                 <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
+                        data-download-name="@($"GlobalPatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="modalActions.downloadFile('@pdfUrl','@($"GlobalPatientTransfer_{item.CaseMgrSwRn}.pdf")')"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
+                        aria-label="Download PDF">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                </button>
             </td>
         </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="13" class="text-center">No transfers found.</td>
+    </tr>
 }
     </tbody>
 </table>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var deleteForms = document.querySelectorAll('.js-confirm-delete');
-        deleteForms.forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-                var confirmation = window.confirm('Are you sure you want to delete this patient transfer?');
-                if (confirmation) {
-                    form.submit();
-                }
-            });
-        });
-    });
-</script>
+<div class="mt-3">
+    <div class="d-flex justify-content-end align-items-center">
+        @await Html.PartialAsync("_Pagination", paginationModel)
+    </div>
+</div>

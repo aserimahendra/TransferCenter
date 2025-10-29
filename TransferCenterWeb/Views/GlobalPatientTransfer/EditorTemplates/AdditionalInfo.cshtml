@@ -1,413 +1,411 @@
 ﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.AdditionalInfo
+@using Microsoft.AspNetCore.Mvc.Rendering
 
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.UId)
+@Html.HiddenFor(m => m.IsActive)
 
-<div class="row table">
 
-    <!-- Bool fields as Yes/No radio buttons -->
-    <div class="row mb-3">
+<div class="card mb-4">
+    <div class="card-header fw-semibold">
+        Additional Information
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mb-4">
+            <table class="table table-bordered table-sm align-middle mb-0">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="w-25">@Html.DisplayNameFor(m => m.ServicesAvailable)</th>
+                        <td class="w-25 text-center">
+                            @{ var servicesYesId = Html.IdFor(m => m.ServicesAvailable) + "_Yes"; var servicesNoId = Html.IdFor(m => m.ServicesAvailable) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.ServicesAvailable, true, new { @class = "form-check-input", id = servicesYesId })
+                                    <label class="form-check-label mb-0" for="@servicesYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.ServicesAvailable, false, new { @class = "form-check-input", id = servicesNoId })
+                                    <label class="form-check-label mb-0" for="@servicesNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ServicesAvailable, "", new { @class = "text-danger small d-block" })
+                        </td>
+                        <th class="w-25">@Html.DisplayNameFor(m => m.SitterRequired)</th>
+                        <td class="w-25 text-center">
+                            @{ var sitterYesId = Html.IdFor(m => m.SitterRequired) + "_Yes"; var sitterNoId = Html.IdFor(m => m.SitterRequired) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.SitterRequired, true, new { @class = "form-check-input", id = sitterYesId })
+                                    <label class="form-check-label mb-0" for="@sitterYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.SitterRequired, false, new { @class = "form-check-input", id = sitterNoId })
+                                    <label class="form-check-label mb-0" for="@sitterNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SitterRequired, "", new { @class = "text-danger small d-block" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.VTIBDrips)</th>
+                        <td class="text-center">
+                            @{ var vtibYesId = Html.IdFor(m => m.VTIBDrips) + "_Yes"; var vtibNoId = Html.IdFor(m => m.VTIBDrips) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.VTIBDrips, true, new { @class = "form-check-input", id = vtibYesId })
+                                    <label class="form-check-label mb-0" for="@vtibYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.VTIBDrips, false, new { @class = "form-check-input", id = vtibNoId })
+                                    <label class="form-check-label mb-0" for="@vtibNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.VTIBDrips, "", new { @class = "text-danger small d-block" })
+                        </td>
+                        <th>@Html.DisplayNameFor(m => m.Dialysis)</th>
+                        <td class="text-center">
+                            @{ var dialysisYesId = Html.IdFor(m => m.Dialysis) + "_Yes"; var dialysisNoId = Html.IdFor(m => m.Dialysis) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.Dialysis, true, new { @class = "form-check-input", id = dialysisYesId })
+                                    <label class="form-check-label mb-0" for="@dialysisYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.Dialysis, false, new { @class = "form-check-input", id = dialysisNoId })
+                                    <label class="form-check-label mb-0" for="@dialysisNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Dialysis, "", new { @class = "text-danger small d-block" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.PFCTTransfer)</th>
+                        <td class="text-center">
+                            @{ var pfctYesId = Html.IdFor(m => m.PFCTTransfer) + "_Yes"; var pfctNoId = Html.IdFor(m => m.PFCTTransfer) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.PFCTTransfer, true, new { @class = "form-check-input", id = pfctYesId })
+                                    <label class="form-check-label mb-0" for="@pfctYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.PFCTTransfer, false, new { @class = "form-check-input", id = pfctNoId })
+                                    <label class="form-check-label mb-0" for="@pfctNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.PFCTTransfer, "", new { @class = "text-danger small d-block" })
+                        </td>
+                        <th>@Html.DisplayNameFor(m => m.CovidWithin3Days)</th>
+                        <td class="text-center">
+                            @{ var covidYesId = Html.IdFor(m => m.CovidWithin3Days) + "_Yes"; var covidNoId = Html.IdFor(m => m.CovidWithin3Days) + "_No"; }
+                            <div class="d-inline-flex justify-content-center align-items-center gap-4 flex-wrap">
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.CovidWithin3Days, true, new { @class = "form-check-input", id = covidYesId })
+                                    <label class="form-check-label mb-0" for="@covidYesId">Yes</label>
+                                </div>
+                                <div class="d-inline-flex align-items-center gap-2">
+                                    @Html.RadioButtonFor(m => m.CovidWithin3Days, false, new { @class = "form-check-input", id = covidNoId })
+                                    <label class="form-check-label mb-0" for="@covidNoId">No</label>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.CovidWithin3Days, "", new { @class = "text-danger small d-block" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="align-top">@Html.DisplayNameFor(m => m.OtherNotes)</th>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.OtherNotes, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OtherNotes, "", new { @class = "text-danger small d-block" })
+                        </td>
+                    </tr>
 
-        <!-- ServicesAvailable -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0 text-wrap text-break">@Html.DisplayNameFor(m => m.ServicesAvailable)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.ServicesAvailable, true, new { @class = "form-check-input", id = "ServicesAvailableYes" })
-                        <label class="form-check-label" for="ServicesAvailableYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.ServicesAvailable, false, new { @class = "form-check-input", id = "ServicesAvailableNo" })
-                        <label class="form-check-label" for="ServicesAvailableNo">No</label>
-                    </div>
-                </div>
-            </div>
+                    <tr>
+                        <th scope="row" class="align-top">@Html.DisplayNameFor(m => m.CodeStatus)</th>
+                        <td colspan="3" style="border-right:none">
+                            @{ var codeStatusId = Html.IdFor(m => m.CodeStatus); }
+                            @Html.DropDownListFor(
+                                m => m.CodeStatus,
+                                new List<SelectListItem>
+                                {
+                                    new SelectListItem { Value = "Full Code", Text = "Full Code" },
+                                    new SelectListItem { Value = "Full DNR", Text = "Full DNR" },
+                                    new SelectListItem { Value = "Modified Code/DNR", Text = "Modified Code/DNR" }
+                                },
+                                "Select Code Status",
+                                new { @class = "form-select", id = codeStatusId })
+                            @Html.ValidationMessageFor(m => m.CodeStatus, "", new { @class = "text-danger small d-block" })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- SitterRequired -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0">@Html.DisplayNameFor(m => m.SitterRequired)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.SitterRequired, true, new { @class = "form-check-input", id = "SitterRequiredYes" })
-                        <label class="form-check-label" for="SitterRequiredYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.SitterRequired, false, new { @class = "form-check-input", id = "SitterRequiredNo" })
-                        <label class="form-check-label" for="SitterRequiredNo">No</label>
-                    </div>
-                </div>
-            </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="w-40">Document</th>
+                        <th class="text-center">Sent</th>
+                        <th class="text-center">Yes</th>
+                        <th class="text-center">N/A</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.FaceSheet)</th>
+                        @{ var faceSheetSentId = Html.IdFor(m => m.FaceSheet) + "_Sent"; var faceSheetYesId = Html.IdFor(m => m.FaceSheet) + "_Yes"; var faceSheetNaId = Html.IdFor(m => m.FaceSheet) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.FaceSheet, DocumentStatus.Sent, new { @class = "form-check-input", id = faceSheetSentId })
+                                <label class="form-check-label mb-0" for="@faceSheetSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.FaceSheet, DocumentStatus.Yes, new { @class = "form-check-input", id = faceSheetYesId })
+                                <label class="form-check-label mb-0" for="@faceSheetYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.FaceSheet, DocumentStatus.NA, new { @class = "form-check-input", id = faceSheetNaId })
+                                <label class="form-check-label mb-0" for="@faceSheetNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.FaceSheet, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.HAndP)</th>
+                        @{ var hapSentId = Html.IdFor(m => m.HAndP) + "_Sent"; var hapYesId = Html.IdFor(m => m.HAndP) + "_Yes"; var hapNaId = Html.IdFor(m => m.HAndP) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.HAndP, DocumentStatus.Sent, new { @class = "form-check-input", id = hapSentId })
+                                <label class="form-check-label mb-0" for="@hapSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.HAndP, DocumentStatus.Yes, new { @class = "form-check-input", id = hapYesId })
+                                <label class="form-check-label mb-0" for="@hapYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.HAndP, DocumentStatus.NA, new { @class = "form-check-input", id = hapNaId })
+                                <label class="form-check-label mb-0" for="@hapNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.HAndP, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.CovidTestResults)</th>
+                        @{ var ctrSentId = Html.IdFor(m => m.CovidTestResults) + "_Sent"; var ctrYesId = Html.IdFor(m => m.CovidTestResults) + "_Yes"; var ctrNaId = Html.IdFor(m => m.CovidTestResults) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.CovidTestResults, DocumentStatus.Sent, new { @class = "form-check-input", id = ctrSentId })
+                                <label class="form-check-label mb-0" for="@ctrSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.CovidTestResults, DocumentStatus.Yes, new { @class = "form-check-input", id = ctrYesId })
+                                <label class="form-check-label mb-0" for="@ctrYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.CovidTestResults, DocumentStatus.NA, new { @class = "form-check-input", id = ctrNaId })
+                                <label class="form-check-label mb-0" for="@ctrNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.CovidTestResults, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.TransferOrder)</th>
+                        @{ var toSentId = Html.IdFor(m => m.TransferOrder) + "_Sent"; var toYesId = Html.IdFor(m => m.TransferOrder) + "_Yes"; var toNaId = Html.IdFor(m => m.TransferOrder) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TransferOrder, DocumentStatus.Sent, new { @class = "form-check-input", id = toSentId })
+                                <label class="form-check-label mb-0" for="@toSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TransferOrder, DocumentStatus.Yes, new { @class = "form-check-input", id = toYesId })
+                                <label class="form-check-label mb-0" for="@toYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TransferOrder, DocumentStatus.NA, new { @class = "form-check-input", id = toNaId })
+                                <label class="form-check-label mb-0" for="@toNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.TransferOrder, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.ProgressNotes)</th>
+                        @{ var pnSentId = Html.IdFor(m => m.ProgressNotes) + "_Sent"; var pnYesId = Html.IdFor(m => m.ProgressNotes) + "_Yes"; var pnNaId = Html.IdFor(m => m.ProgressNotes) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ProgressNotes, DocumentStatus.Sent, new { @class = "form-check-input", id = pnSentId })
+                                <label class="form-check-label mb-0" for="@pnSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ProgressNotes, DocumentStatus.Yes, new { @class = "form-check-input", id = pnYesId })
+                                <label class="form-check-label mb-0" for="@pnYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ProgressNotes, DocumentStatus.NA, new { @class = "form-check-input", id = pnNaId })
+                                <label class="form-check-label mb-0" for="@pnNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ProgressNotes, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.ConsultationNotes)</th>
+                        @{ var cnSentId = Html.IdFor(m => m.ConsultationNotes) + "_Sent"; var cnYesId = Html.IdFor(m => m.ConsultationNotes) + "_Yes"; var cnNaId = Html.IdFor(m => m.ConsultationNotes) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ConsultationNotes, DocumentStatus.Sent, new { @class = "form-check-input", id = cnSentId })
+                                <label class="form-check-label mb-0" for="@cnSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ConsultationNotes, DocumentStatus.Yes, new { @class = "form-check-input", id = cnYesId })
+                                <label class="form-check-label mb-0" for="@cnYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.ConsultationNotes, DocumentStatus.NA, new { @class = "form-check-input", id = cnNaId })
+                                <label class="form-check-label mb-0" for="@cnNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ConsultationNotes, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.MostRecentLabResults)</th>
+                        @{ var mrlSentId = Html.IdFor(m => m.MostRecentLabResults) + "_Sent"; var mrlYesId = Html.IdFor(m => m.MostRecentLabResults) + "_Yes"; var mrlNaId = Html.IdFor(m => m.MostRecentLabResults) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MostRecentLabResults, DocumentStatus.Sent, new { @class = "form-check-input", id = mrlSentId })
+                                <label class="form-check-label mb-0" for="@mrlSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MostRecentLabResults, DocumentStatus.Yes, new { @class = "form-check-input", id = mrlYesId })
+                                <label class="form-check-label mb-0" for="@mrlYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MostRecentLabResults, DocumentStatus.NA, new { @class = "form-check-input", id = mrlNaId })
+                                <label class="form-check-label mb-0" for="@mrlNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MostRecentLabResults, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.RadiologyResults)</th>
+                        @{ var rrSentId = Html.IdFor(m => m.RadiologyResults) + "_Sent"; var rrYesId = Html.IdFor(m => m.RadiologyResults) + "_Yes"; var rrNaId = Html.IdFor(m => m.RadiologyResults) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.RadiologyResults, DocumentStatus.Sent, new { @class = "form-check-input", id = rrSentId })
+                                <label class="form-check-label mb-0" for="@rrSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.RadiologyResults, DocumentStatus.Yes, new { @class = "form-check-input", id = rrYesId })
+                                <label class="form-check-label mb-0" for="@rrYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.RadiologyResults, DocumentStatus.NA, new { @class = "form-check-input", id = rrNaId })
+                                <label class="form-check-label mb-0" for="@rrNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RadiologyResults, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.MedicationList)</th>
+                        @{ var mlSentId = Html.IdFor(m => m.MedicationList) + "_Sent"; var mlYesId = Html.IdFor(m => m.MedicationList) + "_Yes"; var mlNaId = Html.IdFor(m => m.MedicationList) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MedicationList, DocumentStatus.Sent, new { @class = "form-check-input", id = mlSentId })
+                                <label class="form-check-label mb-0" for="@mlSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MedicationList, DocumentStatus.Yes, new { @class = "form-check-input", id = mlYesId })
+                                <label class="form-check-label mb-0" for="@mlYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.MedicationList, DocumentStatus.NA, new { @class = "form-check-input", id = mlNaId })
+                                <label class="form-check-label mb-0" for="@mlNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.MedicationList, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.TreatmentsAndProceduresInED)</th>
+                        @{ var tpeSentId = Html.IdFor(m => m.TreatmentsAndProceduresInED) + "_Sent"; var tpeYesId = Html.IdFor(m => m.TreatmentsAndProceduresInED) + "_Yes"; var tpeNaId = Html.IdFor(m => m.TreatmentsAndProceduresInED) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TreatmentsAndProceduresInED, DocumentStatus.Sent, new { @class = "form-check-input", id = tpeSentId })
+                                <label class="form-check-label mb-0" for="@tpeSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TreatmentsAndProceduresInED, DocumentStatus.Yes, new { @class = "form-check-input", id = tpeYesId })
+                                <label class="form-check-label mb-0" for="@tpeYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.TreatmentsAndProceduresInED, DocumentStatus.NA, new { @class = "form-check-input", id = tpeNaId })
+                                <label class="form-check-label mb-0" for="@tpeNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.TreatmentsAndProceduresInED, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">@Html.DisplayNameFor(m => m.InsuranceAuthorization)</th>
+                        @{ var iaSentId = Html.IdFor(m => m.InsuranceAuthorization) + "_Sent"; var iaYesId = Html.IdFor(m => m.InsuranceAuthorization) + "_Yes"; var iaNaId = Html.IdFor(m => m.InsuranceAuthorization) + "_NA"; }
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.InsuranceAuthorization, DocumentStatus.Sent, new { @class = "form-check-input", id = iaSentId })
+                                <label class="form-check-label mb-0" for="@iaSentId">Sent</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.InsuranceAuthorization, DocumentStatus.Yes, new { @class = "form-check-input", id = iaYesId })
+                                <label class="form-check-label mb-0" for="@iaYesId">Yes</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-inline-flex justify-content-center align-items-center gap-2">
+                                @Html.RadioButtonFor(m => m.InsuranceAuthorization, DocumentStatus.NA, new { @class = "form-check-input", id = iaNaId })
+                                <label class="form-check-label mb-0" for="@iaNaId">N/A</label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.InsuranceAuthorization, "", new { @class = "text-danger small d-block mt-1" })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <div class="row mb-3">
-
-        <!-- VTIBDrips -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0">@Html.DisplayNameFor(m => m.VTIBDrips)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.VTIBDrips, true, new { @class = "form-check-input", id = "VTIBDripsYes" })
-                        <label class="form-check-label" for="VTIBDripsYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.VTIBDrips, false, new { @class = "form-check-input", id = "VTIBDripsNo" })
-                        <label class="form-check-label" for="VTIBDripsNo">No</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dialysis -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0">@Html.DisplayNameFor(m => m.Dialysis)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.Dialysis, true, new { @class = "form-check-input", id = "DialysisYes" })
-                        <label class="form-check-label" for="DialysisYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.Dialysis, false, new { @class = "form-check-input", id = "DialysisNo" })
-                        <label class="form-check-label" for="DialysisNo">No</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mb-3">
-
-        <!-- PFCTTransfer -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0">@Html.DisplayNameFor(m => m.PFCTTransfer)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.PFCTTransfer, true, new { @class = "form-check-input", id = "PFCTTransferYes" })
-                        <label class="form-check-label" for="PFCTTransferYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.PFCTTransfer, false, new { @class = "form-check-input", id = "PFCTTransferNo" })
-                        <label class="form-check-label" for="PFCTTransferNo">No</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CovidWithin3Days -->
-
-        <div class="col-md-6">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <label class="form-label mb-0">@Html.DisplayNameFor(m => m.CovidWithin3Days)</label>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.CovidWithin3Days, true, new { @class = "form-check-input", id = "CovidWithin3DaysYes" })
-                        <label class="form-check-label" for="CovidWithin3DaysYes">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @Html.RadioButtonFor(model => model.CovidWithin3Days, false, new { @class = "form-check-input", id = "CovidWithin3DaysNo" })
-                        <label class="form-check-label" for="CovidWithin3DaysNo">No</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Text fields: OtherNotes, CodeStatus -->
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row mb-4">
-                <div class="col-md-3 align-items-center">
-                    <label asp-for="OtherNotes" class="form-label mb-0"></label>
-                </div>
-                <div class="col-md-8">
-                    <input asp-for="OtherNotes" class="form-control" />
-                    <span asp-validation-for="OtherNotes" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="row mb-4">
-                <div class="col-md-3 align-items-center">
-                    <label asp-for="CodeStatus" class="form-label mb-0"></label>
-                </div>
-                <div class="col-md-8">
-                    <input asp-for="CodeStatus" class="form-control" />
-                    <span asp-validation-for="CodeStatus" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-
-
-<!-- Enum Based fields: OtherNotes, CodeStatus -->
-
-<!-- FaceSheet -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="FaceSheet" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.FaceSheet, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="FaceSheet">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.FaceSheet, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="FaceSheet">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.FaceSheet, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="FaceSheet">N/A</label>
-        </div>
-        <span asp-validation-for="FaceSheet" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- HAndP -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="HAndP" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.HAndP, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="HAndP">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.HAndP, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="HAndP">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.HAndP, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="HAndP">N/A</label>
-        </div>
-        <span asp-validation-for="HAndP" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- CovidTestResults -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="CovidTestResults" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.CovidTestResults, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="CovidTestResults">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.CovidTestResults, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="CovidTestResults">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.CovidTestResults, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="CovidTestResults">N/A</label>
-        </div>
-        <span asp-validation-for="CovidTestResults" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- TransferOrder -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="TransferOrder" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TransferOrder, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TransferOrder">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TransferOrder, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TransferOrder">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TransferOrder, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TransferOrder">N/A</label>
-        </div>
-        <span asp-validation-for="TransferOrder" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- ProgressNotes -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="ProgressNotes" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ProgressNotes, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ProgressNotes">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ProgressNotes, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ProgressNotes">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ProgressNotes, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ProgressNotes">N/A</label>
-        </div>
-        <span asp-validation-for="ProgressNotes" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- ConsultationNotes -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="ConsultationNotes" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ConsultationNotes, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ConsultationNotes">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ConsultationNotes, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ConsultationNotes">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.ConsultationNotes, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="ConsultationNotes">N/A</label>
-        </div>
-        <span asp-validation-for="ConsultationNotes" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- MostRecentLabResults -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="MostRecentLabResults" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MostRecentLabResults, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MostRecentLabResults">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MostRecentLabResults, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MostRecentLabResults">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MostRecentLabResults, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MostRecentLabResults">N/A</label>
-        </div>
-        <span asp-validation-for="MostRecentLabResults" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- RadiologyResults -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="RadiologyResults" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.RadiologyResults, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="RadiologyResults">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.RadiologyResults, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="RadiologyResults">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.RadiologyResults, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="RadiologyResults">N/A</label>
-        </div>
-        <span asp-validation-for="RadiologyResults" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- MedicationList -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="MedicationList" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MedicationList, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MedicationList">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MedicationList, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MedicationList">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.MedicationList, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="MedicationList">N/A</label>
-        </div>
-        <span asp-validation-for="MedicationList" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- TreatmentsAndProceduresInED -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="TreatmentsAndProceduresInED" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TreatmentsAndProceduresInED, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TreatmentsAndProceduresInED">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TreatmentsAndProceduresInED, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TreatmentsAndProceduresInED">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.TreatmentsAndProceduresInED, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="TreatmentsAndProceduresInED">N/A</label>
-        </div>
-        <span asp-validation-for="TreatmentsAndProceduresInED" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- InsuranceAuthorization -->
-<div class="row mb-3">
-    <div class="col-md-3 align-items-center">
-        <label asp-for="InsuranceAuthorization" class="form-label mb-0"></label>
-    </div>
-    <div class="col-md-8">
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.InsuranceAuthorization, DocumentStatus.Sent, new { @class = "form-check-input" })
-            <label class="form-check-label" for="InsuranceAuthorization">Sent</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.InsuranceAuthorization, DocumentStatus.Yes, new { @class = "form-check-input" })
-            <label class="form-check-label" for="InsuranceAuthorization">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.InsuranceAuthorization, DocumentStatus.NA, new { @class = "form-check-input" })
-            <label class="form-check-label" for="InsuranceAuthorization">N/A</label>
-        </div>
-        <span asp-validation-for="InsuranceAuthorization" class="text-danger"></span>
-    </div>
-</div>
-
 

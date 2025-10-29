@@ -6,9 +6,11 @@ using TransferCenterDbStore.Data;
 using TransferCenterDbStore.Interfaces;
 using TransferCenterDbStore.Repositories;
 using TransferCenterDbStore.UnitOfWork;
+using TransferCenterHelper;
 using TransferCenterWeb;
 using TransferCenterWeb.Middleware;
 using TransferCenterWeb.Models;
+using TransferCenterHelper.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,10 @@ builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
 builder.Services.AddScoped<IPatientTransferService, PatientTransferService>();
 builder.Services.AddScoped<IComorbiditiesAndRiskScoreRepository, ComorbiditiesAndRiskScoreRepository>();
 builder.Services.AddScoped<IDbContextFactory, DbContextFactory>();
+// Ensure Playwright browser is installed (Chromium is required for PDF)
+try { Microsoft.Playwright.Program.Main(new [] { "install", "chromium" }); } catch { /* ignore */ }
+builder.Services.AddSingleton<IPdfExporter, PlaywrightPdfExporter>();
+builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
 
 var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
 var copyright = builder.Configuration["Copyright"] ?? "� 2025 Your Company";
@@ -81,6 +87,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+app.UseMiddleware<CallContextMiddleware>();
 
 app.MapControllerRoute(
     name: "areas",

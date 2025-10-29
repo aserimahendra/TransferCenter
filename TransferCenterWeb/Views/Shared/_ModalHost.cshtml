@@ -1,0 +1,29 @@
+<div id="appListAlert" class="alert alert-success alert-dismissible fade d-none mb-3" role="alert">
+    <span id="appListAlertText"></span>
+    <button type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<div class="kpc-loader position-fixed top-0 start-0 w-100 h-100 d-none" id="appListLoader" style="z-index: 1056; background: rgba(255, 255, 255, 0.85);">
+    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+        <img src="~/favicon-nobg.png" alt="KPC" style="width: 80px; height: 80px;">
+        <div class="d-flex gap-2 mt-3">
+            <span class="spinner-grow text-primary" style="width: 1rem; height: 1rem;" role="status"></span>
+            <span class="spinner-grow text-primary" style="width: 1rem; height: 1rem;" role="status"></span>
+            <span class="spinner-grow text-primary" style="width: 1rem; height: 1rem;" role="status"></span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="appModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-kpc-gradient-glass">
+                <h5 class="modal-title" id="appModalLabel">Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <iframe id="appModalFrame" src="" width="100%" height="640" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

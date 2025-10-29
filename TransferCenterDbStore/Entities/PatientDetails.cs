@@ -42,6 +42,5 @@ public class PatientDetails : AuditLogMeta
     public bool Capitated { get; set; }
     public string? GCS { get; set; }
     public short WeightIn { get; set; }
-
     public bool IsActive { get; set; } = true;
 }

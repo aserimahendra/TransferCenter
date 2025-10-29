@@ -1,0 +1,200 @@
+@model TransferCenterWeb.Models.PatientTransfer.ComorbiditiesAndRiskScore
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.UId)
+@Html.HiddenFor(m => m.IsActive)
+<div class="card mb-4">
+    <div class="card-header fw-semibold text-uppercase small">Comorbidities &amp; RF Score</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle mb-0">
+                <thead class="table-warning">
+                    <tr>
+                        <th scope="col" colspan="3" class="text-uppercase small fw-semibold">Comorbidities <span class="text-capitalize">(please mark all that apply)</span></th>
+                        <th scope="col" class="text-center text-danger fw-semibold">RF Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="w-25">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.None, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.None, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td class="w-25">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.StrokeTIA, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.StrokeTIA, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td class="w-25">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.CHF, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.CHF, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td class="w-25">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.CKD_ESRD, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.CKD_ESRD, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.LOSMoreThan2Weeks, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.LOSMoreThan2Weeks, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.UnconsciousOrALOC, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.UnconsciousOrALOC, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.CovidPositive, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.CovidPositive, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.ImmunocompromisedOrHIV, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.ImmunocompromisedOrHIV, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.OutOfServiceArea, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.OutOfServiceArea, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.DNRCodeStatus, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.DNRCodeStatus, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.HTN, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.HTN, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.PsychBackground, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.PsychBackground, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.NonCompliantWithCare, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.NonCompliantWithCare, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.DiabetesOrSkinIssues, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.DiabetesOrSkinIssues, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.MI_Angina_CAD, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.MI_Angina_CAD, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.UnableToPerformADLs, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.UnableToPerformADLs, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.DrugOrAlcoholDependence, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.DrugOrAlcoholDependence, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.LymphomaLeukemiaCancer, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.LymphomaLeukemiaCancer, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.MalnutritionObesityDigestiveDisease, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.MalnutritionObesityDigestiveDisease, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.COPDOrRespiratoryFailure, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.COPDOrRespiratoryFailure, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.RecentSurgeryAtUCI, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.RecentSurgeryAtUCI, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.RecentSurgeryOutsideUCI, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.RecentSurgeryOutsideUCI, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.Ventilated, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.Ventilated, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.PulmonaryHTN, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.PulmonaryHTN, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                @Html.CheckBoxFor(m => m.PulmonaryHTN_Prostacyclin, new { @class = "form-check-input" })
+                                @Html.LabelFor(m => m.PulmonaryHTN_Prostacyclin, new { @class = "form-check-label ms-2" })
+                            </div>
+                        </td>
+                        <td class="text-muted small" colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr class="table-light">
+                        <td colspan="3" class="fw-semibold text-end">Total Points</td>
+                        <td>
+                            @Html.TextBoxFor(m => m.TotalPoints, new { @class = "form-control text-center", type = "number", min = "0" })
+                            @Html.ValidationMessageFor(m => m.TotalPoints, "", new { @class = "text-danger small" })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-light border-top rounded-3 p-3 small">
+    <div class="fw-semibold text-uppercase">Points Algorithm &mdash; For Office Use Only</div>
+    <div>For points that add up to 15 or less, no clinical review required.</div>
+    <div>For points of 16 or higher, clinical review by House Supervisor and/or Nurse Navigator required.</div>
+</div>

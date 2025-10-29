@@ -1,4 +1,4 @@
-@model TransferCenterWeb.Models.Shared.PaginationModel
+@model TransferCenterWeb.Models.PaginationModel
 @using Microsoft.AspNetCore.Routing
 @using System.Text.Encodings.Web
 
@@ -72,13 +72,13 @@
                     @{
                         var firstUrl = htmlEncoder.Encode(BuildUrl(1));
                     }
-                    <a class="page-link" href="@Html.Raw(firstUrl)">First</a>
+                    <a class="page-link" href="@Html.Raw(firstUrl)" data-list-page="true" data-page="1">First</a>
                 </li>
                 <li class="page-item @(currentPage == 1 ? "disabled" : string.Empty)">
                     @{
                         var previousUrl = htmlEncoder.Encode(BuildUrl(System.Math.Max(1, currentPage - 1)));
                     }
-                    <a class="page-link" href="@Html.Raw(previousUrl)">Previous</a>
+                    <a class="page-link" href="@Html.Raw(previousUrl)" data-list-page="true" data-page="@(System.Math.Max(1, currentPage - 1))">Previous</a>
                 </li>
                 @for (var pageNumber = start; pageNumber <= end; pageNumber++)
                 {
@@ -86,20 +86,20 @@
                         @{
                             var pageUrl = htmlEncoder.Encode(BuildUrl(pageNumber));
                         }
-                        <a class="page-link" href="@Html.Raw(pageUrl)">@pageNumber</a>
+                        <a class="page-link" href="@Html.Raw(pageUrl)" data-list-page="true" data-page="@pageNumber">@pageNumber</a>
                     </li>
                 }
                 <li class="page-item @(currentPage == totalPages ? "disabled" : string.Empty)">
                     @{
                         var nextUrl = htmlEncoder.Encode(BuildUrl(System.Math.Min(totalPages, currentPage + 1)));
                     }
-                    <a class="page-link" href="@Html.Raw(nextUrl)">Next</a>
+                    <a class="page-link" href="@Html.Raw(nextUrl)" data-list-page="true" data-page="@(System.Math.Min(totalPages, currentPage + 1))">Next</a>
                 </li>
                 <li class="page-item @(currentPage == totalPages ? "disabled" : string.Empty)">
                     @{
                         var lastUrl = htmlEncoder.Encode(BuildUrl(totalPages));
                     }
-                    <a class="page-link" href="@Html.Raw(lastUrl)">Last</a>
+                    <a class="page-link" href="@Html.Raw(lastUrl)" data-list-page="true" data-page="@totalPages">Last</a>
                 </li>
             </ul>
         </nav>

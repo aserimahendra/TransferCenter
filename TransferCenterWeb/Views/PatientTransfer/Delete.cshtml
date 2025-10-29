@@ -1,0 +1,43 @@
+@model TransferCenterWeb.Models.PatientTransferRequest
+
+@{
+    Layout = "_ModalLayout";
+    ViewData["Title"] = "Delete Patient Transfer";
+    var transferInfo = Model?.PatientTransferInfo;
+    var transferDateDisplay = transferInfo == null
+        ? string.Empty
+        : transferInfo.TransferDate.ToString("MM/dd/yyyy");
+}
+
+<form asp-action="Delete" asp-route-id="@Model?.Id" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+
+    <div class="shadow-sm mb-4 border-0 rounded-4 overflow-hidden">
+        <div class="bg-light p-4">
+            <div class="alert alert-warning" role="alert">
+                <div class="fw-semibold mb-1">This action cannot be undone.</div>
+                <div>Are you sure you want to delete the transfer for <strong>@(transferInfo?.CaseMgrSwRn ?? "this patient")</strong>?</div>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-5">Case Manager/SW/RN</dt>
+                <dd class="col-sm-7">@transferInfo?.CaseMgrSwRn</dd>
+
+                <dt class="col-sm-5">Transfer Date</dt>
+                <dd class="col-sm-7">@transferDateDisplay</dd>
+
+                <dt class="col-sm-5">MR</dt>
+                <dd class="col-sm-7">@transferInfo?.MR</dd>
+
+                <dt class="col-sm-5">Requesting Facility</dt>
+                <dd class="col-sm-7">@transferInfo?.RequestingFacility</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" data-modal-dismiss="cancel">Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>

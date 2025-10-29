@@ -6,7 +6,6 @@ public class AdditionalInfo : AuditLogMeta
     [Key]
     public long Id { get; set; }
     public Guid UId { get; set; }
-    
     public short TransferType { get; set; }
     public bool ServicesAvailable { get; set; }
     public bool SitterRequired { get; set; }
@@ -25,8 +24,8 @@ public class AdditionalInfo : AuditLogMeta
     public short MedicationList { get; set; }
     public short TreatmentsAndProceduresInED { get; set; }
     public short InsuranceAuthorization { get; set; }
-    public string OtherNotes { get; set; }
-    public string CodeStatus { get; set; }
+    public string? OtherNotes { get; set; }
+    public string? CodeStatus { get; set; }
 
     public short LifeImageUploadRequested { get; set; }
 
@@ -58,11 +57,11 @@ public class AdditionalInfo : AuditLogMeta
 
     public bool MultiDrugResistantInfection { get; set; }
 
-    public string Microorganisms { get; set; }
+    public string? Microorganisms { get; set; }
 
     public bool CommunicableDisease { get; set; }
 
-    public string DiseaseConditions { get; set; }
+    public string? DiseaseConditions { get; set; }
     
     public short LabResultsStatus { get; set; }
 

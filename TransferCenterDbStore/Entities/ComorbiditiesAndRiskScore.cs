@@ -7,6 +7,7 @@ public class ComorbiditiesAndRiskScore : AuditLogMeta
     [Key]
     public long Id { get; set; }
     public bool None { get; set; }
+    public Guid UId { get; set; }
     public bool StrokeTIA { get; set; }
     public bool CHF { get; set; }
     public bool CKD_ESRD { get; set; }

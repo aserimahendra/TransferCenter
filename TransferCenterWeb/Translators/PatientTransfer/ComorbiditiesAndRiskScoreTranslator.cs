@@ -36,7 +36,9 @@ public static class ComorbiditiesAndRiskScoreTranslator
             RecentSurgeryAtUCI = source.RecentSurgeryAtUCI,
             RecentSurgeryOutsideUCI = source.RecentSurgeryOutsideUCI,
             TotalPoints = GetValueOrDefault(source.TotalPoints),
-            IsActive = source.IsActive
+            IsActive = source.IsActive,
+            Id = source.Id,
+            UId = source.Uid
         };
     }
 
@@ -46,7 +48,8 @@ public static class ComorbiditiesAndRiskScoreTranslator
 
         return new TransferCenterCore.Models.ComorbiditiesAndRiskScore
         {
-            
+            Id = source.Id,
+            Uid = guid,
             None = source.None,
             StrokeTIA = source.StrokeTIA,
             CHF = source.CHF,

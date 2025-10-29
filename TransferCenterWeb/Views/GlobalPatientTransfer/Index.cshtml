@@ -1,17 +1,36 @@
-﻿@model IEnumerable<TransferCenterWeb.Models.GlobalPatientTransfer.GlobalPatientTransferRequest>
+﻿@{
+    ViewData["Title"] = "Global Patient Transfer Request";
 
+    var baseListUrl = Url.Action("TransferList", "GlobalPatientTransfer");
+    var queryString = ViewContext.HttpContext.Request.QueryString.HasValue
+        ? ViewContext.HttpContext.Request.QueryString.Value
+        : string.Empty;
+    var listUrl = string.IsNullOrEmpty(queryString)
+        ? baseListUrl
+        : string.Concat(baseListUrl, queryString);
+}
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <!-- Left: Page Title -->
     <h2 class="mb-0 text-center text-kpc">Global Patient Transfer Report</h2>
 </div>
 
-
 <section class="container-fluid">
-
-    @{
-        var details = Model.ToList().Select(x => x.PatientTransferInfo).ToList();
-        @await Html.PartialAsync("PatientTransferList", details)
-    }
-
+    <div data-modal-list
+         data-list-url="@listUrl"
+         data-modal-id="appModal"
+         data-modal-title-id="appModalLabel"
+         data-modal-frame-id="appModalFrame"
+         data-loader-id="appListLoader"
+         data-alert-id="appListAlert"
+         data-alert-text-id="appListAlertText"
+         data-success-message="Global transfer saved successfully."
+         data-load-on-init="true">
+        <div data-list-container>
+            <div class="py-5 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

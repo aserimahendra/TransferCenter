@@ -3,7 +3,7 @@ namespace TransferCenterCore.Models;
 public class ComorbiditiesAndRiskScore : AuditLogMeta
 {
     public long Id { get; set; }
-    public long Guid{ get; set; }
+    public Guid Uid{ get; set; }
     public bool None { get; set; }
     public bool StrokeTIA { get; set; }
     public bool CHF { get; set; }

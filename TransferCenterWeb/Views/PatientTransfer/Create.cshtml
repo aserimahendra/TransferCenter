@@ -1,42 +1,43 @@
 ﻿@model TransferCenterWeb.Models.PatientTransferRequest
 
-<h2 class="mb-4 text-warning text-center text-kpc">KPC Global Transfer Request</h2>
+@{
+    Layout = "_ModalLayout";
+    ViewData["Title"] = "Create Patient Transfer";
+}
 
-<form asp-action="Create" method="post" class="needs-validation"  novalidate>
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
     @Html.AntiForgeryToken()
 
-    <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-            Transferring Facility Information
-        </div>
-        <div class="card-body">
-            @Html.EditorFor(m => m.PatientTransferInfo, "EditorTemplates/PatientTransferInfo")
+    <div class="shadow-sm mb-5 border-0 rounded-4 overflow-hidden">
+        <div class="bg-light p-4">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
+                @Html.EditorFor(m => m.PatientTransferInfo, "EditorTemplates/PatientTransferInfo")
+            </section>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
+                @Html.EditorFor(m => m.PatientDetails, "EditorTemplates/PatientDetails")
+            </section>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
+                @Html.EditorFor(mbox => mbox.ComorbiditiesAndRiskScore, "EditorTemplates/ComorbiditiesAndRiskScore")
+            </section>
+
+            <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 shadow-sm">
+                @Html.EditorFor(mbox => mbox.AdditionalInfo, "EditorTemplates/AdditionalInfo")
+            </section>
         </div>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-header bg-secondary text-white">
-            Patient Information
-        </div>
-        <div class="card-body">
-            @Html.EditorFor(m => m.PatientDetails, "EditorTemplates/PatientDetails")
+    <div class="position-sticky bottom-0 start-0 end-0 bg-white border-top border-3 border-primary shadow-sm py-3 px-3" style="z-index: 10;">
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary px-4 js-modal-cancel" data-modal-dismiss="cancel">Cancel</button>
+            <button type="submit" class="btn btn-success px-4">Submit Request</button>
         </div>
     </div>
-
-    <div class="card mb-4">
-        <div class="card-header bg-dark text-white">
-            Additional information
-        </div>
-        <div class="card-body">
-            @Html.EditorFor(mbox => mbox.AdditionalInfo, "EditorTemplates/AdditionalInfo")
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success">Submit</button>
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

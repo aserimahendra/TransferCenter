@@ -2,126 +2,142 @@
 
 @Html.HiddenFor(m => m.Id)
 @Html.HiddenFor(m => m.UId)
+@Html.HiddenFor(m => m.IsActive)
 
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-<!-- Case Manager / Call Time -->
-<div class="row mb-3">
-    <div class="col-md-6">
-        <label asp-for="CaseMgrSwRn" class="form-label"></label>
-        <input asp-for="CaseMgrSwRn" class="form-control" />
-        <span asp-validation-for="CaseMgrSwRn" class="text-danger"></span>
-    </div>
-    <div class="col-md-3">
-        <label asp-for="TransferDate" class="form-label"></label>
-        <input asp-for="TransferDate" class="form-control" type="date" />
-        <span asp-validation-for="TransferDate" class="text-danger"></span>
-    </div>
-    <div class="col-md-3">
-        <label asp-for="MR" class="form-label"></label>
-        <input asp-for="MR" class="form-control" type="number" />
-        <span asp-validation-for="MR" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- Primary Caller -->
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label asp-for="PrimaryCallerName" class="form-label"></label>
-        <input asp-for="PrimaryCallerName" class="form-control" />
-        <span asp-validation-for="PrimaryCallerName" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="PhoneNumber" class="form-label"></label>
-        <input asp-for="PhoneNumber" class="form-control" type="tel" />
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="FaxNumber" class="form-label"></label>
-        <input asp-for="FaxNumber" class="form-control" type="tel" />
-        <span asp-validation-for="FaxNumber" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- Secondary Caller -->
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label asp-for="SecondaryCallerName" class="form-label"></label>
-        <input asp-for="SecondaryCallerName" class="form-control" />
-        <span asp-validation-for="SecondaryCallerName" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="SecondPhoneNumber" class="form-label"></label>
-        <input asp-for="SecondPhoneNumber" class="form-control" type="tel" />
-        <span asp-validation-for="SecondPhoneNumber" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="SecondFaxNumber" class="form-label"></label>
-        <input asp-for="SecondFaxNumber" class="form-control" type="tel" />
-        <span asp-validation-for="SecondFaxNumber" class="text-danger"></span>
-    </div>
-</div>
-
-<!-- Facility & HLOC -->
-<div class="row mb-3">
-    <div class="col-md-6">
-        <label asp-for="RequestingFacility" class="form-label"></label>
-        <input asp-for="RequestingFacility" class="form-control" />
-        <span asp-validation-for="RequestingFacility" class="text-danger"></span>
-    </div>
-    <div class="col-md-3">
-        <div class="form-check mt-4">
-            <input class="form-check-input" asp-for="IsHloc" />
-            <label class="form-check-label" asp-for="IsHloc"></label>
+<div class="card mb-4">
+    <div class="card-header fw-semibold text-uppercase small">Transferring Facility Information</div>
+    <div class="card-body">
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-5">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.CaseMgrSwRn)">@Html.DisplayNameFor(m => m.CaseMgrSwRn)</label>
+                @Html.TextBoxFor(m => m.CaseMgrSwRn, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CaseMgrSwRn, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.TransferDate)">@Html.DisplayNameFor(m => m.TransferDate)</label>
+                @Html.TextBoxFor(
+                    m => m.TransferDate,
+                    "{0:MM/dd/yyyy}",
+                    new {
+                        @class = "form-control date-us",
+                        type = "text",
+                        placeholder = "MM/DD/YYYY",
+                        inputmode = "numeric",
+                        maxlength = "10",
+                        autocomplete = "off"
+                    })
+                @Html.ValidationMessageFor(m => m.TransferDate, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.MR)">@Html.DisplayNameFor(m => m.MR)</label>
+                @Html.TextBoxFor(m => m.MR, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(m => m.MR, "", new { @class = "text-danger small" })
+            </div>
         </div>
-        <span asp-validation-for="IsHloc" class="text-danger"></span>
-    </div>
-    <div class="col-md-3"></div>
-</div>
 
-<!-- Referring MD -->
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label asp-for="ReferringMd" class="form-label"></label>
-        <input asp-for="ReferringMd" class="form-control" />
-        <span asp-validation-for="ReferringMd" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="ReferringMdPhone" class="form-label"></label>
-        <input asp-for="ReferringMdPhone" class="form-control" type="tel" />
-        <span asp-validation-for="ReferringMdPhone" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="ReferringSpecialist" class="form-label"></label>
-        <input asp-for="ReferringSpecialist" class="form-control" />
-        <span asp-validation-for="ReferringSpecialist" class="text-danger"></span>
-    </div>
-</div>
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.PrimaryCallerName)">@Html.DisplayNameFor(m => m.PrimaryCallerName)</label>
+                @Html.TextBoxFor(m => m.PrimaryCallerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PrimaryCallerName, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.PhoneNumber)">@Html.DisplayNameFor(m => m.PhoneNumber)</label>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.FaxNumber)">@Html.DisplayNameFor(m => m.FaxNumber)</label>
+                @Html.TextBoxFor(m => m.FaxNumber, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.FaxNumber, "", new { @class = "text-danger small" })
+            </div>
+        </div>
 
-<!-- Specialist Contact -->
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label asp-for="ReferringSpecialistPhone" class="form-label"></label>
-        <input asp-for="ReferringSpecialistPhone" class="form-control" type="tel" />
-        <span asp-validation-for="ReferringSpecialistPhone" class="text-danger"></span>
-    </div>
-</div>
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.SecondaryCallerName)">@Html.DisplayNameFor(m => m.SecondaryCallerName)</label>
+                @Html.TextBoxFor(m => m.SecondaryCallerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SecondaryCallerName, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.SecondPhoneNumber)">@Html.DisplayNameFor(m => m.SecondPhoneNumber)</label>
+                @Html.TextBoxFor(m => m.SecondPhoneNumber, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.SecondPhoneNumber, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.SecondFaxNumber)">@Html.DisplayNameFor(m => m.SecondFaxNumber)</label>
+                @Html.TextBoxFor(m => m.SecondFaxNumber, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.SecondFaxNumber, "", new { @class = "text-danger small" })
+            </div>
+        </div>
 
-<!-- Admit Details -->
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label asp-for="AdmitDate" class="form-label"></label>
-        <input asp-for="AdmitDate" class="form-control" type="date" />
-        <span asp-validation-for="AdmitDate" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="Unit" class="form-label"></label>
-        <input asp-for="Unit" class="form-control" />
-        <span asp-validation-for="Unit" class="text-danger"></span>
-    </div>
-    <div class="col-md-4">
-        <label asp-for="UnitPhone" class="form-label"></label>
-        <input asp-for="UnitPhone" class="form-control" type="tel" />
-        <span asp-validation-for="UnitPhone" class="text-danger"></span>
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-8">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.RequestingFacility)">@Html.DisplayNameFor(m => m.RequestingFacility)</label>
+                @Html.TextBoxFor(m => m.RequestingFacility, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RequestingFacility, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.IsHloc, new { @class = "form-check-input" })
+                    <label class="form-check-label fw-semibold text-danger text-uppercase small" for="@Html.IdFor(m => m.IsHloc)">@Html.DisplayNameFor(m => m.IsHloc)</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.IsHloc, "", new { @class = "text-danger small ms-3" })
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-8 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.ReferringMd)">@Html.DisplayNameFor(m => m.ReferringMd)</label>
+                @Html.TextBoxFor(m => m.ReferringMd, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringMd, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.ReferringMdPhone)">@Html.DisplayNameFor(m => m.ReferringMdPhone)</label>
+                @Html.TextBoxFor(m => m.ReferringMdPhone, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.ReferringMdPhone, "", new { @class = "text-danger small" })
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-8 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.ReferringSpecialist)">@Html.DisplayNameFor(m => m.ReferringSpecialist)</label>
+                @Html.TextBoxFor(m => m.ReferringSpecialist, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringSpecialist, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.ReferringSpecialistPhone)">@Html.DisplayNameFor(m => m.ReferringSpecialistPhone)</label>
+                @Html.TextBoxFor(m => m.ReferringSpecialistPhone, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.ReferringSpecialistPhone, "", new { @class = "text-danger small" })
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-end mt-3">
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.AdmitDate)">@Html.DisplayNameFor(m => m.AdmitDate)</label>
+                @Html.TextBoxFor(
+                    m => m.AdmitDate,
+                    "{0:MM/dd/yyyy}",
+                    new {
+                        @class = "form-control date-us",
+                        type = "text",
+                        placeholder = "MM/DD/YYYY",
+                        inputmode = "numeric",
+                        maxlength = "10",
+                        autocomplete = "off"
+                    })
+                @Html.ValidationMessageFor(m => m.AdmitDate, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.Unit)">@Html.DisplayNameFor(m => m.Unit)</label>
+                @Html.TextBoxFor(m => m.Unit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Unit, "", new { @class = "text-danger small" })
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label fw-semibold" for="@Html.IdFor(m => m.UnitPhone)">@Html.DisplayNameFor(m => m.UnitPhone)</label>
+                @Html.TextBoxFor(m => m.UnitPhone, new { @class = "form-control", type = "tel" })
+                @Html.ValidationMessageFor(m => m.UnitPhone, "", new { @class = "text-danger small" })
+            </div>
+        </div>
     </div>
 </div>

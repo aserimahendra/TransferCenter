@@ -23,5 +23,7 @@ public interface IUserService
     string GetLoginIdByEmail(string email);
 
     public Task<(IEnumerable<User> Users,int TotalCount)> GetAllUsersAsync(int page, int pageSize);
+    
+    
         
 }

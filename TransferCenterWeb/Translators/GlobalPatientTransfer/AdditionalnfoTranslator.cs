@@ -1,4 +1,5 @@
 ﻿using System;
+using TransferCenterCore.Context;
 using TransferCenterWeb.Models;
 
 namespace TransferCenter.Translators;
@@ -6,14 +7,15 @@ namespace TransferCenter.Translators;
 public static class AdditionalInfoTranslator
 {
     // Web to Core
-    public static TransferCenterCore.Models.AdditionalInfo ToCoreModel(this TransferCenterWeb.Models.GlobalPatientTransfer.AdditionalInfo source, Guid guid)
+    public static TransferCenterCore.Models.AdditionalInfo ToCoreModel(
+        this TransferCenterWeb.Models.GlobalPatientTransfer.AdditionalInfo source, Guid guid)
     {
         if (source == null) return null!;
 
         return new TransferCenterCore.Models.AdditionalInfo
         {
             Id = source.Id,
-            UId= guid,
+            UId = guid,
             ServicesAvailable = source.ServicesAvailable,
             SitterRequired = source.SitterRequired,
             VTIBDrips = source.VTIBDrips,
@@ -34,12 +36,13 @@ public static class AdditionalInfoTranslator
             OtherNotes = source.OtherNotes,
             CodeStatus = source.CodeStatus,
             IsActive = source.IsActive,
-            TransferType = (short)TransferType.GlobalPatientTransfer
+            TransferType = (short)TransferType.GlobalPatientTransfer,
         };
     }
 
     // Core to Web
-    public static TransferCenterWeb.Models.GlobalPatientTransfer.AdditionalInfo ToWebModel(this TransferCenterCore.Models.AdditionalInfo source)
+    public static TransferCenterWeb.Models.GlobalPatientTransfer.AdditionalInfo ToWebModel(
+        this TransferCenterCore.Models.AdditionalInfo source)
     {
         if (source == null) return null!;
 

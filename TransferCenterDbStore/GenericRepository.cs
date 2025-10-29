@@ -60,7 +60,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
     {
-        return await _entitiySet.FirstOrDefaultAsync(expression, cancellationToken);
+        try
+        {
+            var data = await _entitiySet.FirstOrDefaultAsync(expression, cancellationToken);
+            return data;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public void Remove(T entity)
