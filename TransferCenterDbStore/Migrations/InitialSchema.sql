@@ -177,12 +177,12 @@ CREATE TABLE [PatientTransferInfo] (
 
 CREATE TABLE [User] (
     [UserId] bigint NOT NULL IDENTITY,
-    [FirstName] varchar(200) NOT NULL,
-    [LastName] varchar(200) NOT NULL,
-    [EmailId] varchar(200) NOT NULL,
+    [FirstName] varchar(100) NOT NULL,
+    [LastName] varchar(100) NOT NULL,
+    [EmailId] varchar(100) NOT NULL,
     [Password] varchar(200) NULL,
     [DomainID] varchar(200) NOT NULL,
-    [LoginId] varchar(200) NOT NULL,
+    [LoginId] varchar(100) NOT NULL,
     [Role] smallint NOT NULL,
     [IsActive] bit NOT NULL,
     [CreatedBy] varchar(200) NOT NULL,
