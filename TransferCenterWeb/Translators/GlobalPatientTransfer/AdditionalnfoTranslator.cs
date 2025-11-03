@@ -37,6 +37,9 @@ public static class AdditionalInfoTranslator
             CodeStatus = source.CodeStatus,
             IsActive = source.IsActive,
             TransferType = (short)TransferType.GlobalPatientTransfer,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
         };
     }
 
@@ -69,7 +72,11 @@ public static class AdditionalInfoTranslator
             InsuranceAuthorization = (TransferCenterWeb.Models.DocumentStatus)source.InsuranceAuthorization,
             OtherNotes = source.OtherNotes,
             CodeStatus = source.CodeStatus,
-            IsActive = source.IsActive
+            IsActive = source.IsActive,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
+
         };
     }
 }

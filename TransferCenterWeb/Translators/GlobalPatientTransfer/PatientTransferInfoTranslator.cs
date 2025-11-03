@@ -25,7 +25,10 @@ public static class PatientTransferInfoTranslator
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
             IsActive = source.IsActive,
-            TransferType = (short)Models.TransferType.GlobalPatientTransfer
+            TransferType = (short)Models.TransferType.GlobalPatientTransfer,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
         };
     }
 
@@ -50,7 +53,10 @@ public static class PatientTransferInfoTranslator
             AdmitDate = source.AdmitDate,
             Unit = source.Unit,
             UnitPhone = source.UnitPhone,
-            IsActive = source.IsActive
+            IsActive = source.IsActive,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
         };
     }
 }

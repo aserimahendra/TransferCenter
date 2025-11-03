@@ -25,7 +25,11 @@ public static class PatientDetailsTranslator
             HLOC = patientDetails.HLOC,
             PatientInsurance = patientDetails.PatientInsurance,
             IsActive = patientDetails.IsActive,
-            TransferType = (short)Models.TransferType.GlobalPatientTransfer
+            TransferType = (short)Models.TransferType.GlobalPatientTransfer,
+            CreatedBy = patientDetails.CreatedBy,
+            CreatedOn = patientDetails.CreatedOn,
+            LastUpdatedOn = patientDetails.LastUpdatedOn
+            
         };
     }
     public static TransferCenterWeb.Models.GlobalPatientTransfer.PatientDetails ToWebModel(this TransferCenterCore.Models.PatientDetails coreModel)
@@ -50,7 +54,11 @@ public static class PatientDetailsTranslator
             Lateral = coreModel.Lateral,
             HLOC = coreModel.HLOC,
             PatientInsurance = coreModel.PatientInsurance,
-            IsActive = coreModel.IsActive
+            IsActive = coreModel.IsActive,
+            CreatedBy = coreModel.CreatedBy,
+            CreatedOn = coreModel.CreatedOn,
+            LastUpdatedOn = coreModel.LastUpdatedOn
+
         };
     }
 }

@@ -1,224 +1,220 @@
-﻿IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
-BEGIN
-    CREATE TABLE [__EFMigrationsHistory] (
-        [MigrationId] nvarchar(150) NOT NULL,
-        [ProductVersion] nvarchar(32) NOT NULL,
-        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
-    );
-END;
-GO
+﻿create database TransferCenter collate SQL_Latin1_General_CP1_CI_AS
+go
 
-BEGIN TRANSACTION;
-CREATE TABLE [AdditionalInfo] (
-    [Id] bigint NOT NULL IDENTITY,
-    [UId] uniqueidentifier NOT NULL,
-    [TransferType] smallint NOT NULL,
-    [ServicesAvailable] bit NOT NULL,
-    [SitterRequired] bit NOT NULL,
-    [VTIBDrips] bit NOT NULL,
-    [Dialysis] bit NOT NULL,
-    [PFCTTransfer] bit NOT NULL,
-    [CovidWithin3Days] bit NOT NULL,
-    [FaceSheet] smallint NOT NULL,
-    [HAndP] smallint NOT NULL,
-    [CovidTestResults] smallint NOT NULL,
-    [TransferOrder] smallint NOT NULL,
-    [ProgressNotes] smallint NOT NULL,
-    [ConsultationNotes] smallint NOT NULL,
-    [MostRecentLabResults] smallint NOT NULL,
-    [RadiologyResults] smallint NOT NULL,
-    [MedicationList] smallint NOT NULL,
-    [TreatmentsAndProceduresInED] smallint NOT NULL,
-    [InsuranceAuthorization] smallint NOT NULL,
-    [OtherNotes] varchar(2000) NOT NULL,
-    [CodeStatus] varchar(200) NOT NULL,
-    [LifeImageUploadRequested] smallint NOT NULL,
-    [SendingFacilityUnableToUseLifeImage] smallint NOT NULL,
-    [ColdOrFluSymptoms] bit NOT NULL,
-    [NewRashUnknownCause] bit NOT NULL,
-    [ContactWithCovidPositive] bit NOT NULL,
-    [DiagnosedCovidOrPositiveLab] bit NOT NULL,
-    [CovidDiagnosisDates] datetime2 NULL,
-    [SickHouseholdMembers] bit NOT NULL,
-    [ExposedToMeasles] bit NOT NULL,
-    [TraveledOutsideUS] bit NOT NULL,
-    [TraveledArabianPeninsula] bit NOT NULL,
-    [TraveledAfrica] bit NOT NULL,
-    [HasRespiratoryIllnessAfterTravel] bit NOT NULL,
-    [AdmittedToKindredHospital] bit NOT NULL,
-    [MultiDrugResistantInfection] bit NOT NULL,
-    [Microorganisms] varchar(500) NOT NULL,
-    [CommunicableDisease] bit NOT NULL,
-    [DiseaseConditions] varchar(500) NOT NULL,
-    [LabResultsStatus] smallint NOT NULL,
-    [DiagnosticsStatus] smallint NOT NULL,
-    [MedicationListStatus] smallint NOT NULL,
-    [IsActive] bit NOT NULL,
-    [CreatedBy] varchar(200) NOT NULL,
-    [CreatedOn] datetime2 NOT NULL,
-    [LastUpdatedOn] datetime2 NULL,
-    CONSTRAINT [PK_AdditionalInfo] PRIMARY KEY ([Id])
-);
+grant connect on database :: TransferCenter to dbo
+go
 
-CREATE TABLE [AuditLog] (
-    [Id] bigint NOT NULL IDENTITY,
-    [UserId] varchar(200) NOT NULL,
-    [ControllerName] varchar(200) NOT NULL,
-    [ActionName] varchar(200) NOT NULL,
-    [ActionType] varchar(200) NULL,
-    [RequestData] varchar(200) NULL,
-    [ResponseData] varchar(200) NULL,
-    [ExecutionStatus] varchar(200) NULL,
-    [ExecutionDate] datetime2 NOT NULL,
-    [ClientIp] varchar(200) NULL,
-    [Remarks] varchar(200) NULL,
-    CONSTRAINT [PK_AuditLog] PRIMARY KEY ([Id])
-);
+grant view any column encryption key definition, view any column master key definition on database :: TransferCenter to [public]
+go
 
-CREATE TABLE [ComorbiditiesAndRiskScores] (
-    [Id] bigint NOT NULL IDENTITY,
-    [UId] uniqueidentifier NOT NULL,
-    [None] bit NOT NULL,
-    [StrokeTIA] bit NOT NULL,
-    [CHF] bit NOT NULL,
-    [CKD_ESRD] bit NOT NULL,
-    [HTN] bit NOT NULL,
-    [DiabetesOrSkinIssues] bit NOT NULL,
-    [MI_Angina_CAD] bit NOT NULL,
-    [COPDOrRespiratoryFailure] bit NOT NULL,
-    [Ventilated] bit NOT NULL,
-    [PulmonaryHTN] bit NOT NULL,
-    [PulmonaryHTN_Prostacyclin] bit NOT NULL,
-    [ImmunocompromisedOrHIV] bit NOT NULL,
-    [PsychBackground] bit NOT NULL,
-    [NonCompliantWithCare] bit NOT NULL,
-    [UnableToPerformADLs] bit NOT NULL,
-    [DrugOrAlcoholDependence] bit NOT NULL,
-    [LymphomaLeukemiaCancer] bit NOT NULL,
-    [MalnutritionObesityDigestiveDisease] bit NOT NULL,
-    [UnconsciousOrALOC] bit NOT NULL,
-    [LOSMoreThan2Weeks] bit NOT NULL,
-    [OutOfServiceArea] bit NOT NULL,
-    [DNRCodeStatus] bit NOT NULL,
-    [CovidPositive] bit NOT NULL,
-    [RecentSurgeryAtUCI] bit NOT NULL,
-    [RecentSurgeryOutsideUCI] bit NOT NULL,
-    [TotalPoints] int NULL,
-    [Comorbidities] varchar(500) NULL,
-    [RiskScore] float NOT NULL,
-    [CreatedDate] datetime2 NOT NULL,
-    [UpdatedDate] datetime2 NOT NULL,
-    [IsActive] bit NOT NULL,
-    [CreatedBy] varchar(200) NOT NULL,
-    [CreatedOn] datetime2 NOT NULL,
-    [LastUpdatedOn] datetime2 NULL,
-    CONSTRAINT [PK_ComorbiditiesAndRiskScores] PRIMARY KEY ([Id])
-);
+create table dbo.AdditionalInfo
+(
+    Id                                  bigint identity
+        constraint PK_AdditionalInfo
+            primary key,
+    UId                                 uniqueidentifier not null,
+    TransferType                        smallint         not null,
+    ServicesAvailable                   bit              not null,
+    SitterRequired                      bit              not null,
+    VTIBDrips                           bit              not null,
+    Dialysis                            bit              not null,
+    PFCTTransfer                        bit              not null,
+    CovidWithin3Days                    bit              not null,
+    FaceSheet                           smallint         not null,
+    HAndP                               smallint         not null,
+    CovidTestResults                    smallint         not null,
+    TransferOrder                       smallint         not null,
+    ProgressNotes                       smallint         not null,
+    ConsultationNotes                   smallint         not null,
+    MostRecentLabResults                smallint         not null,
+    RadiologyResults                    smallint         not null,
+    MedicationList                      smallint         not null,
+    TreatmentsAndProceduresInED         smallint         not null,
+    InsuranceAuthorization              smallint         not null,
+    OtherNotes                          varchar(1000),
+    CodeStatus                          varchar(200),
+    LifeImageUploadRequested            smallint         not null,
+    SendingFacilityUnableToUseLifeImage smallint         not null,
+    ColdOrFluSymptoms                   bit              not null,
+    NewRashUnknownCause                 bit              not null,
+    ContactWithCovidPositive            bit              not null,
+    DiagnosedCovidOrPositiveLab         bit              not null,
+    CovidDiagnosisDates                 datetime2,
+    SickHouseholdMembers                bit              not null,
+    ExposedToMeasles                    bit              not null,
+    TraveledOutsideUS                   bit              not null,
+    TraveledArabianPeninsula            bit              not null,
+    TraveledAfrica                      bit              not null,
+    HasRespiratoryIllnessAfterTravel    bit              not null,
+    AdmittedToKindredHospital           bit              not null,
+    MultiDrugResistantInfection         bit              not null,
+    Microorganisms                      varchar(300),
+    CommunicableDisease                 bit              not null,
+    DiseaseConditions                   varchar(300),
+    LabResultsStatus                    smallint         not null,
+    DiagnosticsStatus                   smallint         not null,
+    MedicationListStatus                smallint         not null,
+    IsActive                            bit              not null,
+    CreatedBy                           varchar(100)    not null,
+    CreatedOn                           datetime2        not null,
+    LastUpdatedOn                       datetime2
+)
+    go
 
-CREATE TABLE [PatientDetails] (
-    [Id] bigint NOT NULL IDENTITY,
-    [UId] uniqueidentifier NOT NULL,
-    [TransferType] smallint NOT NULL,
-    [Name] varchar(200) NOT NULL,
-    [DOB] datetime2 NOT NULL,
-    [Gender] smallint NOT NULL,
-    [IsIsolation] bit NOT NULL,
-    [IsolationType] varchar(200) NOT NULL,
-    [Height] float NOT NULL,
-    [Weight] float NOT NULL,
-    [Diagnosis] varchar(200) NOT NULL,
-    [LevelOfCareNeeded] varchar(200) NULL,
-    [AcceptingPhysician] varchar(200) NULL,
-    [ReasonForTransfer] varchar(1000) NULL,
-    [Lateral] bit NOT NULL,
-    [HLOC] bit NOT NULL,
-    [PatientInsurance] varchar(200) NULL,
-    [CodeStatus] varchar(200) NULL,
-    [Sitter] bit NOT NULL,
-    [JehovahWitness] bit NOT NULL,
-    [Capitated] bit NOT NULL,
-    [GCS] varchar(200) NULL,
-    [WeightIn] smallint NOT NULL,
-    [IsActive] bit NOT NULL,
-    [CreatedBy] varchar(200) NOT NULL,
-    [CreatedOn] datetime2 NOT NULL,
-    [LastUpdatedOn] datetime2 NULL,
-    CONSTRAINT [PK_PatientDetails] PRIMARY KEY ([Id])
-);
+create table dbo.AuditLog
+(
+    Id              bigint identity
+        constraint PK_AuditLog
+            primary key,
+    UserId          varchar(100) not null,
+    ControllerName  varchar(100) not null,
+    ActionName      varchar(50) not null,
+    ActionType      varchar(50),
+    RequestData     varchar(500),
+    ResponseData    varchar(500),
+    ExecutionStatus varchar(50),
+    ExecutionDate   datetime2     not null,
+    ClientIp        varchar(30),
+    Remarks         varchar(200)
+)
+    go
 
-CREATE TABLE [PatientTransferInfo] (
-    [Id] bigint NOT NULL IDENTITY,
-    [UId] uniqueidentifier NOT NULL,
-    [TransferType] smallint NOT NULL,
-    [CaseMgrSwRn] varchar(200) NOT NULL,
-    [PhoneNumber] varchar(200) NOT NULL,
-    [FaxNumber] varchar(200) NOT NULL,
-    [RequestingFacility] varchar(200) NOT NULL,
-    [TransferDate] datetime2 NOT NULL,
-    [ReferringMd] varchar(200) NOT NULL,
-    [ReferringMdPhone] varchar(200) NOT NULL,
-    [ReferringSpecialistPhone] varchar(200) NOT NULL,
-    [ReferringSpecialist] varchar(200) NOT NULL,
-    [AdmitDate] datetime2 NOT NULL,
-    [Unit] varchar(200) NOT NULL,
-    [UnitPhone] varchar(200) NOT NULL,
-    [IsHloc] bit NOT NULL,
-    [MR] int NULL,
-    [SecondPhoneNumber] varchar(200) NULL,
-    [SecondFaxNumber] varchar(200) NULL,
-    [PrimaryCallerName] varchar(200) NULL,
-    [SecondaryCallerName] varchar(200) NULL,
-    [IsActive] bit NOT NULL,
-    [CreatedBy] varchar(200) NOT NULL,
-    [CreatedOn] datetime2 NOT NULL,
-    [LastUpdatedOn] datetime2 NULL,
-    CONSTRAINT [PK_PatientTransferInfo] PRIMARY KEY ([Id])
-);
+create table dbo.ComorbiditiesAndRiskScores
+(
+    Id                                  bigint identity
+        constraint PK_ComorbiditiesAndRiskScores
+            primary key,
+    None                                bit              not null,
+    StrokeTIA                           bit              not null,
+    CHF                                 bit              not null,
+    CKD_ESRD                            bit              not null,
+    HTN                                 bit              not null,
+    DiabetesOrSkinIssues                bit              not null,
+    MI_Angina_CAD                       bit              not null,
+    COPDOrRespiratoryFailure            bit              not null,
+    Ventilated                          bit              not null,
+    PulmonaryHTN                        bit              not null,
+    PulmonaryHTN_Prostacyclin           bit              not null,
+    ImmunocompromisedOrHIV              bit              not null,
+    PsychBackground                     bit              not null,
+    NonCompliantWithCare                bit              not null,
+    UnableToPerformADLs                 bit              not null,
+    DrugOrAlcoholDependence             bit              not null,
+    LymphomaLeukemiaCancer              bit              not null,
+    MalnutritionObesityDigestiveDisease bit              not null,
+    UnconsciousOrALOC                   bit              not null,
+    LOSMoreThan2Weeks                   bit              not null,
+    OutOfServiceArea                    bit              not null,
+    DNRCodeStatus                       bit              not null,
+    CovidPositive                       bit              not null,
+    RecentSurgeryAtUCI                  bit              not null,
+    RecentSurgeryOutsideUCI             bit              not null,
+    TotalPoints                         int,
+    Comorbidities                       varchar(300),
+    RiskScore                           float            not null,
+    CreatedDate                         datetime2        not null,
+    UpdatedDate                         datetime2        not null,
+    IsActive                            bit              not null,
+    CreatedBy                           varchar(100)    not null,
+    CreatedOn                           datetime2        not null,
+    LastUpdatedOn                       datetime2,
+    UId                                 uniqueidentifier not null
+)
+    go
 
-CREATE TABLE [User] (
-    [UserId] bigint NOT NULL IDENTITY,
-    [FirstName] varchar(100) NOT NULL,
-    [LastName] varchar(100) NOT NULL,
-    [EmailId] varchar(100) NOT NULL,
-    [Password] varchar(200) NULL,
-    [DomainID] varchar(200) NOT NULL,
-    [LoginId] varchar(100) NOT NULL,
-    [Role] smallint NOT NULL,
-    [IsActive] bit NOT NULL,
-    [CreatedBy] varchar(200) NOT NULL,
-    [CreatedOn] datetime2 NOT NULL,
-    [LastUpdatedOn] datetime2 NULL,
-    CONSTRAINT [PK_User] PRIMARY KEY ([UserId])
-);
+create table dbo.PatientDetails
+(
+    Id                 bigint identity
+        constraint PK_PatientDetails
+            primary key,
+    UId                uniqueidentifier not null,
+    TransferType       smallint         not null,
+    Name               varchar(200)    not null,
+    DOB                datetime2        not null,
+    Gender             smallint         not null,
+    IsIsolation        bit              not null,
+    IsolationType      varchar(200)    not null,
+    Height             float            not null,
+    Weight             float            not null,
+    Diagnosis          varchar(200)    not null,
+    LevelOfCareNeeded  varchar(200),
+    AcceptingPhysician varchar(200),
+    ReasonForTransfer  nvarchar(max),
+    Lateral            bit              not null,
+    HLOC               bit              not null,
+    PatientInsurance   varchar(1000),
+    CodeStatus         varchar(200),
+    Sitter             bit              not null,
+    JehovahWitness     bit              not null,
+    Capitated          bit              not null,
+    GCS                varchar(200),
+    WeightIn           smallint         not null,
+    IsActive           bit              not null,
+    CreatedBy          varchar(100)    not null,
+    CreatedOn          datetime2        not null,
+    LastUpdatedOn      datetime2
+)
+    go
 
-INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20251028190438_InitialSchema', N'9.0.9');
+create table dbo.PatientTransferInfo
+(
+    Id                       bigint identity
+        constraint PK_PatientTransferInfo
+            primary key,
+    UId                      uniqueidentifier not null,
+    TransferType             smallint         not null,
+    CaseMgrSwRn              varchar(200)    not null,
+    PhoneNumber              varchar(15)    not null,
+    FaxNumber                varchar(15)    not null,
+    RequestingFacility       varchar(200)    not null,
+    TransferDate             datetime2        not null,
+    ReferringMd              varchar(200)    not null,
+    ReferringMdPhone         varchar(15)    not null,
+    ReferringSpecialistPhone varchar(15)    not null,
+    ReferringSpecialist      varchar(200)    not null,
+    AdmitDate                datetime2        not null,
+    Unit                     varchar(200)    not null,
+    UnitPhone                varchar(200)    not null,
+    IsHloc                   bit              not null,
+    MR                       int,
+    SecondPhoneNumber        varchar(15),
+    SecondFaxNumber          varchar(15),
+    PrimaryCallerName        varchar(200),
+    SecondaryCallerName      varchar(200),
+    IsActive                 bit              not null,
+    CreatedBy                varchar(100)    not null,
+    CreatedOn                datetime2        not null,
+    LastUpdatedOn            datetime2
+)
+    go
 
-COMMIT;
-GO
+create table dbo.[User]
+(
+    UserId        bigint identity
+    constraint PK_tblUser
+    primary key,
+    FirstName     varchar(100)                not null,
+    LastName      varchar(100)                not null,
+    EmailId       varchar(100)                not null,
+    IsActive      bit
+    constraint DF_User_IsActive default 1 not null,
+    DomainID      varchar(100),
+    LoginId       varchar(100)                not null,
+    Password      varchar(100),
+    CreatedOn     datetime                    not null,
+    Role          smallint
+    constraint DF_User_Role default 0     not null,
+    LastUpdatedOn datetime,
+    CreatedBy     varchar(100)                not null
+    )
+    go
 
--- Migration: add Role column to User table if not exists
--- Adds a SMALLINT column named Role with default 0
+create table dbo.__EFMigrationsHistory
+(
+    MigrationId    nvarchar(150) not null
+        constraint PK___EFMigrationsHistory
+            primary key,
+    ProductVersion nvarchar(32)  not null
+)
 
-IF COL_LENGTH('dbo.[User]', 'Role') IS NULL
-BEGIN
-    PRINT 'Adding Role column to dbo.[User]';
-    ALTER TABLE dbo.[User]
-    ADD [Role] smallint NOT NULL CONSTRAINT DF_User_Role DEFAULT (0);
-END
-ELSE
-BEGIN
-    PRINT 'Role column already exists on dbo.[User]';
-END
-
--- Set Role = 1 for admin users (safe check). Adjust conditions if your admin user is identified differently.
-IF COL_LENGTH('dbo.[User]', 'Role') IS NOT NULL
-BEGIN
-    PRINT 'Updating admin user role to 1 where applicable';
-    UPDATE dbo.[User]
-    SET [Role] = 1
-    WHERE [Role] <> 1 AND (
-        LOWER(ISNULL([LoginId], '')) = 'admin'
-        
-    );
-END
+go

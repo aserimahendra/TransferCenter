@@ -5,6 +5,7 @@ using TransferCenterCore.Interfaces;
 using TransferCenterHelper;
 using TransferCenterWeb.Models;
 using TransferCenterWeb.Models.PatientTransfer;
+using TransferCenterWeb.Models.ViewModel;
 using TransferCenterWeb.Translators;
 
 namespace TransferCenterWeb.Controllers;
@@ -59,6 +60,7 @@ public class PatientTransferController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PatientTransferRequest patientTransferRequest)
     {
+        var error = ModelState.Values.SelectMany(x => x.Errors).ToList();
         if (!ModelState.IsValid)
             return View(patientTransferRequest);
 
@@ -94,7 +96,7 @@ public class PatientTransferController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(PatientTransferRequest patientTransferRequest)
-    {
+    { 
         if (!ModelState.IsValid)
             return View(patientTransferRequest);
 
@@ -119,21 +121,29 @@ public class PatientTransferController : Controller
             return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
         }
     }
+
+    [HttpGet]
+    [Authorize(Policy = "RequireAdminRole")]
+    public IActionResult DeleteConformation(Guid id, string msg)
+    {
+        if (id == Guid.Empty) return NotFound();
+        return View(new DeleteViewModel(){Uid = id, Message = msg});
+    }
     
     
     [HttpPost]
+    [Authorize(Policy = "RequireAdminRole")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(Guid id)
     {
         try
         {
-            var data = await _patientTransferService.Get(id);
-            await _patientTransferService.Delete(data);
+            var details = await _patientTransferService.Get(id);
+            await _patientTransferService.Delete(details);
             var successResult = new ModalActionResult(
                 Constant.Status.Message.Deleted,
                 Constant.Status.Code.Success,
                 true);
-
             return PartialView(Constant.ViewPath.ModalActionResult, successResult);
         }
         catch (Exception ex)

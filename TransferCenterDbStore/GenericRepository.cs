@@ -29,20 +29,20 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public T Get(Expression<Func<T, bool>> expression)
     {
-        return _entitiySet.FirstOrDefault(expression);
+        return _entitiySet.AsNoTracking().FirstOrDefault(expression);
     }
 
     public IEnumerable<T> GetAll()
-        => _entitiySet.AsEnumerable();
+        => _entitiySet.AsNoTracking().AsEnumerable();
 
     public IEnumerable<T> GetAll(Expression<Func<T, bool>> expression)
-        => _entitiySet.Where(expression).AsEnumerable();
+        => _entitiySet.Where(expression).AsNoTracking().AsEnumerable();
 
     public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
-        => await _entitiySet.ToListAsync(cancellationToken);
+        => await _entitiySet.AsNoTracking().ToListAsync(cancellationToken);
 
     public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
-        => await _entitiySet.Where(expression).ToListAsync(cancellationToken);
+        => await _entitiySet.Where(expression).AsNoTracking().ToListAsync(cancellationToken);
 
     // Expose IQueryable for callers to compose queries (deferred execution)
     public IQueryable<T> Query()
@@ -62,7 +62,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         try
         {
-            var data = await _entitiySet.FirstOrDefaultAsync(expression, cancellationToken);
+            var data = await _entitiySet.AsNoTracking().FirstOrDefaultAsync(expression, cancellationToken);
             return data;
         }
         catch (Exception e)

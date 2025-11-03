@@ -82,14 +82,14 @@
 <table class="table table-bordered table-striped">
     <thead class="table-primary">
     <tr>
-    <th>Case Manager/SW/RN</th>
-    <th>Transfer Date</th>
-    <th>MR</th>
-    <th>Primary Caller</th>
-    <th>Phone Number</th>
-    <th>Requesting Facility</th>
-    <th>Admit Date</th>
-    <th>Unit</th>
+        <th>Case Manager/SW/RN</th>
+        <th>Transfer Date</th>
+        <th>MR</th>
+        <th>Primary Caller</th>
+        <th>Phone Number</th>
+        <th>Requesting Facility</th>
+        <th>Admit Date</th>
+        <th>Unit</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -114,7 +114,7 @@
                         var modalUpdateTitle = $"Update In-Patient transfer : {item.CaseMgrSwRn}";
                         var pdfTitle = $"Update In-Patient transfer : {item.CaseMgrSwRn}";
                         var modalDetailsTitle = $"In-Patient transfer Details:  {item.CaseMgrSwRn}";
-                        var deleteUrl = Url.Action("Delete", "PatientTransfer", new { id = item.UId });
+                        var deleteUrl = Url.Action("DeleteConformation", "PatientTransfer", new { id = item.UId, msg= $"{Html.DisplayNameFor(_ => item.CaseMgrSwRn)}:{item.CaseMgrSwRn}" });
                         var pdfUrl = Url.Action("DetailsInPdf", "PatientTransfer", new { id = item.UId });
                         var modalDeleteTitle = $"Delete In-Patient transfer: {item.CaseMgrSwRn}";
                     }
@@ -130,18 +130,21 @@
                             aria-label="View transfer details">
                         <i class="bi bi-info-circle"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
-                            data-modal-title="@modalDeleteTitle"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this transfer"
-                            aria-label="Delete transfer">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
-                      data-download-name="@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="(function(m,u,n){try{if(m&&typeof m.downloadFile==='function'){m.downloadFile(u,n);}else{var root=document.querySelector('[data-modal-list]');var id=root?root.getAttribute('data-loader-id'):null;var l=id?document.getElementById(id):null;if(l) l.classList.remove('d-none'); try{window.location.href=u;}finally{if(l) setTimeout(function(){l.classList.add('d-none');},2000);}}}catch(_e){window.location.href=u;}})(window.modalActions,'@pdfUrl','@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")')"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
-                                aria-label="Download PDF">
-                            <i class="bi bi-file-earmark-pdf"></i>
+                    @if (User?.Identity?.IsAuthenticated == true && User.HasClaim("Role", "1"))
+                    {
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
+                                data-modal-title="@modalDeleteTitle"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this transfer"
+                                aria-label="Delete transfer">
+                            <i class="bi bi-trash"></i>
                         </button>
+                    }
+                    <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
+                            data-download-name="@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="(function(m,u,n){try{if(m&&typeof m.downloadFile==='function'){m.downloadFile(u,n);}else{var root=document.querySelector('[data-modal-list]');var id=root?root.getAttribute('data-loader-id'):null;var l=id?document.getElementById(id):null;if(l) l.classList.remove('d-none'); try{window.location.href=u;}finally{if(l) setTimeout(function(){l.classList.add('d-none');},2000);}}}catch(_e){window.location.href=u;}})(window.modalActions,'@pdfUrl','@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")')"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
+                            aria-label="Download PDF">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </button>
                 </td>
             </tr>
         }
@@ -154,3 +157,4 @@
     }
     </tbody>
 </table>
+

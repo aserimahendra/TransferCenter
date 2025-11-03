@@ -38,7 +38,10 @@ public static class ComorbiditiesAndRiskScoreTranslator
             TotalPoints = GetValueOrDefault(source.TotalPoints),
             IsActive = source.IsActive,
             Id = source.Id,
-            UId = source.Uid
+            UId = source.Uid,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
         };
     }
 
@@ -77,6 +80,9 @@ public static class ComorbiditiesAndRiskScoreTranslator
             RecentSurgeryOutsideUCI = source.RecentSurgeryOutsideUCI,
             TotalPoints = source.TotalPoints,
             IsActive = source.IsActive,
+            CreatedBy = source.CreatedBy,
+            CreatedOn = source.CreatedOn,
+            LastUpdatedOn = source.LastUpdatedOn
         };
     }
 

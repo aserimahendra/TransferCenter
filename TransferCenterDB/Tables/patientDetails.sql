@@ -15,13 +15,13 @@ CREATE TABLE dbo.PatientDetails (
 
     Weight FLOAT NOT NULL,
 
-    Diagnosis NVARCHAR(MAX) NULL,
+    Diagnosis VARCHAR(200) NULL,
 
-    LevelOfCareNeeded NVARCHAR(MAX) NULL,
+    LevelOfCareNeeded VARCHAR(200) NULL,
 
     AcceptingPhysician NVARCHAR(255) NULL,
 
-    ReasonForTransfer NVARCHAR(MAX) NULL,
+    ReasonForTransfer VARCHAR(200) NULL,
 
     Lateral BIT NOT NULL,
 
@@ -29,7 +29,7 @@ CREATE TABLE dbo.PatientDetails (
 
     PatientInsurance NVARCHAR(255) NULL,
 
-    CodeStatus NVARCHAR(MAX) NULL,
+    CodeStatus VARCHAR(200) NULL,
 
     Sitter BIT NOT NULL,
 

@@ -47,7 +47,10 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 RadiologyResults = (short)source.RadiologyResults,
                 MedicationList = (short)source.MedicationList,
                 IsActive = source.IsActive,
-                TransferType = (short)Models.TransferType.PatientTransfer
+                TransferType = (short)Models.TransferType.PatientTransfer,
+                CreatedBy = source.CreatedBy,
+                CreatedOn = source.CreatedOn,
+                LastUpdatedOn = source.LastUpdatedOn
             };
         }
 
@@ -91,7 +94,10 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 MostRecentLabResults = (DocumentStatus)source.MostRecentLabResults,
                 RadiologyResults = (DocumentStatus)source.RadiologyResults,
                 MedicationList = (DocumentStatus)source.MedicationList,
-                IsActive = source.IsActive
+                IsActive = source.IsActive,
+                CreatedBy = source.CreatedBy,
+                CreatedOn = source.CreatedOn,
+                LastUpdatedOn = source.LastUpdatedOn
             };
         }
     }

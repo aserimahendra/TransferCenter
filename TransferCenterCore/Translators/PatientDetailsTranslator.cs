@@ -34,7 +34,7 @@ public static class PatientDetailsTranslator
             IsActive = patientDetails.IsActive,
             CreatedOn = patientDetails.CreatedOn,
             CreatedBy = patientDetails.CreatedBy,
-            LastUpdatedOn = patientDetails.LastUpdatedOn,
+            LastUpdatedOn = patientDetails.LastUpdatedOn
         };
     }
     public static Models.PatientDetails ToCoreModel(this TransferCenterDbStore.Entities.PatientDetails coreModel)

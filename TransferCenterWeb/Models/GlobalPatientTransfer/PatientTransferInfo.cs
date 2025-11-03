@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterWeb.Models.GlobalPatientTransfer;
 
-public class PatientTransferInfo
+public class PatientTransferInfo:AuditLogMeta
 {
     public long Id { get; set; }
 

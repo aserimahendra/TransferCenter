@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterWeb.Models.GlobalPatientTransfer;
 
-public class AdditionalInfo
+public class AdditionalInfo:AuditLogMeta
 {
     public Guid UId { get; set; }
 

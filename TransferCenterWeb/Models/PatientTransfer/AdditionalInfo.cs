@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterWeb.Models.PatientTransfer;
 
-public class AdditionalInfo
+public class AdditionalInfo : AuditLogMeta
 {
     public Guid UId { get; set; }
 
@@ -44,6 +44,8 @@ public class AdditionalInfo
     public bool DiagnosedCovidOrPositiveLab { get; set; }
 
     [Display(Name = "If YES, please specify dates")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime? CovidDiagnosisDates { get; set; }
 
     [Display(Name = "Do you have any sick household members or been in close contact with someone who has cold or flu-like symptoms in the last 14 days?")]

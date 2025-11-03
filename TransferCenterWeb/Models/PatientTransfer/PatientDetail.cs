@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TransferCenterWeb.Models.PatientTransfer;
 
-public class PatientDetails
+public class PatientDetails : AuditLogMeta
 {
     public long Id { get; set; }
 

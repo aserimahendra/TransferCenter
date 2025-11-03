@@ -140,13 +140,16 @@
                         data-bs-toggle="tooltip" data-bs-placement="top" title="View transfer details" aria-label="View transfer details">
                     <i class="bi bi-info-circle"></i>
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
+                @if (User?.Identity?.IsAuthenticated == true && User.HasClaim("Role", "1"))
+                {
+                    <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
                             data-modal-title="@modalDeleteTitle"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this transfer"
                             aria-label="Delete transfer">
                         <i class="bi bi-trash"></i>
                     </button>
-                 <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
+                }
+                <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
                         data-download-name="@($"GlobalPatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="modalActions.downloadFile('@pdfUrl','@($"GlobalPatientTransfer_{item.CaseMgrSwRn}.pdf")')"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
                         aria-label="Download PDF">

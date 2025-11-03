@@ -5,7 +5,7 @@ namespace TransferCenterWeb.Models.PatientTransfer;
     /// <summary>
     /// Comorbidities and Risk Scoring (RF Score section)
     /// </summary>
-    public class ComorbiditiesAndRiskScore
+    public class ComorbiditiesAndRiskScore : AuditLogMeta
     {
         public Guid UId { get; set; }
 

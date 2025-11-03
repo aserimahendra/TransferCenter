@@ -36,26 +36,70 @@ import './modalLayout.js';
 			input.type = 'text';
 		}
 
-		// Focus: switch to date and normalize value to ISO
-		input.addEventListener('focus', () => {
-			if (input.type === 'text') {
-				const iso = toIso((input.value || '').trim());
-				input.type = 'date';
-				if (iso) input.value = iso;
-				if (typeof input.showPicker === 'function') {
-					try { input.showPicker(); } catch (_) {}
+		// If Bootstrap Datepicker is available, prefer it for a better UI
+		if (window.jQuery && typeof window.jQuery.fn?.datepicker === 'function') {
+			const $ = window.jQuery;
+			const $input = $(input);
+			$input.datepicker({
+				format: 'mm/dd/yyyy',
+				autoclose: true,
+				todayHighlight: true,
+				orientation: 'bottom auto',
+				container: 'body'
+			}).on('changeDate', function (e) {
+				// Ensure value is strictly MM/DD/YYYY
+				const date = e.date;
+				if (date instanceof Date && !isNaN(date.getTime())) {
+					const mm = pad(date.getMonth() + 1);
+					const dd = pad(date.getDate());
+					const yyyy = date.getFullYear();
+					this.value = `${mm}/${dd}/${yyyy}`;
 				}
+			});
+			// Open on focus for convenience
+			$input.on('focus', function(){
+				try { $input.datepicker('show'); } catch (_e) {}
+			});
+		} else {
+			// Debug aid: surface once if plugin is missing
+			if (!window.__dpWarned) {
+				try { console.warn('Bootstrap Datepicker plugin not found; falling back to native picker.'); } catch (_c) {}
+				window.__dpWarned = true;
 			}
-		});
-
-		// Blur: switch back to text and show US format
-		input.addEventListener('blur', () => {
-			if (input.type === 'date') {
-				const isoVal = (input.value || '').trim();
-				input.type = 'text';
-				input.value = isoVal ? toUs(isoVal) : '';
-			}
-		});
+			// Fallback to native temporary picker if plugin is not present
+			input.addEventListener('focus', () => {
+				if (input.type === 'text') {
+					const iso = toIso((input.value || '').trim());
+					const tmp = document.createElement('input');
+					tmp.type = 'date';
+					tmp.style.position = 'absolute';
+					tmp.style.left = '-10000px';
+					tmp.style.top = '-10000px';
+					tmp.value = iso || '';
+					document.body.appendChild(tmp);
+					const cleanup = () => { try { tmp.remove(); } catch (_) {} };
+					const onChange = () => {
+						const chosen = (tmp.value || '').trim();
+						input.value = chosen ? toUs(chosen) : '';
+						cleanup();
+					};
+					tmp.addEventListener('change', onChange, { once: true });
+					tmp.addEventListener('input', onChange, { once: true });
+					if (typeof tmp.showPicker === 'function') {
+						try { tmp.showPicker(); } catch (_) { tmp.focus(); }
+					} else { tmp.focus(); }
+					setTimeout(cleanup, 30000);
+				}
+			});
+			// Blur: switch back to text and show US format if user managed to switch type
+			input.addEventListener('blur', () => {
+				if (input.type === 'date') {
+					const isoVal = (input.value || '').trim();
+					input.type = 'text';
+					input.value = isoVal ? toUs(isoVal) : '';
+				}
+			});
+		}
 
 		// If the input lives inside a form, ensure ISO is posted on submit
 		const form = input.closest('form');
@@ -88,4 +132,16 @@ import './modalLayout.js';
 
 	// Re-bind when modal content is reloaded into the DOM via our modal manager
 	window.addEventListener('modal:list:reloaded', () => bindUsDates());
+
+	// Defensive: ensure datepicker shows on focus for dynamically added inputs
+	document.addEventListener('focusin', (e) => {
+		const el = e.target && e.target.closest && e.target.closest('input.date-us');
+		if (!el) return;
+		if (!el.dataset.usDateBound) {
+			initUsDate(el);
+		}
+		if (window.jQuery && typeof window.jQuery.fn?.datepicker === 'function') {
+			try { window.jQuery(el).datepicker('show'); } catch (_) {}
+		}
+	});
 })();

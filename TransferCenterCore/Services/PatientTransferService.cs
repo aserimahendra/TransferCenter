@@ -136,31 +136,33 @@ public class PatientTransferService : IPatientTransferService
 
     private async Task<TransferCenterDbStore.Entities.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
     {
-        try
-        {
           return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
-        }
-        catch (Exception e)
-        {
-            throw;
-        }
     }
 
     private async Task UpdatePatientInfo(PatientDetails patientDetails)
     {
-        patientDetails.LastUpdatedOn = DateTime.UtcNow;
-        _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
+        if (patientDetails != null)
+        {
+            patientDetails.LastUpdatedOn = DateTime.UtcNow;
+            _unitOfWork.PatientDetailsRepository.Update(patientDetails.ToEntity());
+        }
     }
 
     private async Task UpdatePatientTransferInfo(PatientTransferInfo patientTransferInfo)
     {
-        patientTransferInfo.LastUpdatedOn = DateTime.UtcNow;
-        _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
+        if (patientTransferInfo != null)
+        {
+            patientTransferInfo.LastUpdatedOn = DateTime.UtcNow;
+            _unitOfWork.PatientTransferInfoRepository.Update(patientTransferInfo.ToEntity());
+        }
     }
 
     private async Task UpdateAdditionalInfo(AdditionalInfo additionalInfo)
     {
-        additionalInfo.LastUpdatedOn = DateTime.UtcNow;
-        _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
+        if (additionalInfo != null)
+        {
+            additionalInfo.LastUpdatedOn = DateTime.UtcNow;
+            _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
+        }
     }
 }

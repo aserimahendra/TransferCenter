@@ -8,7 +8,7 @@ public static class AdditionalInfoTranslator
     // Web to Core
     public static TransferCenterDbStore.Entities.AdditionalInfo ToEntity(this Models.AdditionalInfo source)
     {
-        if (source == null) return new AdditionalInfo();
+        if (source == null) return null;
 
         return new TransferCenterDbStore.Entities.AdditionalInfo
         {
@@ -65,7 +65,7 @@ public static class AdditionalInfoTranslator
     // Core to Web
     public static Models.AdditionalInfo ToCoreModel(this AdditionalInfo? source)
     {
-        if (source == null) return new  Models.AdditionalInfo();
+        if (source == null) return null;
 
         return new Models.AdditionalInfo
         {
