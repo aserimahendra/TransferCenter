@@ -18,7 +18,8 @@ public static class UserTranslator
 			LoginId = source.LoginId,
 			CreatedOn = source.CreatedOn,
 			Role = source.Role,
-			IsActive = source.IsActive
+			IsActive = source.IsActive,
+			CreatedBy = source.CreatedBy,
 		};
 	}
 
@@ -38,7 +39,8 @@ public static class UserTranslator
 			LoginId = source.LoginId,
 			CreatedOn = source.CreatedOn,
 			Role = source.Role,
-			IsActive = source.IsActive
+			IsActive = source.IsActive,
+			CreatedBy = source.CreatedBy,
 		};
 	}
 }

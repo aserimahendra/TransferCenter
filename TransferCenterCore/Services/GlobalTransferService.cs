@@ -3,6 +3,8 @@ using TransferCenterCore.Interfaces;
 using TransferCenterCore.Models;
 using TransferCenterCore.Translators;
 using TransferCenterDbStore.UnitOfWork;
+using TransferCenterCore.Extensions;
+using TransferCenterCore.Utility;
 
 namespace TransferCenterCore.Services;
 
@@ -101,35 +103,52 @@ public class GlobalTransferService : IGlobalTransferService
     private const int DefaultPageSize = 10;
     private const short GlobalTransferType = 1;
 
-    public async Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize)
+    public async Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseMgrSwRn, DateTime? transferDateFrom, DateTime? transferDateTo)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? DefaultPageSize : pageSize;
 
+        // Normalize range
+        DateTime? from = transferDateFrom?.Date;
+        DateTime? to = transferDateTo?.Date;
+        if (from.HasValue && to.HasValue && from > to)
+            (from, to) = (to, from);
+
         var baseQuery = _unitOfWork.PatientTransferInfoRepository
             .Query(x => x.IsActive && x.TransferType == GlobalTransferType);
 
-        var totalCount = await _unitOfWork.PatientTransferInfoRepository
-            .CountAsync(x => x.IsActive && x.TransferType == GlobalTransferType);
+        var filteredQuery = baseQuery
+            .StartBuilder()
+            .ByContains(QueryPropertyNames.CaseManager, caseMgrSwRn)
+            .ByDateFrom(QueryPropertyNames.TransferDate, from)
+            .ByDateTo(QueryPropertyNames.TransferDate, to)
+            .Build();
 
-        var pagedTransfers = baseQuery
-            .OrderByDescending(x => x.CreatedOn)
+        var totalCount = filteredQuery.Count();
+
+        var pagedTransfers = filteredQuery
+            .OrderByDescending(x => x.TransferDate)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToList();
 
-        var items = pagedTransfers
-            .Select(x => new GlobalPatientTransferRequest
-            {
-                Id = x.UId,
-                TransferInfo = x.ToCoreModel(),
-                CreatedOn = x.CreatedOn,
-                CreatedBy = x.CreatedBy,
-                LastUpdatedOn = x.LastUpdatedOn
-            })
-            .ToList();
+        var items = pagedTransfers.Select(MapToCoreModel).ToList();
 
         return (items, totalCount);
+    }
+
+    // Filtering logic moved to extension-based builder in TransferCenterCore.Extensions.QueryFilterExtensions
+
+    private GlobalPatientTransferRequest MapToCoreModel(TransferCenterDbStore.Entities.PatientTransferInfo x)
+    {
+        return new GlobalPatientTransferRequest
+        {
+            Id = x.UId,
+            TransferInfo = x.ToCoreModel(),
+            CreatedOn = x.CreatedOn,
+            CreatedBy = x.CreatedBy,
+            LastUpdatedOn = x.LastUpdatedOn
+        };
     }
 
     public async Task<GlobalPatientTransferRequest> Get(Guid uid)

@@ -184,10 +184,11 @@
                         <td class="text-muted small" colspan="3">&nbsp;</td>
                     </tr>
                     <tr class="table-light">
-                        <td colspan="3" class="fw-semibold text-end">Total Points</td>
+                        <td colspan="3" class="fw-semibold text-end">Total Points <span class="text-muted small" data-role="points-status"></span></td>
                         <td>
-                            @Html.TextBoxFor(m => m.TotalPoints, new { @class = "form-control text-center", type = "number", min = "0" })
+                            @Html.TextBoxFor(m => m.TotalPoints, new { @class = "form-control text-center", type = "number", min = "0", @readonly = "readonly", tabindex = "-1", aria_readonly = "true", data_role = "calculated-points" })
                             @Html.ValidationMessageFor(m => m.TotalPoints, "", new { @class = "text-danger small" })
+                            <div class="form-text small">Auto-calculated based on selections above.</div>
                         </td>
                     </tr>
                 </tbody>

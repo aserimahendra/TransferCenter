@@ -64,7 +64,7 @@ builder.Services.AddSingleton<IPdfExporter, PlaywrightPdfExporter>();
 builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
 
 var buildNumber = builder.Configuration["BuildNumber"] ?? "Unknown";
-var copyright = builder.Configuration["Copyright"] ?? "� 2025 Your Company";
+var copyright = builder.Configuration["Copyright"] ?? "� 2025 KPC Group";
 builder.Services.AddSingleton(new BuildInfo { BuildNumber = buildNumber, Copyright = copyright });
 
 

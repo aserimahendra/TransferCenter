@@ -1,9 +1,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace TransferCenterWeb.Models.PatientTransfer;
 
-public class AdditionalInfo : AuditLogMeta
+public class AdditionalInfo : AuditLogMeta, IValidatableObject
 {
     public Guid UId { get; set; }
 
@@ -73,13 +74,13 @@ public class AdditionalInfo : AuditLogMeta
     public bool MultiDrugResistantInfection { get; set; }
 
     [Display(Name = "If yes, list microorganism(s)")]
-    public string Microorganisms { get; set; }
+    public string? Microorganisms { get; set; }
 
     [Display(Name = "Does the patient have an active communicable disease (examples: disseminated shingles, norovirus, TB, etc.) or other condition (e.g. lice, scabies)?")]
     public bool CommunicableDisease { get; set; }
 
     [Display(Name = "If yes, list disease(s)/condition(s)")]
-    public string DiseaseConditions { get; set; }
+    public string? DiseaseConditions { get; set; }
 
     [Display(Name = "3 Days of Lab Results (including a COVID result within the last 72 hours)")]
     public DocumentStatus LabResultsStatus { get; set; }
@@ -115,6 +116,36 @@ public class AdditionalInfo : AuditLogMeta
     public DocumentStatus MedicationList { get; set; }
 
     public bool IsActive { get; set; } = true;
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        // If diagnosed/positive at non-UCI lab, date is required
+        if (DiagnosedCovidOrPositiveLab && !CovidDiagnosisDates.HasValue)
+        {
+            yield return new ValidationResult(
+                "Diagnosis date is required when patient is diagnosed with COVID-19 or tested positive.",
+                new[] { nameof(CovidDiagnosisDates) }
+            );
+        }
+
+        // If multi-drug resistant infection is indicated, microorganisms list is required
+        if (MultiDrugResistantInfection && string.IsNullOrWhiteSpace(Microorganisms))
+        {
+            yield return new ValidationResult(
+                "Please list microorganism(s) when Multi-Drug Resistant Infection is selected.",
+                new[] { nameof(Microorganisms) }
+            );
+        }
+
+        // If communicable disease indicated, disease/condition list required
+        if (CommunicableDisease && string.IsNullOrWhiteSpace(DiseaseConditions))
+        {
+            yield return new ValidationResult(
+                "Please list disease(s)/condition(s) when an active communicable disease is selected.",
+                new[] { nameof(DiseaseConditions) }
+            );
+        }
+    }
 }
 public enum DocumentStatus
 {

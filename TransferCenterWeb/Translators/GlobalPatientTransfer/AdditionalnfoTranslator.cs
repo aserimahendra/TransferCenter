@@ -37,7 +37,7 @@ public static class AdditionalInfoTranslator
             CodeStatus = source.CodeStatus,
             IsActive = source.IsActive,
             TransferType = (short)TransferType.GlobalPatientTransfer,
-            CreatedBy = source.CreatedBy,
+            CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty ,
             CreatedOn = source.CreatedOn,
             LastUpdatedOn = source.LastUpdatedOn
         };

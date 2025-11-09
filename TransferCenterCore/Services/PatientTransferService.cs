@@ -4,6 +4,8 @@ using TransferCenterCore.Interfaces;
 using TransferCenterCore.Models;
 using TransferCenterCore.Translators;
 using TransferCenterDbStore.UnitOfWork;
+using TransferCenterCore.Extensions;
+using TransferCenterCore.Utility;
 
 namespace TransferCenterCore.Services;
 
@@ -23,6 +25,7 @@ public class PatientTransferService : IPatientTransferService
         patientTransferRequest.AdditionalInfo.IsActive = false;
         patientTransferRequest.PatientDetails.IsActive = false;
         patientTransferRequest.PatientTransferInfo.IsActive = false;
+        patientTransferRequest.ComorbiditiesAndRiskScore.IsActive = false;
         await Update(patientTransferRequest);
     }
 
@@ -33,6 +36,7 @@ public class PatientTransferService : IPatientTransferService
             await SavePatientInfo(patientTransferRequest.PatientDetails);
             await SavePatientTransferInfo(patientTransferRequest.PatientTransferInfo);
             await SaveAdditionalInfo(patientTransferRequest.AdditionalInfo);
+            await SaveComorbiditiesAndRiskScore(patientTransferRequest.ComorbiditiesAndRiskScore);
             await _unitOfWork.CommitAsync();
 
         }
@@ -62,6 +66,13 @@ public class PatientTransferService : IPatientTransferService
         additionalInfo.CreatedOn = DateTime.UtcNow;
         _unitOfWork.AdditionalInfoRepository.Add(additionalInfo.ToEntity());
     }
+    
+    private async Task SaveComorbiditiesAndRiskScore(ComorbiditiesAndRiskScore comorbiditiesAndRiskScore)
+    {
+        comorbiditiesAndRiskScore.CreatedBy = CallContextScope.Current?.EmailId ?? string.Empty;
+        comorbiditiesAndRiskScore.CreatedOn = DateTime.UtcNow;
+        _unitOfWork.ComorbiditiesAndRiskScoreRepository.Add(comorbiditiesAndRiskScore.ToEntity());
+    }
 
     public async Task Update(PatientTransferRequest patientTransferRequest)
     {
@@ -70,6 +81,7 @@ public class PatientTransferService : IPatientTransferService
             await UpdatePatientInfo(patientTransferRequest.PatientDetails);
             await UpdatePatientTransferInfo(patientTransferRequest.PatientTransferInfo);
             await UpdateAdditionalInfo(patientTransferRequest.AdditionalInfo);
+            await UpdateComorbiditiesAndRiskScore(patientTransferRequest.ComorbiditiesAndRiskScore);
             await _unitOfWork.CommitAsync();
         }
         catch (Exception)
@@ -81,30 +93,40 @@ public class PatientTransferService : IPatientTransferService
     private const int DefaultPageSize = 10;
     private const short InPatientTransferType = 2;
 
-    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize)
+    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? DefaultPageSize : pageSize;
+        // Normalize date range
+        DateTime? from = transferDateFrom?.Date;
+        DateTime? to = transferDateTo?.Date;
+        if (from.HasValue && to.HasValue && from > to)
+            (from, to) = (to, from);
 
         var baseQuery = _unitOfWork.PatientTransferInfoRepository
             .Query(x => x.IsActive && x.TransferType == InPatientTransferType);
 
-        var totalCount = await _unitOfWork.PatientTransferInfoRepository
-            .CountAsync(x => x.IsActive && x.TransferType == InPatientTransferType);
+        var filteredQuery = baseQuery
+            .StartBuilder()
+            .ByContains(QueryPropertyNames.CaseManager, caseManager)
+            .ByDateFrom(QueryPropertyNames.TransferDate, from)
+            .ByDateTo(QueryPropertyNames.TransferDate, to)
+            .Build();
 
-        var pagedTransfers = baseQuery
+        // total count AFTER applying filters
+        var totalCount = filteredQuery.Count();
+
+        var pagedTransfers = filteredQuery
             .OrderByDescending(x => x.CreatedOn)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToList();
 
-        var items = pagedTransfers
-            .Select(x => new PatientTransferRequest
-            {
-                Id = x.UId,
-                PatientTransferInfo = x.ToCoreModel(),
-            })
-            .ToList();
+        var items = pagedTransfers.Select(x => new PatientTransferRequest
+        {
+            Id = x.UId,
+            PatientTransferInfo = x.ToCoreModel(),
+        }).ToList();
 
         return (items, totalCount);
     }
@@ -114,12 +136,13 @@ public class PatientTransferService : IPatientTransferService
         var transferInfo = await GetTransferInfoAsync(uid);
         var patientDetails = await GetPatientDetailsAsync(uid);
         var additionalInfo = await GetAdditionalInfoAsync(uid);
-
+        var comorbiditiesAndRiskScore = await GetComorbiditiesAndRiskScore(uid);
         return new PatientTransferRequest
         {
             AdditionalInfo = additionalInfo.ToCoreModel(),
             PatientDetails = patientDetails.ToCoreModel(),
             PatientTransferInfo = transferInfo.ToCoreModel(),
+            ComorbiditiesAndRiskScore = comorbiditiesAndRiskScore.ToCoreModel(),
             Id = uid
         };
     }
@@ -137,6 +160,11 @@ public class PatientTransferService : IPatientTransferService
     private async Task<TransferCenterDbStore.Entities.AdditionalInfo> GetAdditionalInfoAsync(Guid uid)
     {
           return await _unitOfWork.AdditionalInfoRepository.GetAsync(x => x.UId == uid);
+    }
+    
+    private async Task<TransferCenterDbStore.Entities.ComorbiditiesAndRiskScore> GetComorbiditiesAndRiskScore(Guid uid)
+    {
+        return await _unitOfWork.ComorbiditiesAndRiskScoreRepository.GetAsync(x => x.UId == uid);
     }
 
     private async Task UpdatePatientInfo(PatientDetails patientDetails)
@@ -157,6 +185,15 @@ public class PatientTransferService : IPatientTransferService
         }
     }
 
+    private async Task UpdateComorbiditiesAndRiskScore(ComorbiditiesAndRiskScore comorbiditiesAndRiskScore)
+    {
+        if (comorbiditiesAndRiskScore != null)
+        {
+            comorbiditiesAndRiskScore.LastUpdatedOn = DateTime.UtcNow;
+            _unitOfWork.ComorbiditiesAndRiskScoreRepository.Update(comorbiditiesAndRiskScore.ToEntity());
+        }
+    }
+    
     private async Task UpdateAdditionalInfo(AdditionalInfo additionalInfo)
     {
         if (additionalInfo != null)

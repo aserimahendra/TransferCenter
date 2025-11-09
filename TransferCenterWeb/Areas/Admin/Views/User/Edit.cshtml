@@ -2,57 +2,56 @@
 
 @{
     Layout = "_ModalLayout";
-    ViewData["Title"] = "Edit Admin User";
+    ViewData["Title"] = "Update User";
 }
 
-<form asp-action="Edit" method="post" class="needs-validation" novalidate>
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.UserId)
-    @Html.HiddenFor(m => m.Role)
+    @* Role now selected via dropdown *@
+    @Html.HiddenFor(m => m.IsActive)
     @Html.HiddenFor(m => m.CreatedOn)
+    @Html.HiddenFor(m => m.CreatedBy)
+    @Html.HiddenFor(m => m.Password)
+    @Html.HiddenFor(m => m.UserId)
 
     <div class="card shadow-sm mb-4 border-0 rounded-4 overflow-hidden">
         <div class="card-body bg-light p-4">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
-
             <section class="p-4 border border-3 border-primary-subtle bg-white rounded-3 mb-4 shadow-sm">
                 <h5 class="fw-semibold mb-3 text-primary">Account Details</h5>
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label asp-for="FirstName" class="form-label"></label>
-                        <input asp-for="FirstName" class="form-control" autocomplete="off" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        @Html.LabelFor(m => m.Role, htmlAttributes: new { @class = "form-label" })
+                        <select asp-for="Role" class="form-select" name="role">
+                            <option value="">-- Select Role --</option>
+                            <option value="1" @(Model != null && Model.Role == 1 ? "selected" : "")>Admin</option>
+                            <option value="2" @(Model != null && Model.Role == 2 ? "selected" : "")>Operator</option>
+                        </select>
+                        @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="LastName" class="form-label"></label>
-                        <input asp-for="LastName" class="form-control" autocomplete="off" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
+                        @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="EmailId" class="form-label"></label>
-                        <input asp-for="EmailId" class="form-control" autocomplete="off" />
-                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                        @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="LoginId" class="form-label"></label>
-                        <input asp-for="LoginId" class="form-control" autocomplete="off" />
-                        <span asp-validation-for="LoginId" class="text-danger"></span>
+                        @Html.LabelFor(m => m.EmailId, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="DomainID" class="form-label"></label>
-                        <input asp-for="DomainID" class="form-control" autocomplete="off" />
-                        <span asp-validation-for="DomainID" class="text-danger"></span>
+                        @Html.LabelFor(m => m.LoginId, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.LoginId, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="Password" class="form-label"></label>
-                        <input asp-for="Password" class="form-control" type="password" autocomplete="new-password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input asp-for="IsActive" class="form-check-input" />
-                            <label asp-for="IsActive" class="form-check-label"></label>
-                        </div>
+                        @Html.LabelFor(m => m.DomainID, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.DomainID, new { @class = "form-control", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.DomainID, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </section>
@@ -62,7 +61,7 @@
     <div class="position-sticky bottom-0 start-0 end-0 bg-white border-top border-3 border-primary shadow-sm py-3 px-3" style="z-index: 10;">
         <div class="d-flex justify-content-end gap-2">
             <button type="button" class="btn btn-outline-secondary px-4 js-modal-cancel" data-modal-dismiss="cancel">Cancel</button>
-            <button type="submit" class="btn btn-success px-4">Save Changes</button>
+            <button type="submit" class="btn btn-success px-4">Update User</button>
         </div>
     </div>
 </form>

@@ -1,4 +1,6 @@
-﻿namespace TransferCenterWeb.Translators;
+﻿using TransferCenterCore.Context;
+
+namespace TransferCenterWeb.Translators;
 
 public static class PatientDetailsTranslator
 {
@@ -26,7 +28,7 @@ public static class PatientDetailsTranslator
             PatientInsurance = patientDetails.PatientInsurance,
             IsActive = patientDetails.IsActive,
             TransferType = (short)Models.TransferType.GlobalPatientTransfer,
-            CreatedBy = patientDetails.CreatedBy,
+            CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty,
             CreatedOn = patientDetails.CreatedOn,
             LastUpdatedOn = patientDetails.LastUpdatedOn
             

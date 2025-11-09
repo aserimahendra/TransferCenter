@@ -32,18 +32,25 @@ public class GlobalPatientTransferController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> TransferList(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> TransferList(string? caseMgr, DateTime? transferFrom, DateTime? transferTo, int page = 1, int pageSize = 10)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
+        DateTime? from = transferFrom?.Date;
+        DateTime? to = transferTo?.Date;
+        if (from.HasValue && to.HasValue && from > to)
+            (from, to) = (to, from);
 
-        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize);
+        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize, caseMgr, from, to);
         var webItems = items.Select(x => x.ToWebModel()).ToList();
 
         var viewModel = new GlobalPatientTransferListViewModel
         {
             Items = webItems,
-            TotalCount = totalCount
+            TotalCount = totalCount,
+            CaseMgrSwRn = caseMgr,
+            TransferDateFrom = from,
+            TransferDateTo = to
         };
 
         return PartialView("PatientTransferList", viewModel);

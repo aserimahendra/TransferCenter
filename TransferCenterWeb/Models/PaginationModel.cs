@@ -13,6 +13,5 @@ public class PaginationModel
     public string PageQueryKey { get; set; } = "page";
     public string PageSizeQueryKey { get; set; } = "pageSize";
     public bool RenderIfSinglePage { get; set; }
-
     public int TotalPages => PageSize <= 0 ? 0 : (int)Math.Ceiling(TotalItems / (double)PageSize);
 }

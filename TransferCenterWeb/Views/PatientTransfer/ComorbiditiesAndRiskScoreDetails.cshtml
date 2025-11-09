@@ -1,0 +1,110 @@
+@model TransferCenterWeb.Models.PatientTransfer.ComorbiditiesAndRiskScore
+
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.None)</td>
+            <td class="col-sm-3">@(Model.None ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.StrokeTIA)</td>
+            <td class="col-sm-3">@(Model.StrokeTIA ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CHF)</td>
+            <td class="col-sm-3">@(Model.CHF ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CKD_ESRD)</td>
+            <td class="col-sm-3">@(Model.CKD_ESRD ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.HTN)</td>
+            <td class="col-sm-3">@(Model.HTN ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DiabetesOrSkinIssues)</td>
+            <td class="col-sm-3">@(Model.DiabetesOrSkinIssues ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MI_Angina_CAD)</td>
+            <td class="col-sm-3">@(Model.MI_Angina_CAD ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.COPDOrRespiratoryFailure)</td>
+            <td class="col-sm-3">@(Model.COPDOrRespiratoryFailure ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.Ventilated)</td>
+            <td class="col-sm-3">@(Model.Ventilated ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.PulmonaryHTN)</td>
+            <td class="col-sm-3">@(Model.PulmonaryHTN ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.PulmonaryHTN_Prostacyclin)</td>
+            <td class="col-sm-3">@(Model.PulmonaryHTN_Prostacyclin ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.ImmunocompromisedOrHIV)</td>
+            <td class="col-sm-3">@(Model.ImmunocompromisedOrHIV ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.PsychBackground)</td>
+            <td class="col-sm-3">@(Model.PsychBackground ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.NonCompliantWithCare)</td>
+            <td class="col-sm-3">@(Model.NonCompliantWithCare ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.UnableToPerformADLs)</td>
+            <td class="col-sm-3">@(Model.UnableToPerformADLs ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DrugOrAlcoholDependence)</td>
+            <td class="col-sm-3">@(Model.DrugOrAlcoholDependence ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.LymphomaLeukemiaCancer)</td>
+            <td class="col-sm-3">@(Model.LymphomaLeukemiaCancer ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.MalnutritionObesityDigestiveDisease)</td>
+            <td class="col-sm-3">@(Model.MalnutritionObesityDigestiveDisease ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.UnconsciousOrALOC)</td>
+            <td class="col-sm-3">@(Model.UnconsciousOrALOC ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.LOSMoreThan2Weeks)</td>
+            <td class="col-sm-3">@(Model.LOSMoreThan2Weeks ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.OutOfServiceArea)</td>
+            <td class="col-sm-3">@(Model.OutOfServiceArea ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.DNRCodeStatus)</td>
+            <td class="col-sm-3">@(Model.DNRCodeStatus ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.CovidPositive)</td>
+            <td class="col-sm-3">@(Model.CovidPositive ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.RecentSurgeryAtUCI)</td>
+            <td class="col-sm-3">@(Model.RecentSurgeryAtUCI ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.RecentSurgeryOutsideUCI)</td>
+            <td class="col-sm-3">@(Model.RecentSurgeryOutsideUCI ? "Yes" : "No")</td>
+        </tr>
+        <tr>
+            <td class="col-sm-9">@Html.DisplayNameFor(model => model.TotalPoints)</td>
+            <td class="col-sm-3">@Html.DisplayFor(model => model.TotalPoints)</td>
+        </tr>
+    </tbody>
+ </table>

@@ -1,3 +1,4 @@
+using TransferCenterCore.Context;
 using PatientTransferInfo = TransferCenterWeb.Models.PatientTransfer.PatientTransferInfo;
 
 namespace TransferCenterWeb.Translators.PatientTransfer;
@@ -65,7 +66,7 @@ public static class PatientTransferInfoTranslator
             UnitPhone = source.UnitPhone,
             TransferType = (short)Models.TransferType.PatientTransfer,
             IsActive = source.IsActive,
-            CreatedBy = source.CreatedBy,
+            CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty,
             CreatedOn = source.CreatedOn,
             LastUpdatedOn = source.LastUpdatedOn
         };

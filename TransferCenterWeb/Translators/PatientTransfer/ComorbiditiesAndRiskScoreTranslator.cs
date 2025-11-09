@@ -1,3 +1,4 @@
+using TransferCenterCore.Context;
 using TransferCenterWeb.Models.PatientTransfer;
 
 namespace TransferCenterWeb.Translators.PatientTransfer;
@@ -39,7 +40,7 @@ public static class ComorbiditiesAndRiskScoreTranslator
             IsActive = source.IsActive,
             Id = source.Id,
             UId = source.Uid,
-            CreatedBy = source.CreatedBy,
+            CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty,
             CreatedOn = source.CreatedOn,
             LastUpdatedOn = source.LastUpdatedOn
         };

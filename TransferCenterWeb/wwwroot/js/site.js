@@ -56,10 +56,7 @@ import './modalLayout.js';
 					this.value = `${mm}/${dd}/${yyyy}`;
 				}
 			});
-			// Open on focus for convenience
-			$input.on('focus', function(){
-				try { $input.datepicker('show'); } catch (_e) {}
-			});
+			// Showing the picker on focus is handled centrally via the document focusin listener
 		} else {
 			// Debug aid: surface once if plugin is missing
 			if (!window.__dpWarned) {
@@ -145,3 +142,4 @@ import './modalLayout.js';
 		}
 	});
 })();
+

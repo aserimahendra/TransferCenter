@@ -5,7 +5,7 @@
     ViewBag.Title = "Admin Users";
     Layout = "_Layout";
 
-    var baseListUrl = Url.Action("UserTable", "User", new { area = "Admin" });
+    var baseListUrl = Url.Action("UserList", "User", new { area = "Admin" });
     var queryString = ViewContext.HttpContext.Request.QueryString.HasValue
         ? ViewContext.HttpContext.Request.QueryString.Value
         : string.Empty;
@@ -38,3 +38,37 @@
         </div>
     </div>
 </section>
+
+<script>
+    // Attach once: this script runs on the main page (Index), so it works even when the list is loaded via AJAX
+    (function(){
+        if (window.__userToggleHandlerAttached) return; // prevent duplicate listeners on soft reloads
+        window.__userToggleHandlerAttached = true;
+        document.addEventListener('change', async function (e) {
+            const el = e.target;
+            if (!el.classList || !el.classList.contains('js-toggle-active')) return;
+            const userId = el.getAttribute('data-user-id');
+            const isActive = el.checked;
+            const root = el.closest('[data-user-list-root]');
+            const tokenEl = root && root.querySelector('input[name="__RequestVerificationToken"]');
+            const token = tokenEl ? tokenEl.value : '';
+            try {
+                const resp = await fetch('@Url.Action("ToggleActive", "User", new { area = "Admin" })', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': token
+                    },
+                    body: `id=${encodeURIComponent(userId)}&isActive=${isActive}`
+                });
+                if (!resp.ok) throw new Error('Request failed');
+                const data = await resp.json();
+                if (!data || data.success !== true) throw new Error('Operation failed');
+            } catch (err) {
+                // revert UI on failure
+                el.checked = !isActive;
+                alert('Failed to update status.');
+            }
+        });
+    })();
+</script>

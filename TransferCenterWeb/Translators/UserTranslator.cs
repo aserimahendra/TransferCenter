@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TransferCenterCore.Context;
 using WebUser = TransferCenterWeb.Models.User;
 
 namespace TransferCenterWeb.Translators;
@@ -25,7 +26,8 @@ public static class UserTranslator
             LoginId = source.LoginId,
             CreatedOn = source.CreatedOn,
             Role = source.Role,
-            IsActive = source.IsActive
+            IsActive = source.IsActive,
+            CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty
         };
     }
 
@@ -48,7 +50,9 @@ public static class UserTranslator
             LoginId = source.LoginId,
             CreatedOn = source.CreatedOn,
             Role = source.Role,
-            IsActive = source.IsActive
+            IsActive = source.IsActive,
+            CreatedBy = source.CreatedBy
+            
         };
     }
 

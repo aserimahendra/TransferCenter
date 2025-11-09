@@ -25,5 +25,5 @@ public enum TransferType
 public enum RoleType : short
 {
     Admin = 1,
-    User = 2
+    Operator = 2
 }

@@ -44,39 +44,46 @@
         .ToList() ?? new List<PatientTransferInfo>();
 }
 
-<div class="d-flex justify-content-between align-items-center mt-3">
-    <div>
-        Showing page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items
+<div class="row align-items-center mt-3 mb-3 g-2">
+    <div class="col d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-primary" data-modal-url="@Url.Action("Create", "PatientTransfer")"
+                data-modal-title="Create In-Patient Transfer Request"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request"
+                aria-label="Add new transfer">
+            <i class="bi bi-plus-circle me-1"></i> Create
+        </button>
     </div>
-    <div>
-        @await Html.PartialAsync("_Pagination", paginationModel)
+    <div class="col-auto ms-auto">
+    <form method="get" action="@Url.Action("PatientTransferList","PatientTransfer")" data-list-filter class="row row-cols-lg-auto g-2 align-items-end mb-0" >
+            <div class="col">
+                <label for="caseManager" class="form-label form-label-sm mb-0 text-muted">Case Manager/SW/RN</label>
+                <input type="text" id="caseManager" name="caseManager" value="@Model?.CaseManager" class="form-control form-control-sm" placeholder="Search name" />
+            </div>
+            <div class="col">
+                <label for="transferDateFrom" class="form-label form-label-sm mb-0 text-muted">Transfer Date From</label>
+                <input type="text" id="transferDateFrom" name="transferDateFrom" value="@Model?.TransferDateFrom?.ToString("MM/dd/yyyy")" class="form-control form-control-sm date-us" placeholder="MM/DD/YYYY" />
+            </div>
+            <div class="col">
+                <label for="transferDateTo" class="form-label form-label-sm mb-0 text-muted">Transfer Date To</label>
+                <input type="text" id="transferDateTo" name="transferDateTo" value="@Model?.TransferDateTo?.ToString("MM/dd/yyyy")" class="form-control form-control-sm date-us" placeholder="MM/DD/YYYY" />
+            </div>
+            <div class="col">
+                <label for="pageSize" class="form-label form-label-sm mb-0 text-muted">Page size</label>
+                <select id="pageSize" name="pageSize" class="form-select form-select-sm">
+                    <option value="10" selected="@(pageSize == 10 ? "selected" : null)">10</option>
+                    <option value="25" selected="@(pageSize == 25 ? "selected" : null)">25</option>
+                    <option value="50" selected="@(pageSize == 50 ? "selected" : null)">50</option>
+                </select>
+            </div>
+            <div class="col d-flex gap-2">
+                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-funnel me-1"></i> Filter</button>
+                <button type="reset" class="btn btn-outline-secondary btn-sm" title="Reset filters" aria-label="Reset filters">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+                    Reset
+                </button>
+            </div>
+        </form>
     </div>
-</div>
-
-<form method="get" data-list-filter class="row g-2 mb-3">
-    <div class="col-auto">
-        <select name="pageSize" class="form-select">
-            <option value="10" selected="@(pageSize == 10 ? "selected" : null)">10</option>
-            <option value="25" selected="@(pageSize == 25 ? "selected" : null)">25</option>
-            <option value="50" selected="@(pageSize == 50 ? "selected" : null)">50</option>
-        </select>
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-secondary">Apply</button>
-    </div>
-</form>
-
-<div class="d-flex justify-content-end align-items-center mb-3 gap-2">
-    <button type="button" class="btn btn-primary" data-modal-url="@Url.Action("Create", "PatientTransfer")"
-            data-modal-title="Create In-Patient Transfer Request"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request"
-            aria-label="Add new transfer">
-        <i class="bi bi-plus-circle"></i>
-    </button>
-    <a asp-controller="PatientTransfer" asp-action="ExportExcel" class="btn btn-success" title="Export to Excel"
-       data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Export to Excel">
-        <i class="bi bi-file-earmark-spreadsheet"></i>
-    </a>
 </div>
 
 <table class="table table-bordered table-striped">
@@ -157,4 +164,9 @@
     }
     </tbody>
 </table>
-
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <div>
+        @await Html.PartialAsync("_Pagination", paginationModel)
+    </div>
+    <span class="small text-muted">Page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items</span>
+</div>

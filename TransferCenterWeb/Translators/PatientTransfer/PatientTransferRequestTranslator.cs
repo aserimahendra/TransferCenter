@@ -14,7 +14,8 @@ public static class PatientTransferRequestTranslator
         {
             PatientTransferInfo = Translators.PatientTransfer.PatientTransferInfoTranslator.ToCoreModel(source.PatientTransferInfo, source.Id),
             PatientDetails = Translators.PatientTransfer.PatientDetailsTranslator.ToCoreModel(source.PatientDetails, source.Id),
-            AdditionalInfo = Translators.PatientTransfer.AdditionalInfoTranslator.ToCoreModel(source.AdditionalInfo, source.Id)
+            AdditionalInfo = Translators.PatientTransfer.AdditionalInfoTranslator.ToCoreModel(source.AdditionalInfo, source.Id),
+            ComorbiditiesAndRiskScore = Translators.PatientTransfer.ComorbiditiesAndRiskScoreTranslator.ToCoreModel(source.ComorbiditiesAndRiskScore, source.Id),
         };
     }
 
@@ -28,7 +29,8 @@ public static class PatientTransferRequestTranslator
             Id = source.Id,
             PatientTransferInfo = Translators.PatientTransfer.PatientTransferInfoTranslator.ToWebModel(source.PatientTransferInfo),
             PatientDetails = Translators.PatientTransfer.PatientDetailsTranslator.ToWebModel(source.PatientDetails),
-            AdditionalInfo = AdditionalInfoTranslator.ToWebModel(source.AdditionalInfo)
+            AdditionalInfo = AdditionalInfoTranslator.ToWebModel(source.AdditionalInfo),
+            ComorbiditiesAndRiskScore = ComorbiditiesAndRiskScoreTranslator.ToWebModel(source.ComorbiditiesAndRiskScore),
         };
     }
 }

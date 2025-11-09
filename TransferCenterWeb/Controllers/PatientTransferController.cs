@@ -35,16 +35,19 @@ public class PatientTransferController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> PatientTransferList(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> PatientTransferList(int page = 1, int pageSize = 10, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
-        var (items, totalCount) = await _patientTransferService.GetList(page, pageSize);
+        var (items, totalCount) = await _patientTransferService.GetList(page, pageSize, caseManager, transferDateFrom, transferDateTo);
         var webItems = items.Select(x => x.ToWebModel()).ToList();
         var viewModel = new PatientTransferListViewModel()
         {
             Items = webItems,
-            TotalCount = totalCount
+            TotalCount = totalCount,
+            CaseManager = caseManager,
+            TransferDateFrom = transferDateFrom,
+            TransferDateTo = transferDateTo
         };
         return PartialView("PatientTransferList", viewModel);
     }

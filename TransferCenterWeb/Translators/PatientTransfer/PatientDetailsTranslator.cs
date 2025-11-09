@@ -1,4 +1,5 @@
 using System;
+using TransferCenterCore.Context;
 using TransferCenterCore.Models;
 using TransferCenterWeb.Models.PatientTransfer;
 using AdditionalInfo = TransferCenterCore.Models.AdditionalInfo;
@@ -34,7 +35,7 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 IsActive = source.IsActive,
                 TransferType = (short)Models.TransferType.PatientTransfer,
                 WeightIn = source.WeightIn,
-                CreatedBy = source.CreatedBy,
+                CreatedBy = CallContextScope.Current?.EmailId ?? String.Empty,
                 CreatedOn = source.CreatedOn,
                 LastUpdatedOn = source.LastUpdatedOn
             };

@@ -59,7 +59,7 @@
                             </span>
                         </li>
                         <li class="nav-item">
-                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline" asp-area="">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-sm text-white btn-outline-warning" >Logout</button>
                             </form>
@@ -107,6 +107,7 @@
         }
     </script>
     <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/comorbidities-score.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

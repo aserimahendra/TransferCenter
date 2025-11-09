@@ -201,6 +201,44 @@
 
                     form.dataset.listFilterBound = 'true';
 
+                    // Handle form reset centrally so "Reset" truly clears and reloads the list
+                    form.addEventListener('reset', (event) => {
+                        debugger
+                        event.preventDefault();
+                        try {
+                            // Clear known filter fields across both lists while preserving pageSize
+                            const namesToClear = ['caseManager','caseMgr','transferDateFrom','transferFrom','transferDateTo','transferTo'];
+                            namesToClear.forEach((name) => {
+                                const el = form.querySelector(`[name="${name}"]`);
+                                if (el) {
+                                    el.value = '';
+                                }
+                            });
+                            // Ensure page resets to 1
+                            let pageInput = form.querySelector('input[name="page"]');
+                            if (!pageInput) {
+                                pageInput = document.createElement('input');
+                                pageInput.type = 'hidden';
+                                pageInput.name = 'page';
+                                form.appendChild(pageInput);
+                            }
+                            pageInput.value = '1';
+
+                            const action = form.getAttribute('action') || this.listUrl;
+                            if (!action) {
+                                return;
+                            }
+                            const formData = new FormData(form);
+                            const params = new URLSearchParams(formData);
+                            const query = params.toString();
+                            this.listUrl = query ? `${action.split('?')[0]}?${query}` : action.split('?')[0];
+                            this.reload();
+                        } catch (_e) {
+                            // fallback: navigate
+                            try { form.submit(); } catch (_) {}
+                        }
+                    });
+
                     form.addEventListener('submit', (event) => {
                         event.preventDefault();
 
@@ -444,6 +482,7 @@
                     this.wireDeleteConfirm(this.tableContainer);
                     this.initTooltips(this.tableContainer);
                     this.bindFilterForms(this.tableContainer);
+                    try { window.dispatchEvent(new Event('modal:list:reloaded')); } catch(_e) {}
                     if (successMessage) {
                         this.showAlert(successMessage, variant);
                     }
