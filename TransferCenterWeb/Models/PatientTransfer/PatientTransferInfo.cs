@@ -31,11 +31,13 @@ public class PatientTransferInfo : AuditLogMeta
     [Required]
     [DisplayName("Phone #")]
     [Phone]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid primary phone number (10-20 digits, may include +, space, (), - or .)")]
     public string PhoneNumber { get; set; }
 
     [Required]
     [DisplayName("Fax #")]
     [Phone]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid fax number (10-20 digits, may include +, space, (), - or .)")]
     public string FaxNumber { get; set; }
 
     
@@ -45,10 +47,12 @@ public class PatientTransferInfo : AuditLogMeta
     
     
     [DisplayName("Phone #")]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid secondary phone number (10-20 digits, may include +, space, (), - or .)")]
     public string SecondPhoneNumber { get; set; }
     
     
     [DisplayName("Fax #")]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid fax number (10-20 digits, may include +, space, (), - or .)")]
     public string SecondFaxNumber { get; set; }
     
     
@@ -66,6 +70,7 @@ public class PatientTransferInfo : AuditLogMeta
     [Required]
     [DisplayName("Direct Phone #")]
     [Phone]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid referring MD phone (10-20 digits, may include +, space, (), - or .)")]
     public string ReferringMdPhone { get; set; }
     
     [Required]
@@ -75,6 +80,7 @@ public class PatientTransferInfo : AuditLogMeta
     [Required]
     [DisplayName("Direct Phone #")]
     [Phone]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid specialist phone (10-20 digits, may include +, space, (), - or .)")]
     public string ReferringSpecialistPhone { get; set; }
 
 
@@ -90,6 +96,7 @@ public class PatientTransferInfo : AuditLogMeta
     [Required]
     [DisplayName("Unit Phone #")]
     [Phone]
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid unit phone number (10-20 digits, may include +, space, (), - or .)")]
     public string UnitPhone { get; set; }
     
     public bool IsActive { get; set; } = true;

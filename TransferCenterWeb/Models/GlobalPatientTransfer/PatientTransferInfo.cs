@@ -12,21 +12,23 @@ public class PatientTransferInfo:AuditLogMeta
 
     [Required]
     [DisplayName("Case Mgr/SW/RN")]
-    public string CaseMgrSwRn { get; set; }
+    public string CaseMgrSwRn { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Phone #")]
     [Phone]
-    public string PhoneNumber { get; set; }
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid phone number (10-20 digits, may include +, space, (), - or .)")]
+    public string PhoneNumber { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Fax #")]
     [Phone]
-    public string FaxNumber { get; set; }
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid fax number (10-20 digits, may include +, space, (), - or .)")]
+    public string FaxNumber { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Requesting Facility")]
-    public string RequestingFacility { get; set; }
+    public string RequestingFacility { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Date Of Transfer")]
@@ -36,21 +38,23 @@ public class PatientTransferInfo:AuditLogMeta
 
     [Required]
     [DisplayName("Referring MD")]
-    public string ReferringMd { get; set; }
+    public string ReferringMd { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Direct Phone #")]
     [Phone]
-    public string ReferringMdPhone { get; set; }
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid phone number (10-20 digits, may include +, space, (), - or .)")]
+    public string ReferringMdPhone { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Direct Phone #")]
     [Phone]
-    public string ReferringSpecialistPhone { get; set; }
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid phone number (10-20 digits, may include +, space, (), - or .)")]
+    public string ReferringSpecialistPhone { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Referring Specialist")]
-    public string ReferringSpecialist { get; set; }
+    public string ReferringSpecialist { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Admit Date")]
@@ -59,12 +63,13 @@ public class PatientTransferInfo:AuditLogMeta
     public DateTime AdmitDate { get; set; } = DateTime.Today;
 
     [Required]
-    public string Unit { get; set; }
+    public string Unit { get; set; } = string.Empty;
 
     [Required]
     [DisplayName("Unit Phone #")]
     [Phone]
-    public string UnitPhone { get; set; }
+    [RegularExpression(@"^(?:\+?\d[\d\s().-]{8,18}\d)$", ErrorMessage = "Enter a valid phone number (10-20 digits, may include +, space, (), - or .)")]
+    public string UnitPhone { get; set; } = string.Empty;
 
     public bool IsActive { get; set; } = true;
 }
