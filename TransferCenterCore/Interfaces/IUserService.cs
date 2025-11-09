@@ -10,7 +10,7 @@ public interface IUserService
 
     public long SaveUser(User user);
 
-    public bool CheckDuplicateEmailAndLogin(string emailId, string loginId);
+    public bool CheckDuplicateEmailAndLogin(string emailId, string loginId, long? userId);
     public User GetUserById(long Id);
 
     public void UpdateUser(User user);

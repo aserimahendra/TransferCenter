@@ -47,10 +47,10 @@ public class UserController : Controller
         {
             return View(model);
         }
-        bool isDuplicate = _userService.CheckDuplicateEmailAndLogin(model.EmailId, model.LoginId);
+        bool isDuplicate = _userService.CheckDuplicateEmailAndLogin(model.EmailId, model.LoginId, null);
         if (isDuplicate)
         {
-            ModelState.AddModelError(string.Empty, "Email ID or Login ID already exists.");
+            ModelState.AddModelError(nameof(model.EmailId), "Email ID or Login ID already exists.");
             return View(model);
         }
         try
@@ -94,7 +94,12 @@ public class UserController : Controller
         {
             return View(model);
         }
-        
+        bool isDuplicate = _userService.CheckDuplicateEmailAndLogin(model.EmailId, model.LoginId, model.UserId);
+        if (isDuplicate)
+        {
+            ModelState.AddModelError(nameof(model.EmailId), "Email ID or Login ID already exists.");
+            return View(model);
+        }
         try
         {
             _userService.UpdateUser(model.ToCoreModel());

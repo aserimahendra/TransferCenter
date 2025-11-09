@@ -60,10 +60,20 @@ public class UserService : IUserService
         return 0;
     }
 
-    public bool CheckDuplicateEmailAndLogin(string emailId, string loginId)
+    public bool CheckDuplicateEmailAndLogin(string emailId, string loginId, long? userId)
     {
-        var existingUser = _unitOfWork.UserRepository.Get(x => x.LoginId == loginId && x.IsActive && x.EmailId == emailId);
-        return existingUser != null;
+        TransferCenterDbStore.Entities.User user;
+        if (userId != null && userId > 0)
+        {
+            user = _unitOfWork.UserRepository.Get(x =>
+                (x.LoginId == loginId || x.EmailId == emailId) && x.IsActive && x.UserId != userId);
+        }
+        else
+        {
+            user = _unitOfWork.UserRepository.Get(x => (x.LoginId == loginId || x.EmailId == emailId) && x.IsActive);
+        }
+
+        return user != null;
     }
 
 
@@ -150,6 +160,7 @@ public class UserService : IUserService
                 throw new InvalidOperationException("Password digest length exceeded 100 characters.");
             return digest;
         }
+
         return null;
     }
     // Removed legacy random encryption helper in favor of deterministic digest
