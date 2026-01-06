@@ -29,10 +29,11 @@ import './modalLayout.js';
 		if (!input || input.dataset.usDateBound === '1') return;
 		input.dataset.usDateBound = '1';
 
-		// Normalize initial value if server rendered ISO
+		// Normalize initial value if server rendered ISO (allow optional time/tz portion)
 		const v = (input.value || '').trim();
-		if (v && /^\d{4}-\d{2}-\d{2}$/.test(v)) {
-			input.value = toUs(v);
+		const isoDateMatch = v.match(/^(\d{4}-\d{2}-\d{2})(?:$|[T\s].*)/);
+		if (isoDateMatch) {
+			input.value = toUs(isoDateMatch[1]);
 			input.type = 'text';
 		}
 
@@ -98,7 +99,7 @@ import './modalLayout.js';
 			});
 		}
 
-		// If the input lives inside a form, ensure ISO is posted on submit
+		// If the input lives inside a form, ensure ISO is posted on submit (only when valid)
 		const form = input.closest('form');
 		if (form && form.dataset.usDateSubmitBound !== '1') {
 			form.addEventListener('submit', () => {
@@ -107,8 +108,13 @@ import './modalLayout.js';
 					if (!el) return;
 					if (el.type === 'text') {
 						const iso = toIso((el.value || '').trim());
-						el.type = 'date';
-						el.value = iso || '';
+						// Only switch to date/ISO when the entered value parses as a valid MM/DD/YYYY
+						if (iso) {
+							el.type = 'date';
+							el.value = iso;
+						} else {
+							// Leave the user's text untouched so validation errors will preserve it
+						}
 					}
 				});
 			});
