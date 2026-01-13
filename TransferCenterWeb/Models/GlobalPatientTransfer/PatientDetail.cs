@@ -14,7 +14,7 @@ public class PatientDetails:AuditLogMeta
     public string Name { get; set; } = null!;
 
     [Required]
-    [DisplayName("Date of Birth")]
+    [DisplayName("Date Of Birth (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime DOB { get; set; } = DateTime.Today;
@@ -38,6 +38,9 @@ public class PatientDetails:AuditLogMeta
     [Required]
     [DisplayName("Weight")]
     public double Weight { get; set; }
+
+    [DisplayName("Weight In LBS/KGS")]
+    public short WeightIn { get; set; }
 
     [Required]
     [DisplayName("Diagnosis")]

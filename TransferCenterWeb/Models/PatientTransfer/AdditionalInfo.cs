@@ -44,7 +44,7 @@ public class AdditionalInfo : AuditLogMeta, IValidatableObject
     [Display(Name = "Have you been diagnosed with COVID-19 or tested positive at a non-UCI lab?")]
     public bool DiagnosedCovidOrPositiveLab { get; set; }
 
-    [Display(Name = "If YES, please specify dates")]
+    [Display(Name = "If YES, please specify dates (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime? CovidDiagnosisDates { get; set; }

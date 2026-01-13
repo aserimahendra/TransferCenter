@@ -1,4 +1,5 @@
 ﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.PatientDetails
+@using TransferCenterWeb.Models
 @using Microsoft.AspNetCore.Mvc.Rendering
 
 @Html.HiddenFor(m => m.Id)
@@ -68,6 +69,16 @@
                 <label class="form-label" for="@Html.IdFor(m => m.Weight)">@Html.DisplayNameFor(m => m.Weight)</label>
                 @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Weight, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="@Html.IdFor(m => m.WeightIn)">@Html.DisplayNameFor(m => m.WeightIn)</label>
+                @Html.DropDownListFor(m => m.WeightIn, new List<SelectListItem>
+                {
+                    new() { Text = "-- Select Unit --", Value = string.Empty },
+                    new() { Text = "Lbs", Value = ((short)WeightIn.Lbs).ToString() },
+                    new() { Text = "Kgs", Value = ((short)WeightIn.Kgs).ToString() }
+                }, new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.WeightIn, "", new { @class = "text-danger" })
             </div>
         </div>
 

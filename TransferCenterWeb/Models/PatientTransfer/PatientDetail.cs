@@ -18,7 +18,7 @@ public class PatientDetails : AuditLogMeta
     public string LastName { get; set; }
 
     [Required]
-    [DisplayName("Date of Birth")]
+    [DisplayName("Date Of Birth (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime DOB { get; set; } = DateTime.Today;

@@ -31,7 +31,7 @@ public class PatientTransferInfo:AuditLogMeta
     public string RequestingFacility { get; set; } = string.Empty;
 
     [Required]
-    [DisplayName("Date Of Transfer")]
+    [DisplayName("Date Of Transfer (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime TransferDate { get; set; } = DateTime.Today;
@@ -57,7 +57,7 @@ public class PatientTransferInfo:AuditLogMeta
     public string ReferringSpecialist { get; set; } = string.Empty;
 
     [Required]
-    [DisplayName("Admit Date")]
+    [DisplayName("Admit Date (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime AdmitDate { get; set; } = DateTime.Today;
