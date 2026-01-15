@@ -14,6 +14,13 @@ using TransferCenterHelper.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure appsettings.json to load environment-specific config
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName.ToLower()}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

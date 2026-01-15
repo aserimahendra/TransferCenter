@@ -53,18 +53,15 @@
     string qTransferTo = Model?.TransferDateTo?.ToString("MM/dd/yyyy") ?? string.Empty;
 }
 
-@* <div class="d-flex justify-content-between align-items-center mt-3">
-    <div>
-        Showing page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items
+@if (!string.IsNullOrEmpty(Model?.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.ErrorMessage
     </div>
-    <div>
-        @await Html.PartialAsync("_Pagination", paginationModel)
-    </div>
-</div>
-*@
+}
 <div class="row align-items-center mb-3 g-2">
     <div class="col d-flex align-items-center gap-2">
-        <button type="button" class="btn btn-primary" data-modal-url="@Url.Action("Create", "GlobalPatientTransfer")" data-modal-title="KPC Global Patient Transfer Request"
+        <button type="button" class="btn btn-primary btn-sm mt-4" data-modal-url="@Url.Action("Create", "GlobalPatientTransfer")" data-modal-title="KPC Global Patient Transfer Request"
                 data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request" aria-label="Add new transfer">
             <i class="bi bi-plus-circle me-1"></i> Create
         </button>
@@ -110,7 +107,7 @@
                         { "transferDateTo", Model?.TransferDateTo?.ToString("MM/dd/yyyy") }
                     };
                 }
-                <a href="@Url.Action("ExportToExcel", "GlobalPatientTransfer", exportRouteValues)" target="_blank" class="btn btn-outline-success btn-sm" title="Export to Excel" aria-label="Export to Excel" style="display: flex; align-items: center; gap: 0.5em;">
+                <a href="@Url.Action("ExportToExcel", "GlobalPatientTransfer", exportRouteValues)" class="btn btn-outline-success btn-sm" title="Export to Excel" aria-label="Export to Excel" style="display: flex; align-items: center; gap: 0.5em;">
                     <i class="bi bi-file-earmark-excel" aria-hidden="true"></i>
                 </a>
             </div>

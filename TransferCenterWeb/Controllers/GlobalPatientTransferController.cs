@@ -36,25 +36,37 @@ public class GlobalPatientTransferController : Controller
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
-        DateTime? from = transferFrom?.Date;
-        DateTime? to = transferTo?.Date;
-        if (from.HasValue && to.HasValue && from > to)
-            (from, to) = (to, from);
+        // Validate date range
+        var (isValid, errorMessage) = TransferCenterWeb.Extensions.ExportValidationExtensions.ValidateFilterDateRange(transferFrom, transferTo);
+        if (!isValid)
+        {
+            var viewModel = new GlobalPatientTransferListViewModel()
+            {
+                Items = new List<GlobalPatientTransferRequest>(),
+                TotalCount = 0,
+                PatientName = patientName,
+                CaseMgrSwRn = caseMgr,
+                TransferDateFrom = transferFrom,
+                TransferDateTo = transferTo,
+                ErrorMessage = errorMessage
+            };
+            return PartialView("PatientTransferList", viewModel);
+        }
 
-        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize, caseMgr, from, to, patientName);
+        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize, caseMgr, transferFrom, transferTo, patientName);
         var webItems = items.Select(x => x.ToWebModel()).ToList();
 
-        var viewModel = new GlobalPatientTransferListViewModel
+        var validViewModel = new GlobalPatientTransferListViewModel
         {
             Items = webItems,
             TotalCount = totalCount,
             CaseMgrSwRn = caseMgr,
             PatientName = patientName,
-            TransferDateFrom = from,
-            TransferDateTo = to
+            TransferDateFrom = transferFrom,
+            TransferDateTo = transferTo,
+            ErrorMessage = null
         };
-
-        return PartialView("PatientTransferList", viewModel);
+        return PartialView("PatientTransferList", validViewModel);
     }
     
     [HttpGet]
@@ -62,6 +74,17 @@ public class GlobalPatientTransferController : Controller
     {
         try
         {
+            // Validate date range (max 31 days)
+            // var (isValid, errorMessage) = TransferCenterWeb.Extensions.ExportValidationExtensions.ValidateExportDateRange(transferDateFrom, transferDateTo);
+            // if (!isValid)
+            // {
+            //     var errorResult = new ModalActionResult(
+            //         errorMessage,
+            //         Constant.Status.Code.Error,
+            //         false);
+            //     return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
+            // }
+
             var (items, _) = await _globalTransferService.GetList(caseManager, transferDateFrom, transferDateTo, name);
             var webItems = items.Select(x => x.ToWebModel()).ToList();
             var sheets = new Dictionary<string, (Type, System.Collections.IEnumerable)>
@@ -78,7 +101,11 @@ public class GlobalPatientTransferController : Controller
         }
         catch (Exception ex)
         {
-            throw ex;
+            var errorResult = new ModalActionResult(
+                string.IsNullOrWhiteSpace(ex.Message) ? "Internal server error." : ex.Message,
+                Constant.Status.Code.Error,
+                false);
+            return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
         }
     }
     

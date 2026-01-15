@@ -22,4 +22,7 @@ public class GlobalPatientTransferListViewModel
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime? TransferDateTo { get; init; }
+
+    // Error message for invalid date range
+    public string? ErrorMessage { get; set; }
 }
