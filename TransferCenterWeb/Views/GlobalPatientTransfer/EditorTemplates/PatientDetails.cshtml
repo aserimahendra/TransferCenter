@@ -48,7 +48,7 @@
         </div>
 
         <div class="row mb-3">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-check mt-4">
                     @Html.CheckBoxFor(m => m.IsIsolation, new { @class = "form-check-input" })
                     <label class="form-check-label" for="@Html.IdFor(m => m.IsIsolation)">@Html.DisplayNameFor(m => m.IsIsolation)</label>
@@ -61,16 +61,24 @@
                 @Html.ValidationMessageFor(m => m.IsolationType, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-3">
-                <label class="form-label" for="@Html.IdFor(m => m.Height)">@Html.DisplayNameFor(m => m.Height)</label>
-                @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Height, "", new { @class = "text-danger" })
+                <label class="form-label">Height (ft / in)</label>
+                <div class="row g-1">
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.HeightFeet, new { @class = "form-control", type = "number", min = "0", step = "1", placeholder = "ft" })
+                        @Html.ValidationMessageFor(m => m.HeightFeet, "", new { @class = "text-danger small" })
+                    </div>
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.HeightInches, new { @class = "form-control", type = "number", min = "0", max = "11", step = "1", placeholder = "in" })
+                        @Html.ValidationMessageFor(m => m.HeightInches, "", new { @class = "text-danger small" })
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label" for="@Html.IdFor(m => m.Weight)">@Html.DisplayNameFor(m => m.Weight)</label>
                 @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Weight, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label class="form-label" for="@Html.IdFor(m => m.WeightIn)">@Html.DisplayNameFor(m => m.WeightIn)</label>
                 @Html.DropDownListFor(m => m.WeightIn, new List<SelectListItem>
                 {
@@ -150,3 +158,45 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        (function () {
+            function toDecimalFeet(feet, inches) {
+                feet = parseInt(feet) || 0;
+                inches = parseInt(inches) || 0;
+                if (inches < 0) inches = 0;
+                if (inches > 11) inches = 11;
+                return feet + (inches / 10);
+            }
+
+            function fromDecimalFeet(height) {
+                var h = parseFloat(height) || 0;
+                var feet = Math.floor(h);
+                var inches = Math.round((h - feet) * 10);
+                return { feet: feet, inches: inches };
+            }
+
+            var feetEl = document.getElementById('@Html.IdFor(m => m.HeightFeet)');
+            var inchesEl = document.getElementById('@Html.IdFor(m => m.HeightInches)');
+
+            if (!feetEl || !inchesEl) return;
+
+            // ensure sensible defaults on load
+            if (!feetEl.value) feetEl.value = 0;
+            if (!inchesEl.value) inchesEl.value = 0;
+
+            // keep client-side feedback but server-side translator performs conversion on POST
+            function clampInches(el) {
+                var v = parseInt(el.value) || 0;
+                if (v < 0) v = 0;
+                if (v > 11) v = 11;
+                el.value = v;
+            }
+
+            feetEl.addEventListener('change', function () { clampInches(inchesEl); });
+            inchesEl.addEventListener('change', function () { clampInches(this); });
+
+        })();
+    </script>
+}

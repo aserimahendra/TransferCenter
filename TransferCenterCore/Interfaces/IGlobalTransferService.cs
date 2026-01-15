@@ -14,7 +14,9 @@ public interface IGlobalTransferService
     /// <param name="caseMgrSwRn">Optional case manager / SW / RN search text (partial match, case-insensitive).</param>
     /// <param name="transferDateFrom">Optional inclusive start date (date component only considered).</param>
     /// <param name="transferDateTo">Optional inclusive end date (date component only considered).</param>
-    public Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseMgrSwRn, DateTime? transferDateFrom, DateTime? transferDateTo);
+    public Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseMgrSwRn, DateTime? transferDateFrom, DateTime? transferDateTo, string? name = null);
     public Task Update(GlobalPatientTransferRequest patientTransferViewModel);
     public Task Delete(GlobalPatientTransferRequest patientTransferViewModel);
+    public Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(string? caseMgrSwRn, DateTime? transferDateFrom, DateTime? transferDateTo, string? name = null);
+    
 }

@@ -60,6 +60,10 @@
                 <input type="text" id="caseManager" name="caseManager" value="@Model?.CaseManager" class="form-control form-control-sm" placeholder="Search name" />
             </div>
             <div class="col">
+                <label for="name" class="form-label form-label-sm mb-0 text-muted">Patient Name</label>
+                <input type="text" id="name" name="name" value="@Model?.Name" class="form-control form-control-sm" placeholder="Search name" />
+            </div>
+            <div class="col">
                 <label for="transferDateFrom" class="form-label form-label-sm mb-0 text-muted">Transfer Date From</label>
                 <input type="text" id="transferDateFrom" name="transferDateFrom" value="@Model?.TransferDateFrom?.ToString("MM/dd/yyyy")" class="form-control form-control-sm date-us" placeholder="MM/DD/YYYY" />
             </div>
@@ -77,10 +81,22 @@
             </div>
             <div class="col d-flex gap-2">
                 <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-funnel me-1"></i> Filter</button>
-                <button type="reset" class="btn btn-outline-secondary btn-sm" title="Reset filters" aria-label="Reset filters">
+                <button type="reset" class="btn btn-outline-secondary btn-sm" title="Reset filters" aria-label="Reset filters" >
                     <i class="bi bi-arrow-counterclockwise me-1"></i>
                     Reset
                 </button>
+                @{
+                    var exportRouteValues = new Dictionary<string, object?>
+                    {
+                        { "caseManager", Model?.CaseManager },
+                        { "name", Model?.Name },
+                        { "transferDateFrom", Model?.TransferDateFrom?.ToString("MM/dd/yyyy") },
+                        { "transferDateTo", Model?.TransferDateTo?.ToString("MM/dd/yyyy") }
+                    };
+                }
+                <a href="@Url.Action("ExportToExcel", "PatientTransfer", exportRouteValues)" target="_blank" class="btn btn-outline-success btn-sm" title="Export to Excel" aria-label="Export to Excel" style="display: flex; align-items: center; gap: 0.5em;">
+                    <i class="bi bi-file-earmark-excel" aria-hidden="true"></i>
+                </a>
             </div>
         </form>
     </div>
@@ -146,7 +162,7 @@
                             <i class="bi bi-trash"></i>
                         </button>
                     }
-                    <button type="button" class="btn btn-outline-danger btn-sm" data-download-url="@pdfUrl"
+                    <button type="button" class="btn btn-outline-danger btn-sm exportExcel" data-download-url="@pdfUrl"
                             data-download-name="@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="(function(m,u,n){try{if(m&&typeof m.downloadFile==='function'){m.downloadFile(u,n);}else{var root=document.querySelector('[data-modal-list]');var id=root?root.getAttribute('data-loader-id'):null;var l=id?document.getElementById(id):null;if(l) l.classList.remove('d-none'); try{window.location.href=u;}finally{if(l) setTimeout(function(){l.classList.add('d-none');},2000);}}}catch(_e){window.location.href=u;}})(window.modalActions,'@pdfUrl','@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")')"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
                             aria-label="Download PDF">

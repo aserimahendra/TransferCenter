@@ -32,6 +32,7 @@ public class UnitOfWork : IUnitOfWork
     IPatientTransferInfoRepository? _patientTransferInfoRepository;
     IAuditLogRepository? _auditLogRepository;
     IComorbiditiesAndRiskScoreRepository? _comorbiditiesAndRiskScoreRepository;
+    ITransferRequestRepository? _transferRequestRepository;
 
     public IUserRepository UserRepository
     {
@@ -59,6 +60,11 @@ public class UnitOfWork : IUnitOfWork
     public IComorbiditiesAndRiskScoreRepository ComorbiditiesAndRiskScoreRepository
     {
         get { return _comorbiditiesAndRiskScoreRepository ??= new ComorbiditiesAndRiskScoreRepository(_dbContext); }
+    }
+
+    public ITransferRequestRepository TransferRequestRepository
+    {
+        get { return _transferRequestRepository ?? new TransferRequestRepository(_dbContext); }
     }
     #endregion
 }

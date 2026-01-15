@@ -58,6 +58,8 @@ builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
 builder.Services.AddScoped<IPatientTransferService, PatientTransferService>();
 builder.Services.AddScoped<IComorbiditiesAndRiskScoreRepository, ComorbiditiesAndRiskScoreRepository>();
 builder.Services.AddScoped<IDbContextFactory, DbContextFactory>();
+builder.Services.AddScoped<ITransferRequestRepository, TransferRequestRepository>();
+
 // Ensure Playwright browser is installed (Chromium is required for PDF)
 try { Microsoft.Playwright.Program.Main(new [] { "install", "chromium" }); } catch { /* ignore */ }
 builder.Services.AddSingleton<IPdfExporter, PlaywrightPdfExporter>();

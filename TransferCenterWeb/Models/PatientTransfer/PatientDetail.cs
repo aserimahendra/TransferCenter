@@ -31,6 +31,14 @@ public class PatientDetails : AuditLogMeta
     [DisplayName("Height")]
     public double Height { get; set; }
 
+    [DisplayName("Height (ft)")]
+    [Range(0, 9, ErrorMessage = "Feet must be 0-9")]
+    public int? HeightFeet { get; set; }
+
+    [DisplayName("Height (in)")]
+    [Range(0, 11, ErrorMessage = "Inches must be between 0 and 11")]
+    public int? HeightInches { get; set; }
+
     [Required]
     [DisplayName("Weight")]
     public double Weight { get; set; }

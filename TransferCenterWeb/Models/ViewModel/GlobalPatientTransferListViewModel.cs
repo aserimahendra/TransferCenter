@@ -10,6 +10,9 @@ public class GlobalPatientTransferListViewModel
     public int TotalCount { get; init; }
     public string? CaseMgrSwRn { get; init; }
 
+    [DisplayName("Patient Name")]
+    public string? PatientName { get; init; }
+
     [DisplayName("Transfer Date From (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]

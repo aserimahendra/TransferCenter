@@ -1,9 +1,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace TransferCenterWeb.Models.GlobalPatientTransfer;
 
-public class PatientDetails:AuditLogMeta
+public class PatientDetails : AuditLogMeta
 {
     public long Id { get; set; }
 
@@ -32,8 +33,16 @@ public class PatientDetails:AuditLogMeta
     public string IsolationType { get; set; }
 
     [Required]
-    [DisplayName("Height")]
+    [DisplayName("Height (stored as decimal feet)")]
     public double Height { get; set; }
+
+    [DisplayName("Height (ft)")]
+    [Range(0, 9, ErrorMessage = "Feet must be 0-9")]
+    public int? HeightFeet { get; set; }
+
+    [DisplayName("Height (in)")]
+    [Range(0, 11, ErrorMessage = "Inches must be between 0 and 11")]
+    public int? HeightInches { get; set; }
 
     [Required]
     [DisplayName("Weight")]

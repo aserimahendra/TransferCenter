@@ -7,12 +7,37 @@ using TransferCenterWeb.Models;
 using TransferCenterWeb.Models.PatientTransfer;
 using TransferCenterWeb.Models.ViewModel;
 using TransferCenterWeb.Translators;
+using TransferCenterWeb.Utility;
 
 namespace TransferCenterWeb.Controllers;
 
 [Authorize]
 public class PatientTransferController : Controller
 {
+    // ...existing code...
+    #region Export to Excel
+
+    [HttpGet]
+    public async Task<IActionResult> ExportToExcel(string? caseManager = null, string? name = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
+    {
+        var (items, _) = await _patientTransferService.GetList(caseManager, transferDateFrom, transferDateTo, name);
+        var webItems = items.Select(x => x.ToWebModel()).ToList();
+        var sheets = new Dictionary<string, (Type, System.Collections.IEnumerable)>
+        {
+            { "Transfer Info", (typeof(TransferCenterWeb.Models.PatientTransfer.PatientTransferInfo), webItems.Select(x => x.PatientTransferInfo).Where(x => x != null).ToList()) },
+            { "Patient Details", (typeof(TransferCenterWeb.Models.PatientTransfer.PatientDetails), webItems.Select(x => x.PatientDetails).Where(x => x != null).ToList()) },
+            { "Additional Info", (typeof(TransferCenterWeb.Models.PatientTransfer.AdditionalInfo), webItems.Select(x => x.AdditionalInfo).Where(x => x != null).ToList()) },
+            { "Comorbidities", (typeof(TransferCenterWeb.Models.PatientTransfer.ComorbiditiesAndRiskScore), webItems.Select(x => x.ComorbiditiesAndRiskScore).Where(x => x != null).ToList()) }
+        };
+        var excludeFieldsSetting = HttpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
+        var excludeFields = excludeFieldsSetting.GetExcelExportExcludeFields(Constant.Config.ExcelExportExcludeFields);
+        var excelBytes = await Task.Run(() => Utility.ExcelExportHelper.ExportToExcel(sheets, excludeFields));
+        var fileName = $"PatientTransfers_{DateTime.UtcNow:yyyyMMdd}.xlsx";
+        return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+    }
+
+    #endregion
+
     private readonly IPatientTransferService _patientTransferService;
     private readonly IPdfExporter _pdfExporter;
     private readonly IViewRenderService _viewRenderService;
@@ -35,22 +60,41 @@ public class PatientTransferController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> PatientTransferList(int page = 1, int pageSize = 10, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
+    public async Task<IActionResult> PatientTransferList(int page = 1, int pageSize = 10, string? caseManager = null, string? name = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
-        var (items, totalCount) = await _patientTransferService.GetList(page, pageSize, caseManager, transferDateFrom, transferDateTo);
+        var (items, totalCount) = await _patientTransferService.GetList(page, pageSize, caseManager, transferDateFrom, transferDateTo, name);
         var webItems = items.Select(x => x.ToWebModel()).ToList();
         var viewModel = new PatientTransferListViewModel()
         {
             Items = webItems,
             TotalCount = totalCount,
+            Name = name,
             CaseManager = caseManager,
             TransferDateFrom = transferDateFrom,
             TransferDateTo = transferDateTo
         };
         return PartialView("PatientTransferList", viewModel);
     }
+
+    [HttpGet]
+    public async Task<JsonResult> GetPatientTransferList(string? caseManager = null, string? name = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
+    {
+        var (items, totalCount) = await _patientTransferService.GetList(1, int.MaxValue, caseManager, transferDateFrom, transferDateTo, name);
+        var webItems = items.Select(x => x.ToWebModel()).ToList();
+        var viewModel = new PatientTransferListViewModel()
+        {
+            Items = webItems,
+            TotalCount = totalCount,
+            Name = name,
+            CaseManager = caseManager,
+            TransferDateFrom = transferDateFrom,
+            TransferDateTo = transferDateTo
+        };
+        return Json(viewModel);
+    }
+
 
     [HttpGet]
     public IActionResult Create()
@@ -184,5 +228,6 @@ public class PatientTransferController : Controller
             return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
         }
     }
+
     
 }

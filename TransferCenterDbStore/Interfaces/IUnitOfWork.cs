@@ -16,5 +16,6 @@ public interface IUnitOfWork
     IPatientTransferInfoRepository PatientTransferInfoRepository { get; }
     IAuditLogRepository AuditLogRepository { get; }
     IComorbiditiesAndRiskScoreRepository ComorbiditiesAndRiskScoreRepository { get; }
+    ITransferRequestRepository TransferRequestRepository { get; }
 
 }

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using TransferCenterCore.Interfaces;
 using TransferCenterWeb.Models.GlobalPatientTransfer;
 using TransferCenterWeb.Models;
 using TransferCenterWeb.Translators;
 using TransferCenterHelper;
+using TransferCenterWeb.Utility;
 
 namespace TransferCenterWeb.Controllers;
 
@@ -32,7 +32,7 @@ public class GlobalPatientTransferController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> TransferList(string? caseMgr, DateTime? transferFrom, DateTime? transferTo, int page = 1, int pageSize = 10)
+    public async Task<IActionResult> TransferList(string? caseMgr, string? patientName, DateTime? transferFrom, DateTime? transferTo, int page = 1, int pageSize = 10)
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
@@ -41,7 +41,7 @@ public class GlobalPatientTransferController : Controller
         if (from.HasValue && to.HasValue && from > to)
             (from, to) = (to, from);
 
-        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize, caseMgr, from, to);
+        var (items, totalCount) = await _globalTransferService.GetList(page, pageSize, caseMgr, from, to, patientName);
         var webItems = items.Select(x => x.ToWebModel()).ToList();
 
         var viewModel = new GlobalPatientTransferListViewModel
@@ -49,14 +49,39 @@ public class GlobalPatientTransferController : Controller
             Items = webItems,
             TotalCount = totalCount,
             CaseMgrSwRn = caseMgr,
+            PatientName = patientName,
             TransferDateFrom = from,
             TransferDateTo = to
         };
 
         return PartialView("PatientTransferList", viewModel);
     }
-
-
+    
+    [HttpGet]
+    public async Task<IActionResult> ExportToExcel(string? caseManager = null, string? name = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
+    {
+        try
+        {
+            var (items, _) = await _globalTransferService.GetList(caseManager, transferDateFrom, transferDateTo, name);
+            var webItems = items.Select(x => x.ToWebModel()).ToList();
+            var sheets = new Dictionary<string, (Type, System.Collections.IEnumerable)>
+            {
+                { "Transfer Info", (typeof(TransferCenterWeb.Models.PatientTransfer.PatientTransferInfo), webItems.Select(x => x.PatientTransferInfo).Where(x => x != null).ToList()) },
+                { "Patient Details", (typeof(TransferCenterWeb.Models.PatientTransfer.PatientDetails), webItems.Select(x => x.PatientDetails).Where(x => x != null).ToList()) },
+                { "Additional Info", (typeof(TransferCenterWeb.Models.PatientTransfer.AdditionalInfo), webItems.Select(x => x.AdditionalInfo).Where(x => x != null).ToList()) },
+            };
+            var excludeFieldsSetting = HttpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
+            var excludeFields = excludeFieldsSetting.GetExcelExportExcludeFields(Constant.Config.ExcelExportExcludeFields);
+            var excelBytes = TransferCenterWeb.Utility.ExcelExportHelper.ExportToExcel(sheets, excludeFields);
+            var fileName = $"GlobalPatientTransfers_{DateTime.UtcNow:yyyyMMdd}.xlsx";
+            return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    
     public IActionResult Create()
     {
         GlobalPatientTransferRequest globalPatientTransferRequest = new GlobalPatientTransferRequest();
@@ -159,4 +184,5 @@ public class GlobalPatientTransferController : Controller
             return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
         }
     }
+
 }

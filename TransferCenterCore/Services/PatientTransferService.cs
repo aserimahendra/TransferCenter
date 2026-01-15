@@ -93,44 +93,32 @@ public class PatientTransferService : IPatientTransferService
     private const int DefaultPageSize = 10;
     private const short InPatientTransferType = 2;
 
-    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null)
+    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null, string? name = null)
     {
-        page = page < 1 ? 1 : page;
-        pageSize = pageSize <= 0 ? DefaultPageSize : pageSize;
-        // Normalize date range
-        DateTime? from = transferDateFrom?.Date;
-        DateTime? to = transferDateTo?.Date;
-        if (from.HasValue && to.HasValue && from > to)
-            (from, to) = (to, from);
-
-        var baseQuery = _unitOfWork.PatientTransferInfoRepository
-            .Query(x => x.IsActive && x.TransferType == InPatientTransferType);
-
-        var filteredQuery = baseQuery
-            .StartBuilder()
-            .ByContains(QueryPropertyNames.CaseManager, caseManager)
-            .ByDateFrom(QueryPropertyNames.TransferDate, from)
-            .ByDateTo(QueryPropertyNames.TransferDate, to)
-            .Build();
-
-        // total count AFTER applying filters
-        var totalCount = filteredQuery.Count();
-
-        var pagedTransfers = filteredQuery
-            .OrderByDescending(x => x.CreatedOn)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
-
-        var items = pagedTransfers.Select(x => new PatientTransferRequest
+        var (items, totalCount) = await _unitOfWork.TransferRequestRepository.GetList(InPatientTransferType,page, pageSize, caseManager, transferDateFrom, transferDateTo, name);
+        var resultItems = items.Select(x => new PatientTransferRequest
         {
-            Id = x.UId,
-            PatientTransferInfo = x.ToCoreModel(),
+            Id = x.Id,
+            PatientTransferInfo = x.PatientTransferInfo.ToCoreModel(),
         }).ToList();
-
-        return (items, totalCount);
+        return (resultItems, totalCount);
     }
-
+    
+    public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null,
+        string? name = null)
+    {
+        var (items, totalCount) = await _unitOfWork.TransferRequestRepository.GetList(InPatientTransferType, caseManager, transferDateFrom, transferDateTo, name);
+        var resultItems = items.Select(x => new PatientTransferRequest
+        {
+            Id = x.Id,
+            PatientTransferInfo = x.PatientTransferInfo.ToCoreModel(),
+            PatientDetails = x.PatientDetails.ToCoreModel(),
+            AdditionalInfo = x.AdditionalInfo.ToCoreModel(),
+            ComorbiditiesAndRiskScore = x.ComorbiditiesAndRiskScore.ToCoreModel(),
+        }).ToList();
+        return (resultItems, totalCount);
+    }
+    
     public async Task<PatientTransferRequest> Get(Guid uid)
     {
         var transferInfo = await GetTransferInfoAsync(uid);
