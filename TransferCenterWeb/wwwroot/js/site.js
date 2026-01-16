@@ -147,5 +147,32 @@ import './modalLayout.js';
 			try { window.jQuery(el).datepicker('show'); } catch (_) {}
 		}
 	});
+
+	document.exportExcel = function (element) {
+		downloadExcelbtn(element);
+					
+}
+
+	// Function to download Excel file using URL from attribute and params from filter inputs
+	function downloadExcelbtn(element) {
+	    var url = element.getAttribute('data-export-url');
+	    if (!url) return;
+
+	    var caseManager = document.getElementById('caseMgrSwRn')?.value || '';
+	    var patientName = document.getElementById('patientName')?.value || '';
+	    var transferFrom = document.getElementById('transferFrom')?.value || '';
+	    var transferTo = document.getElementById('transferTo')?.value || '';
+
+	    var params = new URLSearchParams({
+	        caseManager: caseManager,
+	        name: patientName,
+	        transferDateFrom: transferFrom,
+	        transferDateTo: transferTo
+	    });
+
+	    // Use an invisible iframe to trigger the download without opening a new tab
+	    var downloadUrl = url + '?' + params.toString();
+	    window.location.href = downloadUrl;
+	}
 })();
 
