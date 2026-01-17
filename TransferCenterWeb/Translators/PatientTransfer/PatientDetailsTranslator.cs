@@ -20,7 +20,11 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 Name = $"{source.FirstName} {source.LastName}",
                 DOB = source.DOB,
                 Gender = source.Gender,
-                Height = source.Height,
+                // Height conversion: store as feet + (inches / 10)
+                // e.g., 5 feet 5 inches = 5.5
+                Height = (source.HeightFeet.HasValue || source.HeightInches.HasValue)
+                    ? (double)((source.HeightFeet ?? 0) + ((source.HeightInches ?? 0) / 10.0))
+                    : source.Height,
                 Weight = source.Weight,
                 Diagnosis = source.Diagnosis,
                 ReasonForTransfer = source.ReasonForTransfer,
@@ -57,6 +61,10 @@ namespace TransferCenterWeb.Translators.PatientTransfer
                 DOB = source.DOB,
                 Gender = source.Gender,
                 Height = source.Height,
+                // Extract feet and inches from Height stored as feet + (inches / 10)
+                // e.g., 5.5 = 5 feet and 5 inches
+                HeightFeet = (int)Math.Floor(source.Height),
+                HeightInches = (int)Math.Round((source.Height - Math.Floor(source.Height)) * 10),
                 Weight = source.Weight,
                 Diagnosis = source.Diagnosis,
                 ReasonForTransfer = source.ReasonForTransfer,

@@ -14,6 +14,13 @@ using TransferCenterHelper.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure appsettings.json to load environment-specific config
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName.ToLower()}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -58,6 +65,8 @@ builder.Services.AddScoped<IGlobalTransferService, GlobalTransferService>();
 builder.Services.AddScoped<IPatientTransferService, PatientTransferService>();
 builder.Services.AddScoped<IComorbiditiesAndRiskScoreRepository, ComorbiditiesAndRiskScoreRepository>();
 builder.Services.AddScoped<IDbContextFactory, DbContextFactory>();
+builder.Services.AddScoped<ITransferRequestRepository, TransferRequestRepository>();
+
 // Ensure Playwright browser is installed (Chromium is required for PDF)
 try { Microsoft.Playwright.Program.Main(new [] { "install", "chromium" }); } catch { /* ignore */ }
 builder.Services.AddSingleton<IPdfExporter, PlaywrightPdfExporter>();

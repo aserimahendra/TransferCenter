@@ -48,22 +48,20 @@
 
     // Pre-fill filters from model (controller provides DateTime?)
     string qCaseMgr = Model?.CaseMgrSwRn ?? string.Empty;
+    string qPatientName = Model?.PatientName ?? string.Empty;
     string qTransferFrom = Model?.TransferDateFrom?.ToString("MM/dd/yyyy") ?? string.Empty;
     string qTransferTo = Model?.TransferDateTo?.ToString("MM/dd/yyyy") ?? string.Empty;
 }
 
-@* <div class="d-flex justify-content-between align-items-center mt-3">
-    <div>
-        Showing page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items
+@if (!string.IsNullOrEmpty(Model?.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.ErrorMessage
     </div>
-    <div>
-        @await Html.PartialAsync("_Pagination", paginationModel)
-    </div>
-</div>
-*@
+}
 <div class="row align-items-center mb-3 g-2">
     <div class="col d-flex align-items-center gap-2">
-        <button type="button" class="btn btn-primary" data-modal-url="@Url.Action("Create", "GlobalPatientTransfer")" data-modal-title="KPC Global Patient Transfer Request"
+        <button type="button" class="btn btn-primary btn-sm mt-4" data-modal-url="@Url.Action("Create", "GlobalPatientTransfer")" data-modal-title="KPC Global Patient Transfer Request"
                 data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request" aria-label="Add new transfer">
             <i class="bi bi-plus-circle me-1"></i> Create
         </button>
@@ -73,6 +71,10 @@
             <div class="col">
                 <label for="caseMgrSwRn" class="form-label form-label-sm mb-0 text-muted">Case Manager/SW/RN</label>
                 <input type="text" id="caseMgrSwRn" name="caseMgr" value="@qCaseMgr" class="form-control form-control-sm" placeholder="Search name" />
+            </div>
+            <div class="col">
+                <label for="patientName" class="form-label form-label-sm mb-0 text-muted">Patient Name</label>
+                <input type="text" id="patientName" name="patientName" value="@qPatientName" class="form-control form-control-sm" placeholder="Search patient name" />
             </div>
             <div class="col">
                 <label for="transferFrom" class="form-label form-label-sm mb-0 text-muted">Transfer Date From</label>
@@ -92,8 +94,12 @@
             </div>
             <div class="col d-flex gap-2">
                 <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-funnel me-1"></i> Filter</button>
-                <button type="reset" class="btn btn-outline-secondary btn-sm"  aria-label="Reset filters" title="Reset filters"  >
-                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                <button type="reset" class="btn btn-outline-secondary btn-sm" title="Reset filters" aria-label="Reset filters" >
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+                    Reset
+                </button>
+                <button type="button" class="btn btn-outline-success btn-sm" title="Export to Excel" aria-label="Export to Excel" onclick="exportExcel(this)" data-export-url="@Url.Action("ExportToExcel", "GlobalPatientTransfer")">
+                <i class="bi bi-file-earmark-excel" aria-hidden="true"></i>
                 </button>
             </div>
         </form>

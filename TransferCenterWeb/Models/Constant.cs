@@ -30,11 +30,16 @@ public static class Constant
         public const string Updated = "Successfully Updated !!";
         public const string Deleted = "Successfully Deleted !!";
         }
- public static class Code {
+        public static class Code {
         public const int Success = 200;
         public const int Error = 500;
         public const int NotFound = 404;
- }
+        }
 
-           }
+    }
+
+    public static class Config
+    {
+        public const string ExcelExportExcludeFields = "ExcelExportExcludeFields";
+    }
 }

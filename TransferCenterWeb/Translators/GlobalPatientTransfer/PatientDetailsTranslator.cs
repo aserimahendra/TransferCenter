@@ -17,8 +17,13 @@ public static class PatientDetailsTranslator
             Gender = patientDetails.Gender,
             IsIsolation = patientDetails.IsIsolation,
             IsolationType = patientDetails.IsolationType,
-            Height = patientDetails.Height,
+            // Height conversion: store as feet + (inches / 10)
+            // e.g., 5 feet 5 inches = 5.5
+            Height = (patientDetails.HeightFeet.HasValue || patientDetails.HeightInches.HasValue)
+                ? (double)((patientDetails.HeightFeet ?? 0) + ((patientDetails.HeightInches ?? 0) / 10.0))
+                : patientDetails.Height,
             Weight = patientDetails.Weight,
+            WeightIn = patientDetails.WeightIn,
             Diagnosis = patientDetails.Diagnosis,
             LevelOfCareNeeded = patientDetails.LevelOfCareNeeded,
             AcceptingPhysician = patientDetails.AcceptingPhysician,
@@ -49,7 +54,12 @@ public static class PatientDetailsTranslator
             IsolationType = coreModel.IsolationType,
             Height = coreModel.Height,
             Weight = coreModel.Weight,
+            WeightIn = coreModel.WeightIn,
             Diagnosis = coreModel.Diagnosis,
+            // Extract feet and inches from Height stored as feet + (inches / 10)
+            // e.g., 5.5 = 5 feet and 5 inches
+            HeightFeet = (int)Math.Floor(coreModel.Height),
+            HeightInches = (int)Math.Round((coreModel.Height - Math.Floor(coreModel.Height)) * 10),
             LevelOfCareNeeded = coreModel.LevelOfCareNeeded,
             AcceptingPhysician = coreModel.AcceptingPhysician,
             ReasonForTransfer = coreModel.ReasonForTransfer,

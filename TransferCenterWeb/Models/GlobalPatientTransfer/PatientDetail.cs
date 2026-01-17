@@ -1,9 +1,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace TransferCenterWeb.Models.GlobalPatientTransfer;
 
-public class PatientDetails:AuditLogMeta
+public class PatientDetails : AuditLogMeta
 {
     public long Id { get; set; }
 
@@ -14,7 +15,7 @@ public class PatientDetails:AuditLogMeta
     public string Name { get; set; } = null!;
 
     [Required]
-    [DisplayName("Date of Birth")]
+    [DisplayName("Date Of Birth (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime DOB { get; set; } = DateTime.Today;
@@ -32,12 +33,23 @@ public class PatientDetails:AuditLogMeta
     public string IsolationType { get; set; }
 
     [Required]
-    [DisplayName("Height")]
+    [DisplayName("Height (stored as decimal feet)")]
     public double Height { get; set; }
+
+    [DisplayName("Height (ft)")]
+    [Range(0, 9, ErrorMessage = "Feet must be 0-9")]
+    public int? HeightFeet { get; set; }
+
+    [DisplayName("Height (in)")]
+    [Range(0, 11, ErrorMessage = "Inches must be between 0 and 11")]
+    public int? HeightInches { get; set; }
 
     [Required]
     [DisplayName("Weight")]
     public double Weight { get; set; }
+
+    [DisplayName("Weight In LBS/KGS")]
+    public short WeightIn { get; set; }
 
     [Required]
     [DisplayName("Diagnosis")]

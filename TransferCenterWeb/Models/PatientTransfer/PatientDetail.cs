@@ -18,7 +18,7 @@ public class PatientDetails : AuditLogMeta
     public string LastName { get; set; }
 
     [Required]
-    [DisplayName("Date of Birth")]
+    [DisplayName("Date Of Birth (MM/DD/YYYY)")]
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime DOB { get; set; } = DateTime.Today;
@@ -30,6 +30,14 @@ public class PatientDetails : AuditLogMeta
     [Required]
     [DisplayName("Height")]
     public double Height { get; set; }
+
+    [DisplayName("Height (ft)")]
+    [Range(0, 9, ErrorMessage = "Feet must be 0-9")]
+    public int? HeightFeet { get; set; }
+
+    [DisplayName("Height (in)")]
+    [Range(0, 11, ErrorMessage = "Inches must be between 0 and 11")]
+    public int? HeightInches { get; set; }
 
     [Required]
     [DisplayName("Weight")]

@@ -207,7 +207,7 @@
                         event.preventDefault();
                         try {
                             // Clear known filter fields across both lists while preserving pageSize
-                            const namesToClear = ['caseManager','caseMgr','transferDateFrom','transferFrom','transferDateTo','transferTo'];
+                            const namesToClear = ['caseManager','caseMgr','transferDateFrom','transferFrom','transferDateTo','transferTo','patientName'];
                             namesToClear.forEach((name) => {
                                 const el = form.querySelector(`[name="${name}"]`);
                                 if (el) {
