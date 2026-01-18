@@ -6,6 +6,7 @@ using TransferCenterWeb.Models;
 using TransferCenterWeb.Translators;
 using TransferCenterHelper;
 using TransferCenterHelper.Utility;
+using TransferCenterWeb.Models.ViewModel;
 using TransferCenterWeb.Utility;
 
 namespace TransferCenterWeb.Controllers;
@@ -208,6 +209,40 @@ public class GlobalPatientTransferController : Controller
                 Constant.Status.Code.Error,
                 false);
     
+            return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
+        }
+    }
+
+    [HttpGet]
+    [Authorize(Policy = "RequireAdminRole")]
+    public IActionResult DeleteConformation(Guid id, string msg)
+    {
+        if (id == Guid.Empty) return NotFound();
+        return View(new DeleteViewModel(){Uid = id, Message = msg});
+    }
+
+    [HttpPost]
+    [Authorize(Policy = "RequireAdminRole")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        try
+        {
+            var details = await _globalTransferService.Get(id);
+            await _globalTransferService.Delete(details);
+            var successResult = new ModalActionResult(
+                Constant.Status.Message.Deleted,
+                Constant.Status.Code.Success,
+                true);
+            return PartialView(Constant.ViewPath.ModalActionResult, successResult);
+        }
+        catch (Exception ex)
+        {
+            var errorResult = new ModalActionResult(
+                string.IsNullOrWhiteSpace(ex.Message) ? "Internal server error." : ex.Message,
+                Constant.Status.Code.Error,
+                false);
+
             return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
         }
     }

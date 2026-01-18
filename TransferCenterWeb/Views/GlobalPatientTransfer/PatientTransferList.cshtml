@@ -153,9 +153,9 @@
                     var detailsUrl = Url.Action("Details", "GlobalPatientTransfer", new { id = item.UId });
                     var modalUpdateTitle = $"Update Global Patient transfer : {item.CaseMgrSwRn}";
                     var modalDetailsTitle = $"Global transfer Details:  {item.CaseMgrSwRn}";
-                    var deleteUrl = Url.Action("Delete", "GlobalPatientTransfer", new { id = item.UId });
                     var pdfUrl = Url.Action("DetailsInPdf", "GlobalPatientTransfer", new { id = item.UId });
                     var modalDeleteTitle = $"Delete Global Patient transfer: {item.CaseMgrSwRn}";
+                    var deleteUrl = Url.Action("DeleteConformation", "GlobalPatientTransfer", new { id = item.UId, msg= $"{Html.DisplayNameFor(_ => item.CaseMgrSwRn)}:{item.CaseMgrSwRn}" });
 
                 }
                 <button type="button" class="btn btn-outline-secondary btn-sm me-1" data-modal-url="@editUrl" data-modal-title="@modalUpdateTitle"

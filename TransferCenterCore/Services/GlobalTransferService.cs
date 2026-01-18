@@ -19,6 +19,7 @@ public class GlobalTransferService : IGlobalTransferService
     }
     public async Task Delete(GlobalPatientTransferRequest patientTransferViewModel)
     {
+        patientTransferViewModel.IsActive = false;
         patientTransferViewModel.AdditionalInfo.IsActive = false;
         patientTransferViewModel.PatientInfo.IsActive = false;
         patientTransferViewModel.TransferInfo.IsActive = false;

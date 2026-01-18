@@ -86,7 +86,8 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
         if (transferType == 2)
         {
             query = from pti in _dbContext.Set<PatientTransferInfo>()
-                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId where pti.TransferType == transferType
+                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
+                where pti.TransferType == transferType && pti.IsActive && pd.IsActive
                 select new TransferRequest
                 {
                     Id = pti.UId,
@@ -101,7 +102,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
             query = from pti in _dbContext.Set<PatientTransferInfo>()
                 join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
                 join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
-                where pti.TransferType == transferType
+                where pti.TransferType == transferType && pti.IsActive && pd.IsActive && ai.IsActive
                 select new TransferRequest
                 {
                     Id = pti.UId,
@@ -124,7 +125,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
                 join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
                 join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
                 join c in _dbContext.Set<ComorbiditiesAndRiskScore>() on pti.UId equals c.UId
-                where pti.TransferType == transferType
+                where pti.TransferType == transferType && pti.IsActive && pd.IsActive && ai.IsActive && c.IsActive
                 select new TransferRequest
                 {
                     Id = pti.UId,
@@ -140,7 +141,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
             query = from pti in _dbContext.Set<PatientTransferInfo>()
                 join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
                 join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
-                where pti.TransferType == transferType
+                where pti.TransferType == transferType && pti.IsActive && pd.IsActive && ai.IsActive
                 select new TransferRequest
                 {
                     Id = pti.UId,

@@ -1,8 +1,9 @@
 @model TransferCenterWeb.Models.ViewModel.DeleteViewModel
 
+
 @{
     Layout = "_ModalLayout";
-    ViewData["Title"] = "Delete Patient Transfer";
+    ViewData["Title"] = "Delete Global Patient Transfer";
 }
 
 <form asp-action="Delete" asp-route-id="@Model.Uid" method="post" class="needs-validation" novalidate>
