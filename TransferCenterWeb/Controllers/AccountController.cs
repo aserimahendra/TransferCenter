@@ -18,11 +18,25 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        if (User.Identity?.IsAuthenticated == true)
+        // Check if Azure AD is enabled from config
+        var clientId = TransferCenterWeb.Utility.ConfigManager.GetSetting(HttpContext.RequestServices, "AzureAd:ClientId");
+        if (!string.IsNullOrEmpty(clientId))
         {
-            return RedirectToAction("Index", "GlobalPatientTransfer");
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
+            // Challenge Azure AD login
+            return Challenge(new AuthenticationProperties { RedirectUri = Url.Action("Index", "GlobalPatientTransfer") });
         }
-        return View();
+        else
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
+            return View();
+        }
     }
 
     [HttpPost]

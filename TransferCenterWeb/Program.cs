@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
 using TransferCenterCore.Interfaces;
 using TransferCenterCore.Services;
 using TransferCenterDbStore;
@@ -24,26 +25,37 @@ builder.Configuration
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Add authentication and authorization services
-builder.Services.AddAuthentication(options =>
+// Conditional authentication: Use Azure AD if config section exists, else fallback to cookie auth
+var azureAdSection = builder.Configuration.GetSection("AzureAd");
+if (azureAdSection.Exists() && !string.IsNullOrEmpty(azureAdSection["ClientId"]))
 {
-    options.DefaultAuthenticateScheme = "TransferCenter";
-    options.DefaultSignInScheme = "TransferCenter";
-    options.DefaultChallengeScheme = "TransferCenter";
-})
-.AddCookie("TransferCenter", options =>
+    builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme)
+        .AddMicrosoftIdentityWebApp(azureAdSection);
+    builder.Services.AddAuthorization(options =>
+    {
+        options.FallbackPolicy = options.DefaultPolicy;
+    });
+}
+else
 {
-    options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Error/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-});
-
-// Add authorization with policies
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("RequireAdminRole", policy =>
-        policy.RequireClaim("Role", "1")); // Role 1 is admin
-});
+    builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = "TransferCenter";
+        options.DefaultSignInScheme = "TransferCenter";
+        options.DefaultChallengeScheme = "TransferCenter";
+    })
+    .AddCookie("TransferCenter", options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Error/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    });
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("RequireAdminRole", policy =>
+            policy.RequireClaim("Role", "1")); // Role 1 is admin
+    });
+}
 
 //  Add session support
 builder.Services.AddSession(options =>
