@@ -1,0 +1,37 @@
+﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.GlobalPatientTransferRequest
+
+@{
+    Layout = "_ModalLayout";
+    ViewData["Title"] = "Global Transfer Details";
+}
+
+<div class="container-fluid ">
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white shadow">
+            Transferring Facility Information
+        </div>
+        <div class="card-body">
+            @await Html.PartialAsync("PatientTransferDetails", Model.PatientTransferInfo)
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white shadow">
+            Patient Information
+        </div>
+        <div class="card-body">
+            @await Html.PartialAsync("PatientDetails", Model.PatientDetails)
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white shadow">
+            Additional information
+        </div>
+        <div class="card-body">
+            @await Html.PartialAsync("AdditionalInfoDetails", Model.AdditionalInfo)
+        </div>
+    </div>
+</div>
+
+

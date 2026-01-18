@@ -1,0 +1,74 @@
+
+@model TransferCenterWeb.Areas.Admin.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Admin Users";
+    Layout = "_Layout";
+
+    var baseListUrl = Url.Action("UserList", "User", new { area = "Admin" });
+    var queryString = ViewContext.HttpContext.Request.QueryString.HasValue
+        ? ViewContext.HttpContext.Request.QueryString.Value
+        : string.Empty;
+    var listUrl = string.IsNullOrEmpty(queryString)
+        ? baseListUrl
+        : string.Concat(baseListUrl, queryString);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Admin Users</h2>
+</div>
+
+<section class="container-fluid">
+    <div data-modal-list
+         data-list-url="@listUrl"
+         data-modal-id="appModal"
+         data-modal-title-id="appModalLabel"
+         data-modal-frame-id="appModalFrame"
+         data-loader-id="appListLoader"
+         data-alert-id="appListAlert"
+         data-alert-text-id="appListAlertText"
+         data-success-message="User saved successfully."
+         data-load-on-init="true">
+        <div data-list-container>
+            <div class="py-5 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Attach once: this script runs on the main page (Index), so it works even when the list is loaded via AJAX
+    (function(){
+        if (window.__userToggleHandlerAttached) return; // prevent duplicate listeners on soft reloads
+        window.__userToggleHandlerAttached = true;
+        document.addEventListener('change', async function (e) {
+            const el = e.target;
+            if (!el.classList || !el.classList.contains('js-toggle-active')) return;
+            const userId = el.getAttribute('data-user-id');
+            const isActive = el.checked;
+            const root = el.closest('[data-user-list-root]');
+            const tokenEl = root && root.querySelector('input[name="__RequestVerificationToken"]');
+            const token = tokenEl ? tokenEl.value : '';
+            try {
+                const resp = await fetch('@Url.Action("ToggleActive", "User", new { area = "Admin" })', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': token
+                    },
+                    body: `id=${encodeURIComponent(userId)}&isActive=${isActive}`
+                });
+                if (!resp.ok) throw new Error('Request failed');
+                const data = await resp.json();
+                if (!data || data.success !== true) throw new Error('Operation failed');
+            } catch (err) {
+                // revert UI on failure
+                el.checked = !isActive;
+                alert('Failed to update status.');
+            }
+        });
+    })();
+</script>

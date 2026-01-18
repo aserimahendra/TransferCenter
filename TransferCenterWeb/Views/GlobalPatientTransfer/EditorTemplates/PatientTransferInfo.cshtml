@@ -1,0 +1,122 @@
+﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.PatientTransferInfo
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.UId)
+@Html.HiddenFor(m => m.IsActive)
+@Html.HiddenFor(m => m.CreatedBy)
+@Html.HiddenFor(m => m.CreatedOn)
+
+<div class="card mb-4">
+    <div class="card-header fw-semibold">
+        Transfer Facility Information
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label" for="@Html.IdFor(m => m.CaseMgrSwRn)">@Html.DisplayNameFor(m => m.CaseMgrSwRn)</label>
+                    @Html.TextBoxFor(m => m.CaseMgrSwRn, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CaseMgrSwRn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.PhoneNumber)">@Html.DisplayNameFor(m => m.PhoneNumber)</label>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.FaxNumber)">@Html.DisplayNameFor(m => m.FaxNumber)</label>
+                @Html.TextBoxFor(m => m.FaxNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FaxNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.RequestingFacility)">@Html.DisplayNameFor(m => m.RequestingFacility)</label>
+                @Html.TextBoxFor(m => m.RequestingFacility, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RequestingFacility, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.TransferDate)">@Html.DisplayNameFor(m => m.TransferDate)</label>
+                @Html.TextBoxFor(
+                    m => m.TransferDate,
+                    "{0:MM/dd/yyyy}",
+                    new {
+                        @class = "form-control date-us",
+                        type = "text",
+                        placeholder = "MM/DD/YYYY",
+                        inputmode = "numeric",
+                        maxlength = "10",
+                        autocomplete = "off"
+                    })
+                @Html.ValidationMessageFor(m => m.TransferDate, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.ReferringMd)">@Html.DisplayNameFor(m => m.ReferringMd)</label>
+                @Html.TextBoxFor(m => m.ReferringMd, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringMd, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.ReferringMdPhone)">@Html.DisplayNameFor(m => m.ReferringMdPhone)</label>
+                @Html.TextBoxFor(m => m.ReferringMdPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringMdPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.ReferringSpecialist)">@Html.DisplayNameFor(m => m.ReferringSpecialist)</label>
+                @Html.TextBoxFor(m => m.ReferringSpecialist, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringSpecialist, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="@Html.IdFor(m => m.ReferringSpecialistPhone)">@Html.DisplayNameFor(m => m.ReferringSpecialistPhone)</label>
+                @Html.TextBoxFor(m => m.ReferringSpecialistPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReferringSpecialistPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.AdmitDate)">@Html.DisplayNameFor(m => m.AdmitDate)</label>
+                @Html.TextBoxFor(
+                    m => m.AdmitDate,
+                    "{0:MM/dd/yyyy}",
+                    new {
+                        @class = "form-control date-us",
+                        type = "text",
+                        placeholder = "MM/DD/YYYY",
+                        inputmode = "numeric",
+                        maxlength = "10",
+                        autocomplete = "off"
+                    })
+                @Html.ValidationMessageFor(m => m.AdmitDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.Unit)">@Html.DisplayNameFor(m => m.Unit)</label>
+                @Html.TextBoxFor(m => m.Unit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Unit, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.UnitPhone)">@Html.DisplayNameFor(m => m.UnitPhone)</label>
+                @Html.TextBoxFor(m => m.UnitPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UnitPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-0">
+            <div class="col-md-6">
+                <!-- Optional extra field slot if you want to balance the row -->
+            </div>
+        </div>
+    </div>
+</div>
+

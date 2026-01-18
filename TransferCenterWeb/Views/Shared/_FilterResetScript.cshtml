@@ -1,0 +1,29 @@
+<script>
+// Generic filter reset for all forms with data-list-filter
+function setupGenericFilterReset() {
+    document.querySelectorAll('form[data-list-filter]').forEach(function(form) {
+        var resetBtn = form.querySelector('button[type="reset"], button[aria-label="Reset filters"]');
+        if (resetBtn && !resetBtn.classList.contains('reset-setup')) {
+            resetBtn.classList.add('reset-setup');
+            resetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Clear all text, date, and select fields
+                form.querySelectorAll('input[type="text"], input[type="date"], .date-us, select').forEach(function(input) {
+                    if (input.tagName === 'SELECT') {
+                        input.selectedIndex = 0;
+                    } else {
+                        input.value = '';
+                    }
+                });
+                // Optionally reset page size to default (10) if present
+                var pageSize = form.querySelector('select[name="pageSize"]');
+                if (pageSize) pageSize.value = '10';
+                // Submit the form
+                form.submit();
+            });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', setupGenericFilterReset);
+</script>

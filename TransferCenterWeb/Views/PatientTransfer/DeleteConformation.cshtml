@@ -1,0 +1,38 @@
+@model TransferCenterWeb.Models.ViewModel.DeleteViewModel
+
+
+@{
+    Layout = "_ModalLayout";
+    ViewData["Title"] = "Delete Patient Transfer";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Uid" method="post" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input asp-for="@Model.Uid" type="hidden" />
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-3">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-start gap-3">
+                <div class="text-danger display-6 lh-1"><i class="bi bi-exclamation-octagon-fill"></i></div>
+                <div>
+                    <h5 class="card-title mb-2 text-danger">Delete confirmation</h5>
+                    <p class="mb-2 text-muted">This action cannot be undone.</p>
+                    <div class="alert alert-danger mb-0" role="alert">
+                        Are you sure you want to delete the transfer details for <strong>@Html.DisplayFor(model => model.Message) </strong> !
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-transparent border-0 pt-0">
+            <ul class="small text-muted mb-0 ps-4">
+                <li>All related information will no longer be visible in the list.</li>
+                <li>Only administrators are allowed to perform this action.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary px-4" data-modal-dismiss="cancel">Cancel</button>
+        <button type="submit" class="btn btn-danger px-4">Delete</button>
+    </div>
+</form>

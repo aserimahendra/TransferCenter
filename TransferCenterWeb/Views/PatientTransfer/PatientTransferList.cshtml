@@ -1,0 +1,185 @@
+@model TransferCenterWeb.Models.PatientTransfer.PatientTransferListViewModel
+@using TransferCenterWeb.Models.PatientTransfer
+
+@{
+    var httpContext = ViewContext.HttpContext;
+
+    var currentPage = int.TryParse(httpContext.Request.Query["page"], out var parsedPage) ? parsedPage : 1;
+    if (currentPage < 1)
+    {
+        currentPage = 1;
+    }
+
+    var pageSize = int.TryParse(httpContext.Request.Query["pageSize"], out var parsedPageSize) ? parsedPageSize : 10;
+    if (pageSize <= 0)
+    {
+        pageSize = 10;
+    }
+
+    var total = Model?.TotalCount ?? 0;
+    var totalPages = (int)Math.Ceiling(total / (double)pageSize);
+    if (totalPages > 0 && currentPage > totalPages)
+    {
+        currentPage = totalPages;
+    }
+
+    var queryDictionary = httpContext.Request.Query
+        .ToDictionary(k => k.Key, v => v.Value.ToString(), StringComparer.OrdinalIgnoreCase);
+    queryDictionary["pageSize"] = pageSize.ToString();
+
+    var paginationModel = new PaginationModel
+    {
+        Action = nameof(TransferCenterWeb.Controllers.PatientTransferController.PatientTransferList),
+        Controller = "PatientTransfer",
+        CurrentPage = currentPage,
+        PageSize = pageSize,
+        TotalItems = total,
+        RouteValues = queryDictionary,
+        RenderIfSinglePage = false
+    };
+
+    var transfers = Model?.Items?
+        .Select(x => x.PatientTransferInfo)
+        .Where(x => x != null)
+        .ToList() ?? new List<PatientTransferInfo>();
+}
+
+@if (!string.IsNullOrEmpty(Model?.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.ErrorMessage
+    </div>
+}
+<div class="row align-items-center mt-3 mb-3 g-2">
+    <div class="col d-flex align-items-center gap-2">
+        <button type="button" class="btn mt-4 btn-sm btn-primary" data-modal-url="@Url.Action("Create", "PatientTransfer")"
+                data-modal-title="Create In-Patient Transfer Request"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Create a new transfer request"
+                aria-label="Add new transfer">
+            <i class="bi bi-plus-circle me-1"></i> Create
+        </button>
+    </div>
+    <div class="col-auto ms-auto">
+    <form method="get" action="@Url.Action("PatientTransferList","PatientTransfer")" data-list-filter class="row row-cols-lg-auto g-2 align-items-end mb-0">
+            <div class="col">
+                <label for="caseManager" class="form-label form-label-sm mb-0 text-muted">Case Manager/SW/RN</label>
+                @Html.TextBoxFor(m => m.CaseManager, new { @class = "form-control form-control-sm", placeholder = "Search name", id = "caseManager" })
+            </div>
+            <div class="col">
+                <label for="name" class="form-label form-label-sm mb-0 text-muted">Patient Name</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control form-control-sm", placeholder = "Search name", id = "name" })
+            </div>
+            <div class="col">
+                <label for="transferDateFrom" class="form-label form-label-sm mb-0 text-muted">Transfer Date From</label>
+                @Html.TextBoxFor(m => m.TransferDateFrom, new { @class = "form-control form-control-sm date-us", placeholder = "MM/DD/YYYY", id = "transferDateFrom" })
+            </div>
+            <div class="col">
+                <label for="transferDateTo" class="form-label form-label-sm mb-0 text-muted">Transfer Date To</label>
+                @Html.TextBoxFor(m => m.TransferDateTo, new { @class = "form-control form-control-sm date-us", placeholder = "MM/DD/YYYY", id = "transferDateTo" })
+            </div>
+            <div class="col">
+                <label for="pageSize" class="form-label form-label-sm mb-0 text-muted">Page size</label>
+                <select id="pageSize" name="pageSize" class="form-select form-select-sm">
+                    <option value="10" selected="@(pageSize == 10 ? "selected" : null)">10</option>
+                    <option value="25" selected="@(pageSize == 25 ? "selected" : null)">25</option>
+                    <option value="50" selected="@(pageSize == 50 ? "selected" : null)">50</option>
+                </select>
+            </div>
+            <div class="col d-flex gap-2">
+                <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="bi bi-funnel me-1"></i> Filter</button>
+                <button type="reset" class="btn btn-outline-secondary btn-sm" title="Reset filters" aria-label="Reset filters" >
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>
+                    Reset
+                </button>
+                <button type="button" class="btn btn-outline-success btn-sm" title="Export to Excel" aria-label="Export to Excel" onclick="exportExcel(this)" data-export-url="@Url.Action("ExportToExcel", "PatientTransfer")">
+                <i class="bi bi-file-earmark-excel" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <tr>
+        <th>Case Manager/SW/RN</th>
+        <th>Transfer Date</th>
+        <th>MR</th>
+        <th>Primary Caller</th>
+        <th>Phone Number</th>
+        <th>Requesting Facility</th>
+        <th>Admit Date</th>
+        <th>Unit</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (transfers.Any())
+    {
+        foreach (var item in transfers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => item.CaseMgrSwRn)</td>
+                <td>@Html.DisplayFor(_ => item.TransferDate)</td>
+                <td>@Html.DisplayFor(_ => item.MR)</td>
+                <td>@Html.DisplayFor(_ => item.PrimaryCallerName)</td>
+                <td>@Html.DisplayFor(_ => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(_ => item.RequestingFacility)</td>
+                <td>@Html.DisplayFor(_ => item.AdmitDate)</td>
+                <td>@Html.DisplayFor(_ => item.Unit)</td>
+                <td>
+                    @{
+                        var editUrl = Url.Action("Update", "PatientTransfer", new { id = item.UId });
+                        var detailsUrl = Url.Action("Details", "PatientTransfer", new { id = item.UId });
+                        var modalUpdateTitle = $"Update In-Patient transfer : {item.CaseMgrSwRn}";
+                        var pdfTitle = $"Update In-Patient transfer : {item.CaseMgrSwRn}";
+                        var modalDetailsTitle = $"In-Patient transfer Details:  {item.CaseMgrSwRn}";
+                        var deleteUrl = Url.Action("DeleteConformation", "PatientTransfer", new { id = item.UId, msg= $"{Html.DisplayNameFor(_ => item.CaseMgrSwRn)}:{item.CaseMgrSwRn}" });
+                        var pdfUrl = Url.Action("DetailsInPdf", "PatientTransfer", new { id = item.UId });
+                        var modalDeleteTitle = $"Delete In-Patient transfer: {item.CaseMgrSwRn}";
+                    }
+                    <button type="button" class="btn btn-outline-secondary btn-sm me-1" data-modal-url="@editUrl"
+                            data-modal-title="@modalUpdateTitle"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit this transfer"
+                            aria-label="Edit transfer">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm me-1" data-modal-url="@detailsUrl"
+                            data-modal-title="@modalDetailsTitle"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="View transfer details"
+                            aria-label="View transfer details">
+                        <i class="bi bi-info-circle"></i>
+                    </button>
+                    @if (User?.Identity?.IsAuthenticated == true && User.HasClaim("Role", "1"))
+                    {
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-modal-url="@deleteUrl"
+                                data-modal-title="@modalDeleteTitle"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Delete this transfer"
+                                aria-label="Delete transfer">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    }
+                    <button type="button" class="btn btn-outline-danger btn-sm exportExcel" data-download-url="@pdfUrl"
+                            data-download-name="@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")" onclick="(function(m,u,n){try{if(m&&typeof m.downloadFile==='function'){m.downloadFile(u,n);}else{var root=document.querySelector('[data-modal-list]');var id=root?root.getAttribute('data-loader-id'):null;var l=id?document.getElementById(id):null;if(l) l.classList.remove('d-none'); try{window.location.href=u;}finally{if(l) setTimeout(function(){l.classList.add('d-none');},2000);}}}catch(_e){window.location.href=u;}})(window.modalActions,'@pdfUrl','@($"PatientTransfer_{item.CaseMgrSwRn}.pdf")')"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"
+                            aria-label="Download PDF">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="9" class="text-center">No patient transfers found.</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <div>
+        @await Html.PartialAsync("_Pagination", paginationModel)
+    </div>
+    <span class="small text-muted">Page @currentPage of @(totalPages > 0 ? totalPages : 1) — @total items</span>
+</div>

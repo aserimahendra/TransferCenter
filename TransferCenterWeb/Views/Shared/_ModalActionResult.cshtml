@@ -1,0 +1,41 @@
+@model TransferCenterWeb.Models.ModalActionResult
+@using System
+@using System.Text.Json
+
+@{
+    var payload = new
+    {
+        success = Model?.IsSuccess ?? true,
+        isSuccess = Model?.IsSuccess ?? true,
+        statusCode = Model?.StatusCode ?? 200,
+        message = Model?.Message ?? string.Empty,
+        warnings = Model?.Warnings ?? new List<string>(),
+        errors = Model?.Errors ?? new List<string>()
+    };
+
+    var serialized = JsonSerializer.Serialize(payload);
+}
+
+<script>
+    (function () {
+        if (!window.parent || window.parent === window) {
+            return;
+        }
+
+        var payload = {
+            type: 'modalForm:result',
+            payload: @Html.Raw(serialized)
+        };
+
+        var origin = window.location.origin;
+        if (!origin || origin === 'null') {
+            origin = '*';
+        }
+
+        try {
+            window.parent.postMessage(payload, origin);
+        } catch (postMessageError) {
+            window.parent.postMessage(payload, '*');
+        }
+    })();
+</script>
