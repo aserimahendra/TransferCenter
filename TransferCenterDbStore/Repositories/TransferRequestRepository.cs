@@ -17,7 +17,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
     {
         page = page < 1 ? 1 : page;
         pageSize = pageSize <= 0 ? 10 : pageSize;
-        var query = GetTransferRequestsQuery(transferType, caseManager, transferDateFrom, transferDateTo, name);
+        var query = GetTransferRequestsQuery(false,transferType, caseManager, transferDateFrom, transferDateTo, name);
         var totalCount = await query.CountAsync();
         var items = await query
             .OrderByDescending(x => x.PatientTransferInfo.CreatedOn)
@@ -31,7 +31,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
         string? caseManager = null, DateTime? transferDateFrom = null,
         DateTime? transferDateTo = null, string? name = null)
     {
-        var query = GetTransferRequestsQuery(transferType, caseManager, transferDateFrom, transferDateTo, name);
+        var query = GetTransferRequestsQuery(true,transferType, caseManager, transferDateFrom, transferDateTo, name);
         var totalCount = await query.CountAsync();
 
         var items = await query
@@ -40,7 +40,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
         return (items, totalCount);
     }
 
-    private IQueryable<TransferRequest> GetTransferRequestsQuery(short transferType, string? caseManager = null,
+    private IQueryable<TransferRequest> GetTransferRequestsQuery(bool isForExportExcel ,short transferType, string? caseManager = null,
         DateTime? transferDateFrom = null,
         DateTime? transferDateTo = null, string? name = null)
     {
@@ -49,39 +49,7 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
         if (from.HasValue && to.HasValue && from > to)
             (from, to) = (to, from);
 
-        IQueryable<TransferRequest> query;
-
-        if (transferType == 2)
-        {
-            query = from pti in _dbContext.Set<PatientTransferInfo>()
-                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
-                join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
-                join c in _dbContext.Set<ComorbiditiesAndRiskScore>() on pti.UId equals c.UId
-                where pti.TransferType == transferType
-                select new TransferRequest
-                {
-                    Id = pti.UId,
-                    PatientTransferInfo = pti,
-                    PatientDetails = pd,
-                    AdditionalInfo = ai,
-                    ComorbiditiesAndRiskScore = c
-                };
-        }
-        else
-        {
-            query = from pti in _dbContext.Set<PatientTransferInfo>()
-                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
-                join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
-                where pti.TransferType == transferType
-                select new TransferRequest
-                {
-                    Id = pti.UId,
-                    PatientTransferInfo = pti,
-                    PatientDetails = pd,
-                    AdditionalInfo = ai,
-                    ComorbiditiesAndRiskScore = new ComorbiditiesAndRiskScore()
-                };
-        }
+        var query = BuildTransferRequestsQuery(true,transferType);
 
         if (!string.IsNullOrWhiteSpace(caseManager))
         {
@@ -103,6 +71,85 @@ public class TransferRequestRepository : GenericRepository<TransferRequest>, ITr
         if (to.HasValue)
             query = query.Where(t => t.PatientTransferInfo.TransferDate <= to.Value);
 
+        return query;
+    }
+
+    private IQueryable<TransferRequest> BuildTransferRequestsQuery(bool isForExportExcel, short transferType)
+    {
+        return isForExportExcel ? GetTransferRequestsQueryForAllData(transferType) : GetTransferRequestsQueryForListing(transferType);
+    }
+    
+    private IQueryable<TransferRequest> GetTransferRequestsQueryForListing(short transferType)
+    {
+        IQueryable<TransferRequest> query;
+
+        if (transferType == 2)
+        {
+            query = from pti in _dbContext.Set<PatientTransferInfo>()
+                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId where pti.TransferType == transferType
+                select new TransferRequest
+                {
+                    Id = pti.UId,
+                    PatientTransferInfo = pti,
+                    PatientDetails = pd,
+                    AdditionalInfo = null,
+                    ComorbiditiesAndRiskScore = null,
+                };
+        }
+        else
+        {
+            query = from pti in _dbContext.Set<PatientTransferInfo>()
+                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
+                join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
+                where pti.TransferType == transferType
+                select new TransferRequest
+                {
+                    Id = pti.UId,
+                    PatientTransferInfo = pti,
+                    PatientDetails = pd,
+                    AdditionalInfo = null,
+                    ComorbiditiesAndRiskScore = null
+                };
+        }
+        return query;
+    }
+    
+    private IQueryable<TransferRequest> GetTransferRequestsQueryForAllData(short transferType)
+    {
+        IQueryable<TransferRequest> query;
+
+        if (transferType == 2)
+        {
+            query = from pti in _dbContext.Set<PatientTransferInfo>()
+                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
+                join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
+                join c in _dbContext.Set<ComorbiditiesAndRiskScore>() on pti.UId equals c.UId
+                where pti.TransferType == transferType
+                select new TransferRequest
+                {
+                    Id = pti.UId,
+                    PatientTransferInfo = pti,
+                    PatientDetails = pd,
+                    AdditionalInfo = ai,
+                    ComorbiditiesAndRiskScore = c,
+                    
+                };
+        }
+        else
+        {
+            query = from pti in _dbContext.Set<PatientTransferInfo>()
+                join pd in _dbContext.Set<PatientDetails>() on pti.UId equals pd.UId
+                join ai in _dbContext.Set<AdditionalInfo>() on pti.UId equals ai.UId
+                where pti.TransferType == transferType
+                select new TransferRequest
+                {
+                    Id = pti.UId,
+                    PatientTransferInfo = pti,
+                    PatientDetails = pd,
+                    AdditionalInfo = ai,
+                    ComorbiditiesAndRiskScore = new ComorbiditiesAndRiskScore()
+                };
+        }
         return query;
     }
 }

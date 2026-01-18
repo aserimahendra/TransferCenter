@@ -31,6 +31,7 @@ public static class PatientTransferRequestTranslator
             PatientDetails = Translators.PatientTransfer.PatientDetailsTranslator.ToWebModel(source.PatientDetails),
             AdditionalInfo = AdditionalInfoTranslator.ToWebModel(source.AdditionalInfo),
             ComorbiditiesAndRiskScore = ComorbiditiesAndRiskScoreTranslator.ToWebModel(source.ComorbiditiesAndRiskScore),
+            Name = source.Name,
         };
     }
 }

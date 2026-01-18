@@ -5,6 +5,7 @@ using TransferCenterWeb.Models.GlobalPatientTransfer;
 using TransferCenterWeb.Models;
 using TransferCenterWeb.Translators;
 using TransferCenterHelper;
+using TransferCenterHelper.Utility;
 using TransferCenterWeb.Utility;
 
 namespace TransferCenterWeb.Controllers;
@@ -74,16 +75,16 @@ public class GlobalPatientTransferController : Controller
     {
         try
         {
-            // Validate date range (max 31 days)
-            // var (isValid, errorMessage) = TransferCenterWeb.Extensions.ExportValidationExtensions.ValidateExportDateRange(transferDateFrom, transferDateTo);
-            // if (!isValid)
-            // {
-            //     var errorResult = new ModalActionResult(
-            //         errorMessage,
-            //         Constant.Status.Code.Error,
-            //         false);
-            //     return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
-            // }
+            //Validate date range (max 31 days)
+            var (isValid, errorMessage) = TransferCenterWeb.Extensions.ExportValidationExtensions.ValidateExportDateRange(transferDateFrom, transferDateTo);
+            if (!isValid)
+            {
+                var errorResult = new ModalActionResult(
+                    errorMessage,
+                    Constant.Status.Code.Error,
+                    false);
+                return PartialView(Constant.ViewPath.ModalActionResult, errorResult);
+            }
 
             var (items, _) = await _globalTransferService.GetList(caseManager, transferDateFrom, transferDateTo, name);
             var webItems = items.Select(x => x.ToWebModel()).ToList();
@@ -95,7 +96,7 @@ public class GlobalPatientTransferController : Controller
             };
             var excludeFieldsSetting = HttpContext.RequestServices.GetService(typeof(IConfiguration)) as IConfiguration;
             var excludeFields = excludeFieldsSetting.GetExcelExportExcludeFields(Constant.Config.ExcelExportExcludeFields);
-            var excelBytes = TransferCenterWeb.Utility.ExcelExportHelper.ExportToExcel(sheets, excludeFields);
+            var excelBytes = ExcelExportHelper.ExportToExcel(sheets, excludeFields);
             var fileName = $"GlobalPatientTransfers_{DateTime.UtcNow:yyyyMMdd}.xlsx";
             return File(excelBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
@@ -165,7 +166,6 @@ public class GlobalPatientTransferController : Controller
     {
         if (!ModelState.IsValid)
             return View(globalPatientTransferRequest);
-
         try
         {
             await _globalTransferService.Update(globalPatientTransferRequest.ToCoreModel());

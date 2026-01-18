@@ -96,11 +96,7 @@ public class PatientTransferService : IPatientTransferService
     public async Task<(IEnumerable<PatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseManager = null, DateTime? transferDateFrom = null, DateTime? transferDateTo = null, string? name = null)
     {
         var (items, totalCount) = await _unitOfWork.TransferRequestRepository.GetList(InPatientTransferType,page, pageSize, caseManager, transferDateFrom, transferDateTo, name);
-        var resultItems = items.Select(x => new PatientTransferRequest
-        {
-            Id = x.Id,
-            PatientTransferInfo = x.PatientTransferInfo.ToCoreModel(),
-        }).ToList();
+        var resultItems = items.ToPatientTransferRequestCoreModel();
         return (resultItems, totalCount);
     }
     
