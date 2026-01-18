@@ -214,7 +214,7 @@ public class PatientTransferController : Controller
     {
         try
         {
-            Validate date range (max 31 days)
+            //Validate date range (max 31 days)
             var (isValid, errorMessage) = TransferCenterWeb.Extensions.ExportValidationExtensions.ValidateExportDateRange(transferDateFrom, transferDateTo);
             if (!isValid)
             {
