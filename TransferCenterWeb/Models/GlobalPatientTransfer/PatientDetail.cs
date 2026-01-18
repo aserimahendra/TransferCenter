@@ -24,6 +24,14 @@ public class PatientDetails : AuditLogMeta
     [DisplayName("Gender")]
     public short Gender { get; set; }
 
+    [DisplayName("Gender (Text)")]
+    public string GenderText => Gender switch
+    {
+        0 => "Male",
+        1 => "Female",
+        _ => "Other"
+    };
+
     [Required]
     [DisplayName("Is In Isolation?")]
     public bool IsIsolation { get; set; }
@@ -44,6 +52,8 @@ public class PatientDetails : AuditLogMeta
     [Range(0, 11, ErrorMessage = "Inches must be between 0 and 11")]
     public int? HeightInches { get; set; }
 
+    public string? HeightText => $"{(HeightFeet ?? 0)} ft {(HeightInches ?? 0)} in";
+    
     [Required]
     [DisplayName("Weight")]
     public double Weight { get; set; }

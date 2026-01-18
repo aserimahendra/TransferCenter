@@ -71,7 +71,7 @@ public class GlobalTransferService : IGlobalTransferService
     public async Task<(IEnumerable<GlobalPatientTransferRequest> Items, int TotalCount)> GetList(int page, int pageSize, string? caseMgrSwRn, DateTime? transferDateFrom, DateTime? transferDateTo, string? name = null)
     {
         var (items, totalCount) = await _unitOfWork.TransferRequestRepository.GetList(GlobalTransferType ,page, pageSize, caseMgrSwRn, transferDateFrom, transferDateTo, name);
-        var resultItems = items.Select(x=>MapToCoreModel(x.PatientTransferInfo)).ToList();
+        var resultItems = items.ToGlobalPatientTransferRequestCoreModel();
         return (resultItems, totalCount);
     }
     public async Task<GlobalPatientTransferRequest> Get(Guid uid)
@@ -127,17 +127,7 @@ public class GlobalTransferService : IGlobalTransferService
         additionalInfo.LastUpdatedOn = DateTime.UtcNow;
         _unitOfWork.AdditionalInfoRepository.Update(additionalInfo.ToEntity());
     }
-    private GlobalPatientTransferRequest MapToCoreModel(TransferCenterDbStore.Entities.PatientTransferInfo x)
-    {
-        return new GlobalPatientTransferRequest
-        {
-            Id = x.UId,
-            TransferInfo = x.ToCoreModel(),
-            CreatedOn = x.CreatedOn,
-            CreatedBy = x.CreatedBy,
-            LastUpdatedOn = x.LastUpdatedOn
-        };
-    }
+    
     private async Task<TransferCenterDbStore.Entities.PatientTransferInfo> GetTransferInfoAsync(Guid uid)
     {
         return await _unitOfWork.PatientTransferInfoRepository.GetAsync(x => x.UId == uid);

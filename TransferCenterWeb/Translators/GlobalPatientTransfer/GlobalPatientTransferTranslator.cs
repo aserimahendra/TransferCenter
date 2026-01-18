@@ -29,7 +29,8 @@ public static class GlobalPatientTransferTranslator
             Id = source.Id,
             PatientTransferInfo = PatientTransferInfoTranslator.ToWebModel(source.TransferInfo),
             PatientDetails = PatientDetailsTranslator.ToWebModel(source.PatientInfo),
-            AdditionalInfo = AdditionalInfoTranslator.ToWebModel(source.AdditionalInfo)
+            AdditionalInfo = AdditionalInfoTranslator.ToWebModel(source.AdditionalInfo),
+            Name = source.Name
         };
     }
 }

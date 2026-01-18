@@ -6,6 +6,8 @@ namespace TransferCenterCore.Models;
 public class PatientTransferRequest
 {
     public Guid Id { get; set; }
+    
+    public string Name { get; set; }
 
     // Section 1: Basic Transfer Info (e.g. who referred, unit info)
     public PatientTransferInfo PatientTransferInfo { get; set; } = new();

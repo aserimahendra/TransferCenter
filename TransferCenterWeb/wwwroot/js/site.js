@@ -149,10 +149,24 @@ import './modalLayout.js';
         }
    });
 
-	document.exportExcel = function (element) {
-		downloadExcelbtn(element);
-					
-}
+    function isValidDateRange(from, to) {
+        if (!from || !to) return false;
+        const fromDate = new Date(from);
+        const toDate = new Date(to);
+        const diffTime = toDate - fromDate;
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        return diffDays > 0 && diffDays <= 31;
+    }
+
+    document.exportExcel = function (element) {
+        var transferFrom = document.getElementById('transferFrom')?.value || '';
+        var transferTo = document.getElementById('transferTo')?.value || '';
+        if (!isValidDateRange(transferFrom, transferTo)) {
+            alert('Select a valid date range. It should be greater than 0 and less than or equal to 31 days.');
+            return;
+        }
+        downloadExcelbtn(element);
+    }
 
 	// Function to download Excel file using URL from attribute and params from filter inputs
 	function downloadExcelbtn(element) {
@@ -163,7 +177,7 @@ import './modalLayout.js';
 	    var patientName = document.getElementById('patientName')?.value || '';
 	    var transferFrom = document.getElementById('transferFrom')?.value || '';
 	    var transferTo = document.getElementById('transferTo')?.value || '';
-
+    
 	    var params = new URLSearchParams({
 	        caseManager: caseManager,
 	        name: patientName,

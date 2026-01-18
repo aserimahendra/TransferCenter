@@ -37,11 +37,7 @@
         RouteValues = queryDictionary,
         RenderIfSinglePage = false
     };
-
-    var transfers = Model?.Items?
-        .Select(x => x.PatientTransferInfo)
-        .Where(x => x != null)
-        .ToList() ?? new List<PatientTransferInfo>();
+    var transfers = Model?.Items?.Where(x=>x !=null).ToList() ?? new List<PatientTransferRequest>();
 }
 
 @if (!string.IsNullOrEmpty(Model?.ErrorMessage))
@@ -103,8 +99,8 @@
     <thead class="table-primary">
     <tr>
         <th>Case Manager/SW/RN</th>
+        <th>Name</th>
         <th>Transfer Date</th>
-        <th>MR</th>
         <th>Primary Caller</th>
         <th>Phone Number</th>
         <th>Requesting Facility</th>
@@ -116,12 +112,13 @@
     <tbody>
     @if (transfers.Any())
     {
-        foreach (var item in transfers)
+        foreach (var transfer in transfers)
         {
+            var item = transfer.PatientTransferInfo;
             <tr>
                 <td>@Html.DisplayFor(_ => item.CaseMgrSwRn)</td>
+                <td>@Html.DisplayFor(_ => transfer.Name)</td>
                 <td>@Html.DisplayFor(_ => item.TransferDate)</td>
-                <td>@Html.DisplayFor(_ => item.MR)</td>
                 <td>@Html.DisplayFor(_ => item.PrimaryCallerName)</td>
                 <td>@Html.DisplayFor(_ => item.PhoneNumber)</td>
                 <td>@Html.DisplayFor(_ => item.RequestingFacility)</td>

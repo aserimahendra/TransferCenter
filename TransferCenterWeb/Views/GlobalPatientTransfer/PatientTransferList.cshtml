@@ -42,9 +42,8 @@
     };
 
     var transfers = Model?.Items?
-        .Select(x => x.PatientTransferInfo)
         .Where(x => x != null)
-        .ToList() ?? new List<PatientTransferInfo>();
+        .ToList() ?? new List<GlobalPatientTransferRequest>();
 
     // Pre-fill filters from model (controller provides DateTime?)
     string qCaseMgr = Model?.CaseMgrSwRn ?? string.Empty;
@@ -111,11 +110,11 @@
     <thead class="table-primary">
         <tr>
             <th>Case Manager/SW/RN</th>
+            <th>Patient Name</th>
             <th>Phone Number</th>
             <th>Requesting Facility</th>
             <th>Transfer Date</th>
             <th>Referring MD</th>
-            <th>Referring MD Phone</th>
             <th>Admit Date</th>
             <th class="text-center">Actions</th>
         </tr>
@@ -123,11 +122,15 @@
     <tbody>
 @if (transfers.Any())
 {
-    foreach (var item in transfers)
+    foreach (var transfer in transfers)
     {
+        var item = transfer.PatientTransferInfo;
         <tr>
             <td>
                 @Html.DisplayFor(_ => item.CaseMgrSwRn)
+            </td>
+            <td>
+                @Html.DisplayFor(_ => transfer.Name)
             </td>
             <td>
                 @Html.DisplayFor(_ => item.PhoneNumber)
@@ -137,9 +140,6 @@
             </td>
             <td>
                 @Html.DisplayFor(_ => item.TransferDate)
-            </td>
-            <td>
-                @Html.DisplayFor(_ => item.ReferringMd)
             </td>
             <td>
                 @Html.DisplayFor(_ => item.ReferringMdPhone)
