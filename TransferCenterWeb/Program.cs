@@ -25,10 +25,25 @@ builder.Configuration
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Conditional authentication: Use Azure AD if config section exists, else fallback to cookie auth
+// Conditional authentication: prefer Windows (Negotiate) if enabled, then Azure AD, else fallback to local cookie auth
 var azureAdSection = builder.Configuration.GetSection("AzureAd");
-if (azureAdSection.Exists() && !string.IsNullOrEmpty(azureAdSection["ClientId"]))
+var useWindowsAuth = builder.Configuration.GetValue<bool>("UseWindowsAuth");
+
+if (useWindowsAuth)
 {
+    // Windows Integrated Authentication (local Active Directory)
+    builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Negotiate.NegotiateDefaults.AuthenticationScheme)
+        .AddNegotiate();
+
+    builder.Services.AddAuthorization(options =>
+    {
+        // Require an authenticated Windows identity by default
+        options.FallbackPolicy = options.DefaultPolicy;
+    });
+}
+else if (azureAdSection.Exists() && !string.IsNullOrEmpty(azureAdSection["ClientId"]))
+{
+    // Azure AD (OpenID Connect)
     builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectDefaults.AuthenticationScheme)
         .AddMicrosoftIdentityWebApp(azureAdSection);
     builder.Services.AddAuthorization(options =>
@@ -38,6 +53,7 @@ if (azureAdSection.Exists() && !string.IsNullOrEmpty(azureAdSection["ClientId"])
 }
 else
 {
+    // Local cookie-based login
     builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = "TransferCenter";

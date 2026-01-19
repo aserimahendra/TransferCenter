@@ -18,7 +18,20 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        // Check if Azure AD is enabled from config
+        // Windows Integrated Authentication (local AD) takes precedence when enabled
+        var useWindowsAuthSetting = TransferCenterWeb.Utility.ConfigManager.GetSetting(HttpContext.RequestServices, "UseWindowsAuth");
+        if (bool.TryParse(useWindowsAuthSetting, out var useWindowsAuth) && useWindowsAuth)
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
+
+            // Trigger Negotiate challenge so the browser can send Windows credentials
+            return Challenge();
+        }
+
+        // Otherwise, check if Azure AD is enabled from config
         var clientId = TransferCenterWeb.Utility.ConfigManager.GetSetting(HttpContext.RequestServices, "AzureAd:ClientId");
         if (!string.IsNullOrEmpty(clientId))
         {
