@@ -1,0 +1,32 @@
+@model string
+
+@{
+    var message = string.IsNullOrWhiteSpace(Model)
+        ? "Saved successfully."
+        : Model;
+    var serializedMessage = System.Text.Json.JsonSerializer.Serialize(message);
+}
+
+<script>
+    (function () {
+        if (!window.parent || window.parent === window) {
+            return;
+        }
+
+        var payload = {
+            type: 'modalForm:success',
+            message: @Html.Raw(serializedMessage)
+        };
+
+        var origin = window.location.origin;
+        if (!origin || origin === 'null') {
+            origin = '*';
+        }
+
+        try {
+            window.parent.postMessage(payload, origin);
+        } catch (postMessageError) {
+            window.parent.postMessage(payload, '*');
+        }
+    })();
+</script>

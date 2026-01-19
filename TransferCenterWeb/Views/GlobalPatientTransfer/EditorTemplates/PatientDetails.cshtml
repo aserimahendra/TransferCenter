@@ -1,0 +1,202 @@
+﻿@model TransferCenterWeb.Models.GlobalPatientTransfer.PatientDetails
+@using TransferCenterWeb.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.UId)
+@Html.HiddenFor(m => m.IsActive)
+@Html.HiddenFor(m => m.CreatedBy)
+@Html.HiddenFor(m => m.CreatedOn)
+
+<div class="card mb-4">
+    <div class="card-header fw-semibold">
+        Patient Information
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.Name)">@Html.DisplayNameFor(m => m.Name)</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.DOB)">@Html.DisplayNameFor(m => m.DOB)</label>
+                @Html.TextBoxFor(
+                    m => m.DOB,
+                    "{0:MM/dd/yyyy}",
+                    new {
+                        @class = "form-control date-us",
+                        type = "text",
+                        placeholder = "MM/DD/YYYY",
+                        inputmode = "numeric",
+                        maxlength = "10",
+                        autocomplete = "bday"
+                    })
+                @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="@Html.IdFor(m => m.Gender)">@Html.DisplayNameFor(m => m.Gender)</label>
+                @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+                {
+                    new() { Text = "-- Select Gender --", Value = string.Empty },
+                    new() { Text = "Male", Value = "0" },
+                    new() { Text = "Female", Value = "1" },
+                    new() { Text = "Other", Value = "2" }
+                }, new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <div class="form-check mt-4">
+                    @Html.CheckBoxFor(m => m.IsIsolation, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="@Html.IdFor(m => m.IsIsolation)">@Html.DisplayNameFor(m => m.IsIsolation)</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.IsIsolation, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="@Html.IdFor(m => m.IsolationType)">@Html.DisplayNameFor(m => m.IsolationType)</label>
+                @Html.TextBoxFor(m => m.IsolationType, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IsolationType, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Height (ft / in)</label>
+                <div class="row g-1">
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.HeightFeet, new { @class = "form-control", type = "number", min = "0", step = "1", placeholder = "ft" })
+                        @Html.ValidationMessageFor(m => m.HeightFeet, "", new { @class = "text-danger small" })
+                    </div>
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.HeightInches, new { @class = "form-control", type = "number", min = "0", max = "11", step = "1", placeholder = "in" })
+                        @Html.ValidationMessageFor(m => m.HeightInches, "", new { @class = "text-danger small" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="@Html.IdFor(m => m.Weight)">@Html.DisplayNameFor(m => m.Weight)</label>
+                @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Weight, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="@Html.IdFor(m => m.WeightIn)">@Html.DisplayNameFor(m => m.WeightIn)</label>
+                @Html.DropDownListFor(m => m.WeightIn, new List<SelectListItem>
+                {
+                    new() { Text = "-- Select Unit --", Value = string.Empty },
+                    new() { Text = "Lbs", Value = ((short)WeightIn.Lbs).ToString() },
+                    new() { Text = "Kgs", Value = ((short)WeightIn.Kgs).ToString() }
+                }, new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.WeightIn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label class="form-label" for="@Html.IdFor(m => m.Diagnosis)">@Html.DisplayNameFor(m => m.Diagnosis)</label>
+                @Html.TextBoxFor(m => m.Diagnosis, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Diagnosis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label class="form-label" for="@Html.IdFor(m => m.LevelOfCareNeeded)">@Html.DisplayNameFor(m => m.LevelOfCareNeeded)</label>
+                @Html.DropDownListFor(
+                    m => m.LevelOfCareNeeded,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = "ICU", Text = "ICU" },
+                        new SelectListItem { Value = "TELE", Text = "TELE" },
+                        new SelectListItem { Value = "SDU", Text = "SDU" },
+                        new SelectListItem { Value = "MS", Text = "MS" },
+                        new SelectListItem { Value = "IP to Producer Area", Text = "IP to Producer Area" }
+                    },
+                    "Select Level of Care",
+                    new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.LevelOfCareNeeded, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label class="form-label" for="@Html.IdFor(m => m.AcceptingPhysician)">@Html.DisplayNameFor(m => m.AcceptingPhysician)</label>
+                @Html.TextBoxFor(m => m.AcceptingPhysician, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AcceptingPhysician, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3 align-items-start">
+            <div class="col-md-2">
+                <label class="form-label">@Html.DisplayNameFor(m => m.ReasonForTransfer)</label>
+
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.Lateral, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="@Html.IdFor(m => m.Lateral)">@Html.DisplayNameFor(m => m.Lateral)</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.Lateral, "", new { @class = "text-danger" })
+
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.HLOC, new { @class = "form-check-input" })
+                    <label class="form-check-label" for="@Html.IdFor(m => m.HLOC)">@Html.DisplayNameFor(m => m.HLOC)</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.HLOC, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-10 mt-2">
+                <label class="form-label visually-hidden" for="@Html.IdFor(m => m.ReasonForTransfer)">@Html.DisplayNameFor(m => m.ReasonForTransfer)</label>
+                @Html.TextAreaFor(m => m.ReasonForTransfer, 5, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReasonForTransfer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row mb-0">
+            <div class="col-md-12">
+                <label class="form-label" for="@Html.IdFor(m => m.PatientInsurance)">@Html.DisplayNameFor(m => m.PatientInsurance)</label>
+                @Html.TextBoxFor(m => m.PatientInsurance, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PatientInsurance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            function toDecimalFeet(feet, inches) {
+                feet = parseInt(feet) || 0;
+                inches = parseInt(inches) || 0;
+                if (inches < 0) inches = 0;
+                if (inches > 11) inches = 11;
+                return feet + (inches / 10);
+            }
+
+            function fromDecimalFeet(height) {
+                var h = parseFloat(height) || 0;
+                var feet = Math.floor(h);
+                var inches = Math.round((h - feet) * 10);
+                return { feet: feet, inches: inches };
+            }
+
+            var feetEl = document.getElementById('@Html.IdFor(m => m.HeightFeet)');
+            var inchesEl = document.getElementById('@Html.IdFor(m => m.HeightInches)');
+
+            if (!feetEl || !inchesEl) return;
+
+            // ensure sensible defaults on load
+            if (!feetEl.value) feetEl.value = 0;
+            if (!inchesEl.value) inchesEl.value = 0;
+
+            // keep client-side feedback but server-side translator performs conversion on POST
+            function clampInches(el) {
+                var v = parseInt(el.value) || 0;
+                if (v < 0) v = 0;
+                if (v > 11) v = 11;
+                el.value = v;
+            }
+
+            feetEl.addEventListener('change', function () { clampInches(inchesEl); });
+            inchesEl.addEventListener('change', function () { clampInches(this); });
+
+        })();
+    </script>
+}

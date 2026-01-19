@@ -1,38 +1,95 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TransferCenterCore.Interfaces;
 using TransferCenterWeb.Models;
-using TransferCenterModel;
-using TransferCenterBusinessInterface;
 
-namespace TransferCenterWeb.Controllers
+namespace TransferCenterWeb.Controllers;
+
+public class AccountController : Controller
 {
-    public class AccountController : Controller
+    private readonly IUserService _userService;
+
+    public AccountController(IUserService userService)
     {
-        private readonly IUserBusiness _userBusiness;
-        public AccountController(IUserBusiness userBusiness)
+        _userService = userService;
+    }
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+        // Windows Integrated Authentication (local AD) takes precedence when enabled
+        var useWindowsAuthSetting = TransferCenterWeb.Utility.ConfigManager.GetSetting(HttpContext.RequestServices, "UseWindowsAuth");
+        if (bool.TryParse(useWindowsAuthSetting, out var useWindowsAuth) && useWindowsAuth)
         {
-            _userBusiness = userBusiness;
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
+
+            // Trigger Negotiate challenge so the browser can send Windows credentials
+            return Challenge();
         }
 
-        [HttpGet]
-        public IActionResult Login()
+        // Otherwise, check if Azure AD is enabled from config
+        var clientId = TransferCenterWeb.Utility.ConfigManager.GetSetting(HttpContext.RequestServices, "AzureAd:ClientId");
+        if (!string.IsNullOrEmpty(clientId))
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
+            // Challenge Azure AD login
+            return Challenge(new AuthenticationProperties { RedirectUri = Url.Action("Index", "GlobalPatientTransfer") });
+        }
+        else
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "GlobalPatientTransfer");
+            }
             return View();
         }
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var user = await _userBusiness.Login(model.LoginId, model.Password);
-            if (user != null)
-            {
-                // TODO: Implement authentication logic (cookie, claims, etc.)
-                return RedirectToAction("Index", "Home");
-            }
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
             return View(model);
+
+        var user = await _userService.Login(model.LoginId, model.Password);
+        if (user != null)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.LoginId),
+                new Claim(ClaimTypes.Email, user.EmailId),
+                new Claim("Role", user.Role.ToString()) // Role claim for policy-based auth
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, "TransferCenter");
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+            await HttpContext.SignInAsync("TransferCenter", claimsPrincipal, new AuthenticationProperties
+            {
+                IsPersistent = model.RememberMe,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+            });
+
+            return RedirectToAction("Index", "GlobalPatientTransfer");
         }
+
+        ModelState.AddModelError(string.Empty, Constant.Log.Error.InvalidLoginAttempt);
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync("TransferCenter");
+        return RedirectToAction("Login");
     }
 }
